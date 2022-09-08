@@ -533,7 +533,7 @@ conda install seaborn
 To use it, import the required functions in your Python kernel, e.g.:
 
 ```{python}
-from seaborn import pairplots
+from seaborn import pairplot
 ```
 
 We don't use this library here, but encourage you to look up further information in [the seaborn documentation](https://seaborn.pydata.org/generated/seaborn.pairplot.html).
