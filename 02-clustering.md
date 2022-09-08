@@ -567,14 +567,7 @@ To use it, import the required functions in your Python kernel, e.g.:
 
 
 ```python
-from seaborn import pairplots
-```
-
-```{.error}
-Error in py_call_impl(callable, dots$args, dots$keywords): ImportError: cannot import name 'pairplots' from 'seaborn' (/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/seaborn/__init__.py)
-
-Detailed traceback:
-  File "<string>", line 1, in <module>
+from seaborn import pairplot
 ```
 
 We don't use this library here, but encourage you to look up further information in [the seaborn documentation](https://seaborn.pydata.org/generated/seaborn.pairplot.html).
