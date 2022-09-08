@@ -12,17 +12,18 @@ exercises: 2
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- 
--
--
+- What makes image data unique for machine learning?
+- How can MRI images be clustered and segmented? 
+- What are the ways to improve segmentation?
+- How do we visualise clustering data?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-- Working with a specialised Python package
-- Clustering with Gaussian mixture models (GMM) to segment different parts of a medical image
-- Combining information from different imaging modalities for improved segmentation
-- Strategies to visualise clustering output
+- Learning to work with a specialised Python package.
+- Clustering with Gaussian mixture models (GMM) to segment different parts of a medical image.
+- Combining information from different imaging modalities for improved segmentation.
+- Understanding strategies to visualise clustering output.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -654,8 +655,268 @@ Using `KMeans` from 'sklearn.cluster', do the following tasks:
 
 ## Please check these solutions only after submitting the assignments.
 
-### Q1
 
+```{python}
+img_3d = nib.load('fig/t1.nii')
+img1 = img_3d.get_fdata()
+
+img_3d = nib.load('fig/t1_contrast.nii')
+img2 = img_3d.get_fdata()
+
+img_3d = nib.load('fig/flair.nii')
+img3 = img_3d.get_fdata()
+
+img_3d = nib.load('fig/adc.nii')
+img4 = img_3d.get_fdata()
+```
+
+```{python}
+mask = (img1>0) & (img2>0) & (img3>0) & (img4>0)
+
+img1_nz = img1[mask]
+img2_nz = img2[mask]
+img3_nz = img3[mask]
+img4_nz = img4[mask]
+
+```
+
+```{python}
+import numpy as np
+all_img = np.stack([img1_nz, img2_nz, img3_nz, img4_nz], axis=1)
+
+```
+
+
+
+### **Without scaling**
+```{python}
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(n_clusters=3)
+
+img1_kmeans_labels = kmeans.fit_predict(img1_nz.reshape(-1, 1))
+img1_kmeans_labels += 1
+img1_kmeans_labels_mapped = np.zeros(img1.shape)
+img1_kmeans_labels_mapped[mask] = img1_kmeans_labels
+
+img2_kmeans_labels = kmeans.fit_predict(img2_nz.reshape(-1, 1))
+img2_kmeans_labels += 1
+img2_kmeans_labels_mapped = np.zeros(img2.shape)
+img2_kmeans_labels_mapped[mask] = img2_kmeans_labels
+
+img3_kmeans_labels = kmeans.fit_predict(img3_nz.reshape(-1, 1))
+img3_kmeans_labels += 1
+img3_kmeans_labels_mapped = np.zeros(img3.shape)
+img3_kmeans_labels_mapped[mask] = img3_kmeans_labels
+
+img4_kmeans_labels = kmeans.fit_predict(img4_nz.reshape(-1, 1))
+img4_kmeans_labels += 1
+img4_kmeans_labels_mapped = np.zeros(img4.shape)
+img4_kmeans_labels_mapped[mask] = img4_kmeans_labels
+
+all_img_kmeans_labels = kmeans.fit_predict(all_img)
+all_img_kmeans_labels += 1
+all_img_kmeans_labels_mapped = np.zeros(img1.shape)
+all_img_kmeans_labels_mapped[mask] = all_img_kmeans_labels
+```
+
+
+```{python}
+img_slice = 20
+
+fig, ax = subplots(1, 5, figsize=(20, 5))
+
+ax[0].imshow(img1_kmeans_labels_mapped[:, :, img_slice], cmap='viridis');
+ax[1].imshow(img2_kmeans_labels_mapped[:, :, img_slice], cmap='viridis');
+ax[2].imshow(img3_kmeans_labels_mapped[:, :, img_slice], cmap='viridis');
+ax[3].imshow(img4_kmeans_labels_mapped[:, :, img_slice], cmap='viridis');
+ax[4].imshow(all_img_kmeans_labels_mapped[:, :, img_slice], cmap='viridis');
+
+ax[0].set_ylabel("kmeans, 3 clusters", fontsize=18)
+
+ax[0].set_title("Image 1", fontsize=18)
+ax[1].set_title("Image 2", fontsize=18)
+ax[2].set_title("Image 3", fontsize=18)
+ax[3].set_title("Image 4", fontsize=18)
+ax[4].set_title("All images", fontsize=18)
+
+tight_layout();
+show()
+```
+
+
+```{python}
+fig, ax = subplots(4, 4, figsize=(20, 20))
+
+ax[0, 0].hist(img1_nz, bins=50);
+ax[0, 0].set_title('Image 1', fontsize=16)
+ax[0, 1].scatter(img1_nz, img2_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[0, 1].set_xlabel('Image 1', fontsize=16)
+ax[0, 1].set_ylabel('Image 2', fontsize=16)
+ax[0, 2].scatter(img1_nz, img3_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[0, 2].set_xlabel('Image 1', fontsize=16)
+ax[0, 2].set_ylabel('Image 3', fontsize=16)
+ax[0, 3].scatter(img1_nz, img4_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[0, 3].set_xlabel('Image 1', fontsize=16)
+ax[0, 3].set_ylabel('Image 4', fontsize=16)
+
+ax[1, 0].scatter(img2_nz, img1_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[1, 0].set_xlabel('Image 2', fontsize=16)
+ax[1, 0].set_ylabel('Image 1', fontsize=16)
+ax[1, 1].hist(img2_nz, bins=50);
+ax[1, 1].set_title('Image 2', fontsize=16)
+ax[1, 2].scatter(img2_nz, img3_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[1, 2].set_xlabel('Image 2', fontsize=16)
+ax[1, 2].set_ylabel('Image 3', fontsize=16)
+ax[1, 3].scatter(img2_nz, img4_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[1, 3].set_xlabel('Image 2', fontsize=16)
+ax[1, 3].set_ylabel('Image 4', fontsize=16)
+
+ax[2, 0].scatter(img3_nz, img1_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[2, 0].set_xlabel('Image 3', fontsize=16)
+ax[2, 0].set_ylabel('Image 1', fontsize=16)
+ax[2, 1].scatter(img3_nz, img2_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[2, 1].set_xlabel('Image 3', fontsize=16)
+ax[2, 1].set_ylabel('Image 2', fontsize=16)
+ax[2, 2].hist(img3_nz, bins=50);
+ax[2, 2].set_title('Image 3, fontsize=16')
+ax[2, 3].scatter(img3_nz, img4_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[2, 3].set_xlabel('Image 3', fontsize=16)
+ax[2, 3].set_ylabel('Image 4', fontsize=16)
+
+ax[3, 0].scatter(img4_nz, img1_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[3, 0].set_xlabel('Image 4', fontsize=16)
+ax[3, 0].set_ylabel('Image 1', fontsize=16)
+ax[3, 1].scatter(img4_nz, img2_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[3, 1].set_xlabel('Image 4', fontsize=16)
+ax[3, 1].set_ylabel('Image 2', fontsize=16)
+ax[3, 2].scatter(img4_nz, img3_nz, c=all_img_kmeans_labels, cmap='viridis', vmin=0);
+ax[3, 2].set_xlabel('Image 4', fontsize=16)
+ax[3, 2].set_ylabel('Image 3', fontsize=16)
+ax[3, 3].hist(img4_nz, bins=50);
+ax[3, 3].set_title('Image 4', fontsize=16)
+
+tight_layout();
+show()
+```
+
+
+### **Without scaling**
+```{python}
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+
+img1_scaled = scaler.fit_transform(img1_nz.reshape(-1, 1))
+img2_scaled = scaler.fit_transform(img2_nz.reshape(-1, 1))
+img3_scaled = scaler.fit_transform(img3_nz.reshape(-1, 1))
+img4_scaled = scaler.fit_transform(img4_nz.reshape(-1, 1))
+
+all_img_scaled = np.concatenate([img1_scaled, img2_scaled, img3_scaled, img4_scaled], axis=1)
+```
+
+```{python}
+img1_kmeans_labels = kmeans.fit_predict(img1_scaled)
+img1_kmeans_labels += 1
+img1_kmeans_labels_mapped = np.zeros(img1.shape)
+img1_kmeans_labels_mapped[mask] = img1_kmeans_labels
+
+img2_kmeans_labels = kmeans.fit_predict(img2_scaled)
+img2_kmeans_labels += 1
+img2_kmeans_labels_mapped = np.zeros(img2.shape)
+img2_kmeans_labels_mapped[mask] = img2_kmeans_labels
+
+img3_kmeans_labels = kmeans.fit_predict(img3_scaled)
+img3_kmeans_labels += 1
+img3_kmeans_labels_mapped = np.zeros(img3.shape)
+img3_kmeans_labels_mapped[mask] = img3_kmeans_labels
+
+img4_kmeans_labels = kmeans.fit_predict(img4_scaled)
+img4_kmeans_labels += 1
+img4_kmeans_labels_mapped = np.zeros(img4.shape)
+img4_kmeans_labels_mapped[mask] = img4_kmeans_labels
+
+all_img_kmeans_labels = kmeans.fit_predict(all_img_scaled)
+all_img_kmeans_labels += 1
+all_img_kmeans_labels_mapped = np.zeros(img1.shape)
+all_img_kmeans_labels_mapped[mask] = all_img_kmeans_labels
+```
+
+
+```{python}
+fig, ax = subplots(1, 5, figsize=(20, 5))
+
+ax[0].imshow(img1_kmeans_labels_mapped[:, :, img_slice], cmap='viridis');
+ax[1].imshow(img2_kmeans_labels_mapped[:, :, img_slice], cmap='viridis');
+ax[2].imshow(img3_kmeans_labels_mapped[:, :, img_slice], cmap='viridis');
+ax[3].imshow(img4_kmeans_labels_mapped[:, :, img_slice], cmap='viridis');
+ax[4].imshow(all_img_kmeans_labels_mapped[:, :, img_slice], cmap='viridis');
+
+ax[0].set_ylabel("kmeans, 3 clusters", fontsize=18)
+
+ax[0].set_title("Image 1", fontsize=18)
+ax[1].set_title("Image 2", fontsize=18)
+ax[2].set_title("Image 3", fontsize=18)
+ax[3].set_title("Image 4", fontsize=18)
+ax[4].set_title("All images", fontsize=18)
+
+tight_layout();
+show()
+```
+
+```{python}
+fig, ax = subplots(4, 4, figsize=(20, 20))
+
+ax[0, 0].hist(img1_scaled, bins=50);
+ax[0, 0].set_title('Image 1', fontsize=16)
+ax[0, 1].scatter(img1_scaled, img2_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[0, 1].set_xlabel('Image 1', fontsize=16)
+ax[0, 1].set_ylabel('Image 2', fontsize=16)
+ax[0, 2].scatter(img1_scaled, img3_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[0, 2].set_xlabel('Image 1', fontsize=16)
+ax[0, 2].set_ylabel('Image 3', fontsize=16)
+ax[0, 3].scatter(img1_scaled, img4_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[0, 3].set_xlabel('Image 1', fontsize=16)
+ax[0, 3].set_ylabel('Image 4', fontsize=16)
+
+ax[1, 0].scatter(img2_scaled, img1_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[1, 0].set_xlabel('Image 2', fontsize=16)
+ax[1, 0].set_ylabel('Image 1', fontsize=16)
+ax[1, 1].hist(img2_scaled, bins=50);
+ax[1, 1].set_title('Image 2', fontsize=16)
+ax[1, 2].scatter(img2_scaled, img3_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[1, 2].set_xlabel('Image 2', fontsize=16)
+ax[1, 2].set_ylabel('Image 3', fontsize=16)
+ax[1, 3].scatter(img2_scaled, img4_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[1, 3].set_xlabel('Image 2', fontsize=16)
+ax[1, 3].set_ylabel('Image 4', fontsize=16)
+
+ax[2, 0].scatter(img3_scaled, img1_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[2, 0].set_xlabel('Image 3', fontsize=16)
+ax[2, 0].set_ylabel('Image 1', fontsize=16)
+ax[2, 1].scatter(img3_scaled, img2_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[2, 1].set_xlabel('Image 3', fontsize=16)
+ax[2, 1].set_ylabel('Image 2', fontsize=16)
+ax[2, 2].hist(img3_scaled, bins=50);
+ax[2, 2].set_title('Image 3, fontsize=16')
+ax[2, 3].scatter(img3_scaled, img4_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[2, 3].set_xlabel('Image 3', fontsize=16)
+ax[2, 3].set_ylabel('Image 4', fontsize=16)
+
+ax[3, 0].scatter(img4_scaled, img1_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[3, 0].set_xlabel('Image 4', fontsize=16)
+ax[3, 0].set_ylabel('Image 1', fontsize=16)
+ax[3, 1].scatter(img4_scaled, img2_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[3, 1].set_xlabel('Image 4', fontsize=16)
+ax[3, 1].set_ylabel('Image 2', fontsize=16)
+ax[3, 2].scatter(img4_scaled, img3_scaled, c=all_img_kmeans_labels.reshape(-1, 1), cmap='viridis', vmin=0);
+ax[3, 2].set_xlabel('Image 4', fontsize=16)
+ax[3, 2].set_ylabel('Image 3', fontsize=16)
+ax[3, 3].hist(img4_scaled, bins=50);
+ax[3, 3].set_title('Image 4', fontsize=16)
+
+tight_layout();
+show()
+```
 :::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::
 
@@ -670,9 +931,9 @@ neuroimaging applications](https://onlinelibrary.wiley.com/doi/pdf/10.1002/widm.
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
--
--
--
+- Image analysis almost always requires a bit of preprocessing.
+- Image scaling is performed by using `fit_transform ` method from module `StandardScaler` in `scikit-learn`.
+- The diagonal plots are very useful in exploratory data analysis.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
