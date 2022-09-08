@@ -12,17 +12,18 @@ exercises: 2
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- 
--
--
+- How to find multiple distributions in a dataset?
+- How to use Scikit-learn workflow to perform clustering?
+- Can data be labelled in unsupervised learning?
+- What are ways to score clustering predictions?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-- Multiple Gaussian distributions in a dataset
-- Scikit-learn functionality for Gaussian Mixture Models
-- Automated labelling of dataset
-- Basic scoring of clustering
+- Understanding Multiple Gaussian distributions in a dataset.
+- Demonstrating Scikit-learn functionality for Gaussian Mixture Models.
+- Learning automated labelling of dataset.
+- Explaining basic scoring of clustering.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::: prereq
@@ -821,17 +822,210 @@ The data show systematic gaps in the histogram meaning that some values do not o
 
 ## Please check these solutions only after submitting the assignments.
 
+
+```python
+from numpy import arange, asarray, linspace, zeros, c_, mgrid, meshgrid, array, dot, percentile
+from numpy import histogram, cumsum, around
+from numpy import vstack, sqrt, logspace, amin, amax, equal, count_nonzero
+from numpy.random import uniform, seed, randint, randn, multivariate_normal
+
+from matplotlib.pyplot import subplots, scatter, xlabel, ylabel, axis, figure, colorbar, title, show
+from matplotlib.colors import LogNorm
+
+from pandas import read_csv
+
+from sklearn.mixture import GaussianMixture
+from sklearn.metrics.cluster import adjusted_rand_score
+```
+
 ### Q1
+
+
+```python
+from pandas import read_csv
+
+df = read_csv('data/patients_data.csv') 
+
+df_np = df.to_numpy()
+
+X = df_np[:, [3, 4]]
+
+print(X.shape)
+```
+
+```{.output}
+(100, 2)
+```
+
+### Q2
+
+```python
+clf = GaussianMixture(n_components=2, covariance_type='full')
+
+clf.fit(X)
+```
+
+```{=html}
+<style>#sk-container-id-6 {color: black;background-color: white;}#sk-container-id-6 pre{padding: 0;}#sk-container-id-6 div.sk-toggleable {background-color: white;}#sk-container-id-6 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-6 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-6 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-6 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-6 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-6 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-6 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-6 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-6 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-6 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-6 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-6 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-6 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-6 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-6 div.sk-item {position: relative;z-index: 1;}#sk-container-id-6 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-6 div.sk-item::before, #sk-container-id-6 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-6 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-6 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-6 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-6 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-6 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-6 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-6 div.sk-label-container {text-align: center;}#sk-container-id-6 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-6 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-6" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GaussianMixture(n_components=2)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" checked><label for="sk-estimator-id-6" class="sk-toggleable__label sk-toggleable__label-arrow">GaussianMixture</label><div class="sk-toggleable__content"><pre>GaussianMixture(n_components=2)</pre></div></div></div></div></div>
+```
+
+```python
+resolution = 100
+
+vec_a = linspace(0.7*min(X[:,0]), 1.2*max(X[:,0]), resolution)
+vec_b = linspace(0.7*min(X[:,1]), 1.2*max(X[:,1]), resolution)
+
+grid_a, grid_b = meshgrid(vec_a, vec_b)
+
+XY_statespace = c_[grid_a.ravel(), grid_b.ravel()];
+
+Z_score = clf.score_samples(XY_statespace);
+
+Z_s = Z_score.reshape(grid_a.shape);
+
+
+fig, ax = subplots(figsize=(8, 6))
+
+cax = ax.contour(grid_a, grid_b, -Z_s, 
+           norm=LogNorm(vmin=1.0, vmax=100.0),
+           levels=logspace(0, 2, 10),
+           cmap='magma'
+          );
+
+fig.colorbar(cax);
+
+ax.scatter(X[:, 0], X[:, 1]);
+
+title('Negative log-likelihood of Prediction', fontsize=16)
+axis('tight');
+
+show()
+```
+
+<img src="fig/01-gaussian-rendered-unnamed-chunk-26-23.png" width="768" style="display: block; margin: auto;" />
+
+### Q3
+
+```python
+print('Model Weights: ')
+print(clf.weights_)
+print('')
+
+print('Mean coordinates: ')
+print(clf.means_)
+print('')
+print('Covariance Matrices: ')
+print(clf.covariances_)
+```
+
+```{.output}
+Model Weights: 
+[0.3463565 0.6536435]
+
+Mean coordinates: 
+[[129.51551579  90.3962569 ]
+ [119.21094489  79.01963203]]
+
+Covariance Matrices: 
+[[[24.25340701 -3.75701522]
+  [-3.75701522 19.36301886]]
+
+ [[18.62154032 -2.53646526]
+  [-2.53646526 17.70124705]]]
+```
+
+
+### Q4
+
+```python
+y_predict = clf.predict(X)
+
+gender_boolean = df['Gender'] == 'Female'
+
+y_gender = gender_boolean.to_numpy()
+
+scoring = adjusted_rand_score(y_gender, y_predict)
+
+print(scoring)
+```
+
+```{.output}
+0.030809331315545804
+```
+
+
+```python
+y_smoker = df['Smoker']
+
+scoring = adjusted_rand_score(y_smoker, y_predict)
+
+print(scoring)
+```
+
+```{.output}
+0.7349708237209933
+```
+### Q5
+
+```python
+group1_mean = clf.means_[0]
+group1_cov  = clf.covariances_[0]
+
+group2_mean = clf.means_[1]
+group2_cov  = clf.covariances_[1]
+
+samples = 100
+
+group1_data = multivariate_normal(group1_mean, group1_cov, int(clf.weights_[0]*100))
+group2_data = multivariate_normal(group2_mean, group2_cov, int(clf.weights_[1]*100))
+
+fig, ax = subplots(ncols=2, figsize=(12, 6))
+
+ax[0].scatter(df['Diastolic'], df['Systolic']);
+ax[0].set_xlabel('Diastole', fontsize=16)
+ax[0].set_ylabel('Systole', fontsize=16)
+
+ax[1].scatter(group1_data[:, 0], group1_data[:, 1], c='r');
+ax[1].scatter(group2_data[:, 0], group2_data[:, 1], c='b');
+ax[1].set_xlabel('Diastole', fontsize=16)
+
+fig.suptitle('Scatter plot from Data (left) and Model (right)', fontsize=16);
+show()
+```
+
+<img src="fig/01-gaussian-rendered-unnamed-chunk-30-25.png" width="1152" style="display: block; margin: auto;" />
+
+### Q7
+
+```python
+fig, ax = subplots(ncols=2, figsize=(12, 6))
+
+bins = 20
+ax[0].hist(X, bins=bins);
+ax[0].set_xlabel('Diastole (blue) and Systole (orange)', fontsize=12)
+ax[0].set_ylabel('Count', fontsize=16)
+
+ax[1].hist(group1_data[:, 0], bins=bins);
+ax[1].hist(group2_data[:, 1], bins=bins);
+ax[1].set_xlabel('Model Diastole (blue) and model Systole (orange)', fontsize=12)
+
+fig.suptitle('Scatter plot from Data (left) and Model (right)', fontsize=16);
+show()
+```
+
+<img src="fig/01-gaussian-rendered-unnamed-chunk-31-27.png" width="1152" style="display: block; margin: auto;" />
+
+The data show systematic gaps in the histogram meaning that some values do not occur (integer values only). In contrast, the model data from the random number generator can take any value. Therefore the counts per bin are generally lower for the model. 
 
 :::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
--
--
--
-
+- The automated assignment of data points to distinct groups is called `clustering`.
+- Gaussian Mixture Models (GMM) is one example of cluster analysis.
+- `.fit`, `..score_samples` and `.predict` are some of the key methods in GMM clustering.
+- `adjusted_rand_score` method randomly assigns labels for prediction scoring.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 

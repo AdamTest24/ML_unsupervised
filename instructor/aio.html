@@ -238,7 +238,7 @@
         
 <section id="aio-01-gaussian"><p>Content from <a href="01-gaussian.html">Gaussian Mixtures</a></p>
 <hr>
-<p> Last updated on 2022-08-25 | <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-gaussian.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p> Last updated on 2022-09-08 | <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-gaussian.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -254,12 +254,10 @@
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>
-</li>
-<li>
-</li>
-<li>
-</li>
+<li>How to find multiple distributions in a dataset?</li>
+<li>How to use Scikit-learn workflow to perform clustering?</li>
+<li>Can data be labelled in unsupervised learning?</li>
+<li>What are ways to score clustering predictions?</li>
 </ul>
 </div>
 </div>
@@ -269,10 +267,10 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Multiple Gaussian distributions in a dataset</li>
-<li>Scikit-learn functionality for Gaussian Mixture Models</li>
-<li>Automated labelling of dataset</li>
-<li>Basic scoring of clustering</li>
+<li>Understanding Multiple Gaussian distributions in a dataset.</li>
+<li>Demonstrating Scikit-learn functionality for Gaussian Mixture Models.</li>
+<li>Learning automated labelling of dataset.</li>
+<li>Explaining basic scoring of clustering.</li>
 </ul>
 </div>
 </div>
@@ -1074,9 +1072,225 @@ Predicted Labels
   </h4>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
-<div class="section level3 accordion-body">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb41">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> arange, asarray, linspace, zeros, c_, mgrid, meshgrid, array, dot, percentile</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> histogram, cumsum, around</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> vstack, sqrt, logspace, amin, amax, equal, count_nonzero</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> uniform, seed, randint, randn, multivariate_normal</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> subplots, scatter, xlabel, ylabel, axis, figure, colorbar, title, show</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> LogNorm</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> read_csv</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.mixture <span class="im">import</span> GaussianMixture</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics.cluster <span class="im">import</span> adjusted_rand_score</span></code></pre>
+</div>
+<div class="section level3">
 <h3 id="q1">Q1<a class="anchor" aria-label="anchor" href="#q1"></a>
 </h3>
+<div class="codewrapper sourceCode" id="cb42">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> read_csv</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_csv(<span class="st">'data/patients_data.csv'</span>) </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>df_np <span class="op">=</span> df.to_numpy()</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_np[:, [<span class="dv">3</span>, <span class="dv">4</span>]]</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape)</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>(100, 2)</code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3 id="q2">Q2<a class="anchor" aria-label="anchor" href="#q2"></a>
+</h3>
+<div class="codewrapper sourceCode" id="cb44">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> GaussianMixture(n_components<span class="op">=</span><span class="dv">2</span>, covariance_type<span class="op">=</span><span class="st">'full'</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>clf.fit(X)</span></code></pre>
+</div>
+<style>#sk-container-id-6 {color: black;background-color: white;}#sk-container-id-6 pre{padding: 0;}#sk-container-id-6 div.sk-toggleable {background-color: white;}#sk-container-id-6 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-6 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-6 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-6 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-6 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-6 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-6 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-6 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-6 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-6 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-6 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-6 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-6 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-6 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-6 div.sk-item {position: relative;z-index: 1;}#sk-container-id-6 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-6 div.sk-item::before, #sk-container-id-6 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-6 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-6 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-6 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-6 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-6 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-6 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-6 div.sk-label-container {text-align: center;}#sk-container-id-6 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-6 div.sk-text-repr-fallback {display: none;}</style>
+<div id="sk-container-id-6" class="sk-top-container">
+<div class="sk-text-repr-fallback">
+<pre>GaussianMixture(n_components=2)</pre>
+<b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b>
+</div>
+<div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable">
+<input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" checked><label for="sk-estimator-id-6" class="sk-toggleable__label sk-toggleable__label-arrow">GaussianMixture</label><div class="sk-toggleable__content"><pre>GaussianMixture(n_components=2)</pre></div>
+</div></div></div>
+</div>
+<div class="codewrapper sourceCode" id="cb45">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>resolution <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>vec_a <span class="op">=</span> linspace(<span class="fl">0.7</span><span class="op">*</span><span class="bu">min</span>(X[:,<span class="dv">0</span>]), <span class="fl">1.2</span><span class="op">*</span><span class="bu">max</span>(X[:,<span class="dv">0</span>]), resolution)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>vec_b <span class="op">=</span> linspace(<span class="fl">0.7</span><span class="op">*</span><span class="bu">min</span>(X[:,<span class="dv">1</span>]), <span class="fl">1.2</span><span class="op">*</span><span class="bu">max</span>(X[:,<span class="dv">1</span>]), resolution)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>grid_a, grid_b <span class="op">=</span> meshgrid(vec_a, vec_b)</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>XY_statespace <span class="op">=</span> c_[grid_a.ravel(), grid_b.ravel()]<span class="op">;</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>Z_score <span class="op">=</span> clf.score_samples(XY_statespace)<span class="op">;</span></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>Z_s <span class="op">=</span> Z_score.reshape(grid_a.shape)<span class="op">;</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>cax <span class="op">=</span> ax.contour(grid_a, grid_b, <span class="op">-</span>Z_s, </span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>           norm<span class="op">=</span>LogNorm(vmin<span class="op">=</span><span class="fl">1.0</span>, vmax<span class="op">=</span><span class="fl">100.0</span>),</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>           levels<span class="op">=</span>logspace(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">10</span>),</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>           cmap<span class="op">=</span><span class="st">'magma'</span></span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>          )<span class="op">;</span></span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cax)<span class="op">;</span></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>ax.scatter(X[:, <span class="dv">0</span>], X[:, <span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>title(<span class="st">'Negative log-likelihood of Prediction'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a>axis(<span class="st">'tight'</span>)<span class="op">;</span></span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+</div>
+<figure><img src="../fig/01-gaussian-rendered-unnamed-chunk-26-23.png" width="768" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+</div>
+<div class="section level3">
+<h3 id="q3">Q3<a class="anchor" aria-label="anchor" href="#q3"></a>
+</h3>
+<div class="codewrapper sourceCode" id="cb46">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Model Weights: '</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(clf.weights_)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">''</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Mean coordinates: '</span>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(clf.means_)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">''</span>)</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Covariance Matrices: '</span>)</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(clf.covariances_)</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Model Weights: 
+[0.3463565 0.6536435]
+
+Mean coordinates: 
+[[129.51551579  90.3962569 ]
+ [119.21094489  79.01963203]]
+
+Covariance Matrices: 
+[[[24.25340701 -3.75701522]
+  [-3.75701522 19.36301886]]
+
+ [[18.62154032 -2.53646526]
+  [-2.53646526 17.70124705]]]</code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3 id="q4">Q4<a class="anchor" aria-label="anchor" href="#q4"></a>
+</h3>
+<div class="codewrapper sourceCode" id="cb48">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>y_predict <span class="op">=</span> clf.predict(X)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>gender_boolean <span class="op">=</span> df[<span class="st">'Gender'</span>] <span class="op">==</span> <span class="st">'Female'</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>y_gender <span class="op">=</span> gender_boolean.to_numpy()</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>scoring <span class="op">=</span> adjusted_rand_score(y_gender, y_predict)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(scoring)</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code><span><span class="fl">0.030809331315545804</span></span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb50">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>y_smoker <span class="op">=</span> df[<span class="st">'Smoker'</span>]</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>scoring <span class="op">=</span> adjusted_rand_score(y_smoker, y_predict)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(scoring)</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code><span><span class="fl">0.7349708237209933</span></span></code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3 id="q5">Q5<a class="anchor" aria-label="anchor" href="#q5"></a>
+</h3>
+<div class="codewrapper sourceCode" id="cb52">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>group1_mean <span class="op">=</span> clf.means_[<span class="dv">0</span>]</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>group1_cov  <span class="op">=</span> clf.covariances_[<span class="dv">0</span>]</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>group2_mean <span class="op">=</span> clf.means_[<span class="dv">1</span>]</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>group2_cov  <span class="op">=</span> clf.covariances_[<span class="dv">1</span>]</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>group1_data <span class="op">=</span> multivariate_normal(group1_mean, group1_cov, <span class="bu">int</span>(clf.weights_[<span class="dv">0</span>]<span class="op">*</span><span class="dv">100</span>))</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>group2_data <span class="op">=</span> multivariate_normal(group2_mean, group2_cov, <span class="bu">int</span>(clf.weights_[<span class="dv">1</span>]<span class="op">*</span><span class="dv">100</span>))</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].scatter(df[<span class="st">'Diastolic'</span>], df[<span class="st">'Systolic'</span>])<span class="op">;</span></span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Diastole'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Systole'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].scatter(group1_data[:, <span class="dv">0</span>], group1_data[:, <span class="dv">1</span>], c<span class="op">=</span><span class="st">'r'</span>)<span class="op">;</span></span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].scatter(group2_data[:, <span class="dv">0</span>], group2_data[:, <span class="dv">1</span>], c<span class="op">=</span><span class="st">'b'</span>)<span class="op">;</span></span>
+<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Diastole'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">'Scatter plot from Data (left) and Model (right)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)<span class="op">;</span></span>
+<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+</div>
+<figure><img src="../fig/01-gaussian-rendered-unnamed-chunk-30-25.png" width="1152" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+</div>
+<div class="section level3">
+<h3 id="q7">Q7<a class="anchor" aria-label="anchor" href="#q7"></a>
+</h3>
+<div class="codewrapper sourceCode" id="cb53">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>bins <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].hist(X, bins<span class="op">=</span>bins)<span class="op">;</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Diastole (blue) and Systole (orange)'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Count'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].hist(group1_data[:, <span class="dv">0</span>], bins<span class="op">=</span>bins)<span class="op">;</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].hist(group2_data[:, <span class="dv">1</span>], bins<span class="op">=</span>bins)<span class="op">;</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Model Diastole (blue) and model Systole (orange)'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">'Scatter plot from Data (left) and Model (right)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)<span class="op">;</span></span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+</div>
+<figure><img src="../fig/01-gaussian-rendered-unnamed-chunk-31-27.png" width="1152" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>The data show systematic gaps in the histogram meaning that some values do not occur (integer values only). In contrast, the model data from the random number generator can take any value. Therefore the counts per bin are generally lower for the model.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1089,12 +1303,12 @@ Predicted Labels
 <h3 class="callout-title">Keypoints</h3>
 <div class="callout-content">
 <ul>
+<li>The automated assignment of data points to distinct groups is called <code>clustering</code>.</li>
+<li>Gaussian Mixture Models (GMM) is one example of cluster analysis.</li>
 <li>
-</li>
+<code>.fit</code>, <code>..score_samples</code> and <code>.predict</code> are some of the key methods in GMM clustering.</li>
 <li>
-</li>
-<li>
-</li>
+<code>adjusted_rand_score</code> method randomly assigns labels for prediction scoring.</li>
 </ul>
 </div>
 </div>
@@ -1105,7 +1319,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-02-clustering"><p>Content from <a href="02-clustering.html">Clustering</a></p>
 <hr>
-<p> Last updated on 2022-08-25 | <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-clustering.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p> Last updated on 2022-09-08 | <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-clustering.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -1121,12 +1335,10 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>
-</li>
-<li>
-</li>
-<li>
-</li>
+<li>What makes image data unique for machine learning?</li>
+<li>How can MRI images be clustered and segmented?</li>
+<li>What are the ways to improve segmentation?</li>
+<li>How do we visualise clustering data?</li>
 </ul>
 </div>
 </div>
@@ -1136,10 +1348,10 @@ any links that you are not going to use.
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Working with a specialised Python package</li>
-<li>Clustering with Gaussian mixture models (GMM) to segment different parts of a medical image</li>
-<li>Combining information from different imaging modalities for improved segmentation</li>
-<li>Strategies to visualise clustering output</li>
+<li>Learning to work with a specialised Python package.</li>
+<li>Clustering with Gaussian mixture models (GMM) to segment different parts of a medical image.</li>
+<li>Combining information from different imaging modalities for improved segmentation.</li>
+<li>Understanding strategies to visualise clustering output.</li>
 </ul>
 </div>
 </div>
@@ -1809,9 +2021,281 @@ Detailed traceback:
   </h4>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="section level3 accordion-body">
-<h3 id="q1">Q1<a class="anchor" aria-label="anchor" href="#q1"></a>
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb33">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>img_3d <span class="op">=</span> nib.load(<span class="st">'fig/t1.nii'</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>img1 <span class="op">=</span> img_3d.get_fdata()</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>img_3d <span class="op">=</span> nib.load(<span class="st">'fig/t1_contrast.nii'</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>img2 <span class="op">=</span> img_3d.get_fdata()</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>img_3d <span class="op">=</span> nib.load(<span class="st">'fig/flair.nii'</span>)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>img3 <span class="op">=</span> img_3d.get_fdata()</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>img_3d <span class="op">=</span> nib.load(<span class="st">'fig/adc.nii'</span>)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>img4 <span class="op">=</span> img_3d.get_fdata()</span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb34">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> (img1<span class="op">&gt;</span><span class="dv">0</span>) <span class="op">&amp;</span> (img2<span class="op">&gt;</span><span class="dv">0</span>) <span class="op">&amp;</span> (img3<span class="op">&gt;</span><span class="dv">0</span>) <span class="op">&amp;</span> (img4<span class="op">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>img1_nz <span class="op">=</span> img1[mask]</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>img2_nz <span class="op">=</span> img2[mask]</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>img3_nz <span class="op">=</span> img3[mask]</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>img4_nz <span class="op">=</span> img4[mask]</span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb35">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>all_img <span class="op">=</span> np.stack([img1_nz, img2_nz, img3_nz, img4_nz], axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
+</div>
+<div class="section level3">
+<h3 id="without-scaling">
+<strong>Without scaling</strong><a class="anchor" aria-label="anchor" href="#without-scaling"></a>
+</h3>
+<div class="codewrapper sourceCode" id="cb36">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img1_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels_mapped <span class="op">=</span> np.zeros(img1.shape)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels_mapped[mask] <span class="op">=</span> img1_kmeans_labels</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img2_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels_mapped <span class="op">=</span> np.zeros(img2.shape)</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels_mapped[mask] <span class="op">=</span> img2_kmeans_labels</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img3_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels_mapped <span class="op">=</span> np.zeros(img3.shape)</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels_mapped[mask] <span class="op">=</span> img3_kmeans_labels</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img4_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels_mapped <span class="op">=</span> np.zeros(img4.shape)</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels_mapped[mask] <span class="op">=</span> img4_kmeans_labels</span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels <span class="op">=</span> kmeans.fit_predict(all_img)</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels_mapped <span class="op">=</span> np.zeros(img1.shape)</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels_mapped[mask] <span class="op">=</span> all_img_kmeans_labels</span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb37">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>img_slice <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(<span class="dv">1</span>, <span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">5</span>))</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].imshow(img1_kmeans_labels_mapped[:, :, img_slice], cmap<span class="op">=</span><span class="st">'viridis'</span>)<span class="op">;</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].imshow(img2_kmeans_labels_mapped[:, :, img_slice], cmap<span class="op">=</span><span class="st">'viridis'</span>)<span class="op">;</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].imshow(img3_kmeans_labels_mapped[:, :, img_slice], cmap<span class="op">=</span><span class="st">'viridis'</span>)<span class="op">;</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>].imshow(img4_kmeans_labels_mapped[:, :, img_slice], cmap<span class="op">=</span><span class="st">'viridis'</span>)<span class="op">;</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">4</span>].imshow(all_img_kmeans_labels_mapped[:, :, img_slice], cmap<span class="op">=</span><span class="st">'viridis'</span>)<span class="op">;</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">"kmeans, 3 clusters"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"Image 1"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"Image 2"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="st">"Image 3"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>].set_title(<span class="st">"Image 4"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">4</span>].set_title(<span class="st">"All images"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>tight_layout()<span class="op">;</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+</div>
+<figure><img src="../fig/02-clustering-rendered-unnamed-chunk-32-19.png" width="1920" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb38">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(<span class="dv">4</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">20</span>))</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].hist(img1_nz, bins<span class="op">=</span><span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].scatter(img1_nz, img2_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].scatter(img1_nz, img3_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].set_xlabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].set_ylabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">3</span>].scatter(img1_nz, img4_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">3</span>].set_xlabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">3</span>].set_ylabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].scatter(img2_nz, img1_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].hist(img2_nz, bins<span class="op">=</span><span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].set_title(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].scatter(img2_nz, img3_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].set_xlabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].set_ylabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">3</span>].scatter(img2_nz, img4_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">3</span>].set_xlabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">3</span>].set_ylabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">0</span>].scatter(img3_nz, img1_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">1</span>].scatter(img3_nz, img2_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">2</span>].hist(img3_nz, bins<span class="op">=</span><span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">2</span>].set_title(<span class="st">'Image 3, fontsize=16'</span>)</span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">3</span>].scatter(img3_nz, img4_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">3</span>].set_xlabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">3</span>].set_ylabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">0</span>].scatter(img4_nz, img1_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">1</span>].scatter(img4_nz, img2_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">2</span>].scatter(img4_nz, img3_nz, c<span class="op">=</span>all_img_kmeans_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">2</span>].set_xlabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">2</span>].set_ylabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">3</span>].hist(img4_nz, bins<span class="op">=</span><span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">3</span>].set_title(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a>tight_layout()<span class="op">;</span></span>
+<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+</div>
+<figure><img src="../fig/02-clustering-rendered-unnamed-chunk-33-21.png" width="1920" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+</div>
+<div class="section level3">
+<h3 id="without-scaling-1">
+<strong>Without scaling</strong><a class="anchor" aria-label="anchor" href="#without-scaling-1"></a>
+</h3>
+<div class="codewrapper sourceCode" id="cb39">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>img1_scaled <span class="op">=</span> scaler.fit_transform(img1_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>img2_scaled <span class="op">=</span> scaler.fit_transform(img2_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>img3_scaled <span class="op">=</span> scaler.fit_transform(img3_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>img4_scaled <span class="op">=</span> scaler.fit_transform(img4_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>all_img_scaled <span class="op">=</span> np.concatenate([img1_scaled, img2_scaled, img3_scaled, img4_scaled], axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb40">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img1_scaled)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels_mapped <span class="op">=</span> np.zeros(img1.shape)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels_mapped[mask] <span class="op">=</span> img1_kmeans_labels</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img2_scaled)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels_mapped <span class="op">=</span> np.zeros(img2.shape)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels_mapped[mask] <span class="op">=</span> img2_kmeans_labels</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img3_scaled)</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels_mapped <span class="op">=</span> np.zeros(img3.shape)</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels_mapped[mask] <span class="op">=</span> img3_kmeans_labels</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img4_scaled)</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels_mapped <span class="op">=</span> np.zeros(img4.shape)</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels_mapped[mask] <span class="op">=</span> img4_kmeans_labels</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels <span class="op">=</span> kmeans.fit_predict(all_img_scaled)</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels_mapped <span class="op">=</span> np.zeros(img1.shape)</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels_mapped[mask] <span class="op">=</span> all_img_kmeans_labels</span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb41">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(<span class="dv">1</span>, <span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">5</span>))</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].imshow(img1_kmeans_labels_mapped[:, :, img_slice], cmap<span class="op">=</span><span class="st">'viridis'</span>)<span class="op">;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].imshow(img2_kmeans_labels_mapped[:, :, img_slice], cmap<span class="op">=</span><span class="st">'viridis'</span>)<span class="op">;</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].imshow(img3_kmeans_labels_mapped[:, :, img_slice], cmap<span class="op">=</span><span class="st">'viridis'</span>)<span class="op">;</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>].imshow(img4_kmeans_labels_mapped[:, :, img_slice], cmap<span class="op">=</span><span class="st">'viridis'</span>)<span class="op">;</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">4</span>].imshow(all_img_kmeans_labels_mapped[:, :, img_slice], cmap<span class="op">=</span><span class="st">'viridis'</span>)<span class="op">;</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">"kmeans, 3 clusters"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"Image 1"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"Image 2"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="st">"Image 3"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>].set_title(<span class="st">"Image 4"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">4</span>].set_title(<span class="st">"All images"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>tight_layout()<span class="op">;</span></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+</div>
+<figure><img src="../fig/02-clustering-rendered-unnamed-chunk-36-23.png" width="1920" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb42">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(<span class="dv">4</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">20</span>))</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].hist(img1_scaled, bins<span class="op">=</span><span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].scatter(img1_scaled, img2_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].scatter(img1_scaled, img3_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].set_xlabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].set_ylabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">3</span>].scatter(img1_scaled, img4_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">3</span>].set_xlabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">3</span>].set_ylabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].scatter(img2_scaled, img1_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].hist(img2_scaled, bins<span class="op">=</span><span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].set_title(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].scatter(img2_scaled, img3_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].set_xlabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].set_ylabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">3</span>].scatter(img2_scaled, img4_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">3</span>].set_xlabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">3</span>].set_ylabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">0</span>].scatter(img3_scaled, img1_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">1</span>].scatter(img3_scaled, img2_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">2</span>].hist(img3_scaled, bins<span class="op">=</span><span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">2</span>].set_title(<span class="st">'Image 3, fontsize=16'</span>)</span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">3</span>].scatter(img3_scaled, img4_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">3</span>].set_xlabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>, <span class="dv">3</span>].set_ylabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">0</span>].scatter(img4_scaled, img1_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'Image 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-42"><a href="#cb42-42" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">1</span>].scatter(img4_scaled, img2_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-43"><a href="#cb42-43" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-44"><a href="#cb42-44" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'Image 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-45"><a href="#cb42-45" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">2</span>].scatter(img4_scaled, img3_scaled, c<span class="op">=</span>all_img_kmeans_labels.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), cmap<span class="op">=</span><span class="st">'viridis'</span>, vmin<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb42-46"><a href="#cb42-46" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">2</span>].set_xlabel(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-47"><a href="#cb42-47" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">2</span>].set_ylabel(<span class="st">'Image 3'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-48"><a href="#cb42-48" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">3</span>].hist(img4_scaled, bins<span class="op">=</span><span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb42-49"><a href="#cb42-49" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">3</span>, <span class="dv">3</span>].set_title(<span class="st">'Image 4'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb42-50"><a href="#cb42-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-51"><a href="#cb42-51" aria-hidden="true" tabindex="-1"></a>tight_layout()<span class="op">;</span></span>
+<span id="cb42-52"><a href="#cb42-52" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+</div>
+<figure><img src="../fig/02-clustering-rendered-unnamed-chunk-37-25.png" width="1920" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+</div>
 </div>
 </div>
 </div>
@@ -1827,12 +2311,9 @@ Detailed traceback:
 <h3 class="callout-title">Keypoints</h3>
 <div class="callout-content">
 <ul>
-<li>
-</li>
-<li>
-</li>
-<li>
-</li>
+<li>Image analysis almost always requires a bit of preprocessing.</li>
+<li>Image scaling is performed by using <code>fit_transform</code> method from module <code>StandardScaler</code> in <code>scikit-learn</code>.</li>
+<li>The diagonal plots are very useful in exploratory data analysis.</li>
 </ul>
 </div>
 </div>
@@ -1843,7 +2324,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-03-dimensionality"><p>Content from <a href="03-dimensionality.html">Dimentionality Reduction</a></p>
 <hr>
-<p> Last updated on 2022-08-25 | <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-dimensionality.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p> Last updated on 2022-09-08 | <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-dimensionality.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -1859,12 +2340,10 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>
-</li>
-<li>
-</li>
-<li>
-</li>
+<li>Why is it important to perform dimensionality reduction?</li>
+<li>How is dimensionality reduction performed?</li>
+<li>How PCA is used to determine variance?</li>
+<li>When does PCA fail?</li>
 </ul>
 </div>
 </div>
@@ -1874,10 +2353,10 @@ any links that you are not going to use.
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Work with high-dimensional datasets</li>
-<li>Apply dimensionality reduction to extract few, informative features</li>
-<li>Use PCA for dimensionality reduction</li>
-<li>Estimate optimal number of features</li>
+<li>Understanding working with high-dimensional datasets.</li>
+<li>Applying dimensionality reduction to extract few, informative features.</li>
+<li>Learning to use PCA for dimensionality reduction.</li>
+<li>Estimating optimal number of features.</li>
 </ul>
 </div>
 </div>
@@ -2435,12 +2914,11 @@ any links that you are not going to use.
 <h3 class="callout-title">Keypoints</h3>
 <div class="callout-content">
 <ul>
+<li>Reduced features in a dataset reduce redundancy and process is called dimensionality reduction.</li>
+<li>Principal component analysis (PCA) is one of the most commonly used dimensionality reduction methods.</li>
 <li>
-</li>
-<li>
-</li>
-<li>
-</li>
+<code>n_components</code> is used specify the number of components in <code>scikit-learn</code>.</li>
+<li>PCA can be helpful to find groups of genes that seem to be co-regulated.</li>
 </ul>
 </div>
 </div>
@@ -2491,9 +2969,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://carpentries.github.io/workbench-template-md/instructor/aio.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/aio.html",
-  "dateCreated": "2022-08-25",
-  "dateModified": "2022-09-06",
-  "datePublished": "2022-09-06"
+  "dateCreated": "2022-09-08",
+  "dateModified": "2022-09-08",
+  "datePublished": "2022-09-08"
 }
 
   </script><script>

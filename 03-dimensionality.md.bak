@@ -12,17 +12,18 @@ exercises: 2
  
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- 
--
--
+- Why is it important to perform dimensionality reduction?
+- How is dimensionality reduction performed?
+- How PCA is used to determine variance?
+- When does PCA fail?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-- Work with high-dimensional datasets
-- Apply dimensionality reduction to extract few, informative features
-- Use PCA for dimensionality reduction
-- Estimate optimal number of features
+- Understanding working with high-dimensional datasets.
+- Applying dimensionality reduction to extract few, informative features.
+- Learning to use PCA for dimensionality reduction.
+- Estimating optimal number of features.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::: prereq
@@ -582,9 +583,10 @@ Download data from: https://www.ebi.ac.uk/arrayexpress/experiments/E-GEOD-11083/
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
--
--
--
+- Reduced features in a dataset reduce redundancy and process is called dimensionality reduction.
+- Principal component analysis (PCA) is one of the most commonly used dimensionality reduction methods.
+- `n_components` is used specify the number of components in `scikit-learn`.
+- PCA can be helpful to find groups of genes that seem to be co-regulated.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
