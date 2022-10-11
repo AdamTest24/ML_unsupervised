@@ -1,21 +1,21 @@
 ---
-title: "Gaussian Mixtures"
+title: "Clustering Introduction"
 teaching: 10
 exercises: 2
 ---
 
-[**Download Chapter pdf**](01-gaussian.md.pdf)
+[**Download Chapter pdf**](01-clustering-intro.md.pdf)
 
-[**Download Chapter notebook (ipynb)**](01-gaussian.ipynb)
+[**Download Chapter notebook (ipynb)**](01-clustering-intro.ipynb)
 
 [<span style="color: rgb(255, 0, 0);">**Mandatory Lesson Feedback Survey**</span>](https://docs.google.com/forms/d/e/1FAIpQLSdr0capF7jloJhPH3Pki1B3LZoKOG16poOpuVJ7SL2LkwLHQA/viewform?pli=1)
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How to find multiple distributions in a dataset?
-- How to use Scikit-learn workflow to perform clustering?
-- Can data be labelled in unsupervised learning?
-- What are ways to score clustering predictions?
+- How to search for multiple distributions in a dataset?
+- How to use Scikit-learn to perform clustering?
+- How is data labelled in unsupervised learning?
+- How can we score clustering predictions?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -23,12 +23,12 @@ exercises: 2
 - Understanding Multiple Gaussian distributions in a dataset.
 - Demonstrating Scikit-learn functionality for Gaussian Mixture Models.
 - Learning automated labelling of dataset.
-- Explaining basic scoring of clustering.
+- Obtaining a basic quality score using a ground truth.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::: prereq
-- [Classification Introduction]()
-- [Classification Improvement]()
+- [Classification Introduction](https://learntodiscover.github.io/ML_supervised/01-classification_intro.html)
+- [Classification Improvement](https://learntodiscover.github.io/ML_supervised/02-improvement.html)
 :::::::::::::::::: 
 
 ```{r setup, include=FALSE}
@@ -85,7 +85,9 @@ df[['Weight', 'Height']].describe()
 show()
 ```
 
+<p style='text-align: justify;'>
 Looking at the data, one might expect that there are two distinct groups, visually identified as two clouds separated e.g. by a vertical line at Weight $\approx$ 70 (kg). A consequence is that the mean value of 69.3 kg (which was calculated over all samples) should better be replaced by two mean values, one for each of the clouds. Visually, these can be estimated at around 60 and 80 kg. 
+</p>
 
 We can make this even clearer by looking at the two individual distributions.
 
@@ -103,34 +105,42 @@ show()
 
 ```
 
+<p style='text-align: justify;'>
 The Weight histogram shows two distributions (at the chosen number of bins) which now also points to the two mean values as guessed above. The Height histogram is at least not compatible with the assumption of a normal distribution as would be expected for a typically noisy variable. 
-
+</p>
+<p style='text-align: justify;'>
 Thus, visual inspection suggests to analyse the data in terms of more than one underlying distribution. The automated assignment of data points to distinct groups is called clustering.
-
-We now want to learn to use the Gaussian Mixture Model approach to find those groups. As we will not provide any labels for the training, this presents an example of unsupervised machine learning. Algorithms of this type of machine learning are designed to learn to optimally assign labels through training. As a result we will be able to separate a dataset into groups and be able to predict the labels of new, unlabelled data.
+</p>
+<p style='text-align: justify;'>
+We now want to learn to use the Gaussian Mixture Model approach to find those groups. As we will not provide any labels for the training, this presents an example of unsupervised machine learning. Algorithms of this type of machine learning are designed to learn to optimally assign labels through training. As a result, we will be able to separate a dataset into groups and be able to predict the labels of new, unlabelled data.
+</p>
 
 ## Gaussian Mixture Models
 
-A Gaussian Mixture Models (GMM) approach assumes that the data are composed of two or more normal distributions that may overlap. In a scatter plot that means that there is more than one maximum in the density distribution of the data (see scatter plot above). The task is to find the centres and the spread of each distribution in the mixture. The GMM algorithm thus belongs to the category of (probability) Density Estimators. You can see that another way of grouping could be to find a curve that splits the plane. 
-
-The GMM assumes normally distributed data structure from _n_ sources. Other than that it does not make assumptions about the data.
-
+<p style='text-align: justify;'>
+A Gaussian Mixture Models (GMM) approach assumes that the data are composed of two or more normal distributions that may overlap. In a scatter plot that means that there is more than one centre in the density distribution of the data (see scatter plot above). The task is to find the centres and the spread of each distribution in the mixture. The GMM algorithm thus belongs to the category of (probability) Density Estimators. Another way of grouping is to find a curve that splits the plane into two areas. 
+</p>
+<p style='text-align: justify;'>
+The GMM assumes normally distributed data structure from at least two sources. Other than that it does not make assumptions about the data.
+</p>
+<p style='text-align: justify;'>
 GMM is a parametric learning approach as it optimises the parameters of a normal distributions, i.e. the mean and the covariance matrix of each group. It is therefore an example of a model fitting method. 
-
-As its name suggests, it assumes that the distribution of each group is normal. If the groups are known to be have a non-normal distribution, it may not be the optimal approach. 
-
-
+</p>
+<p style='text-align: justify;'>
+As its name suggests, it assumes that the distribution of each group is normal. If the groups are known to have a non-normal distribution, it may not be the optimal approach. 
+</p>
+<p style='text-align: justify;'>
 GMM is one example of clustering or [cluster analysis](https://en.wikipedia.org/wiki/Cluster_analysis).
-Whenever we suspect that a data set contains contributions of qualitatively different types, we can consider doing a cluster analysis to separate those types. However, this is a vague notion and clustering is therefore a complex field. We can only provide an introduction to its basic components. The main point to keep in mind is that the algorithms provided e.g. by scikit-learn will always give some result but that it is not easy to assess the quality of the results. Scikit-learn has a good [overview of clustering methods](https://scikit-learn.org/stable/modules/clustering.html#c) showing advantages and disadvantages of each. Here is a link to a readable introduction about the cautious application and the [pitfalls of clustering](https://stke.sciencemag.org/content/9/432/re6.full).
-
+Whenever we suspect that a data set contains contributions of qualitatively different types, we can consider doing a cluster analysis to separate those types. However, this is a vague notion and clustering is therefore a complex field. We can only provide an introduction to its basic components. The main point to keep in mind is that the algorithms provided e.g. by Scikit-learn will always give some result but that it is not easy to assess the quality of the results. Scikit-learn has a good [overview of clustering methods](https://scikit-learn.org/stable/modules/clustering.html#c) showing advantages and disadvantages of each. Here is a link to a readable introduction about the cautious application and the [pitfalls of clustering](https://stke.sciencemag.org/content/9/432/re6.full).
+</p>
 
 ## Work Through Example
 
 ### **Creating test data**
-
+<p style='text-align: justify;'>
 Let us create synthetic data for testing of the clustering algorithm. We do this according to the assumptions of GMM: we create two Gaussian data sets with different means and different standard distributions and add them together. For illustration we only use two features. 
-
-The example is adapted from a [scikit-learn example](https://scikit-learn.org/stable/modules/mixture.html#mixture). It uses the concept of [covariance matrix](https://datascienceplus.com/understanding-the-covariance-matrix/) which is the extension of variance (or standard deviation) to multivariate datasets.
+</p>
+The example is adapted from a [Scikit-learn example](https://scikit-learn.org/stable/modules/mixture.html#mixture). It uses the concept of [covariance matrix](https://datascienceplus.com/understanding-the-covariance-matrix/) which is the extension of variance (or standard deviation) to multivariate datasets.
 
 ```{python, results = "hold"}
 n_samples = 500
@@ -166,11 +176,15 @@ show()
 
 ```
 
-The scatter plot showes that this method allows the adjustment of the centers of the distributions as well as the elliptic shape of the distribution.
-
+<p style='text-align: justify;'>
+The scatter plot showes that this method allows the adjustment of the centres of the distributions as well as the elliptic shape of the distribution.
+</p>
+<p style='text-align: justify;'>
 Now we fit a GMM. Note that the GMM needs to be told how many components one wants to fit. Modifications that estimate the optimal number of components exist but we will restrict the demonstration to the method that directly sets the number. 
-
-Analogous to the classifier in supervised learning, we instantiate the model from the imported class `GaussianMixture`. The instaniation takes the number of independent data sets (clusters) as an argument. By default, the classifier tries to fit the full covariance matrix of each group. The fitting is done using the method `fit`.
+</p>
+<p style='text-align: justify;'>
+Analogous to the classifier in supervised learning, we instantiate the model from the imported class `GaussianMixture`. The instantiation takes the number of independent data sets (clusters) as an argument. By default, the classifier tries to fit the full covariance matrix of each group. The fitting is done using the method `fit`.
+</p>
 
 ```{python}
 from sklearn.mixture import GaussianMixture
@@ -185,7 +199,9 @@ clf.fit(X_train)
 
 ```
 
-After the fitting of the model, we first create a meshgrid of the (two-dimensional) state space. For each point in this state space, we obtain the predicted scores using the method `.score_samples`. These are the weighted logarithmic probabilities which show us the predicted distribution of points in the state space. 
+<p style='text-align: justify;'>
+After the fitting of the model, we first create a meshgrid of the (two-dimensional) state space. For each point in this state space, we obtain the predicted scores using the method `.score_samples`. These are the weighted logarithmic probabilities which show the predicted distribution of points in the state space. 
+</p>
 
 ```{python}
 resolution = 100
@@ -204,9 +220,9 @@ Z_s = Z_score.reshape(grid_a.shape)
 print(Z_s.shape)
 ```
 
-
+<p style='text-align: justify;'>
 Now we can display the predicted scores as a contour plot. Typically, the negative log-likelihood or [density estimation](https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm_pdf.html?highlight=lognorm) is used for this. In this case, the highest probabilities are shown as a landscape with two minima.
-
+</p>
 
 ```{python}
 fig, ax = subplots(figsize=(8, 6))
@@ -255,13 +271,17 @@ show()
 
 ```
 
+<p style='text-align: justify;'>
 For the choice of 3 components it does not lead to a probability distribution with 3 distinct maxima. This is because two of the maxima coincide or at least nearly coincide.
-
+</p>
+<p style='text-align: justify;'>
 In our example, the choice of 2 components is very obvious because as done above, we could visualise the complete state space and there was a visually discernible structure in the data. In high-dimensional data the task is difficult and while methods exist to automatically find the [optimal number of components for some clustering methods](https://en.wikipedia.org/wiki/Determining_the_number_of_clusters_in_a_data_set), the success of these depends very much on the problem.
-
+</p>
 
 ### **Getting optimal model parameters**
+<p style='text-align: justify;'>
 Now that the estimator is fitted, we can obtain the optimal parameters for the fitted components. They are stored in the model attributes. We can extract (i) the `.weights_`, the share of each of the components (Gaussians) in the mixture; (ii) the `.means_`, the coordinates of the mean values; and (iii) `.covariances_`, the covariance matrix of each component.
+</p>
 
 ```{python, results = 'hold'}
 components = 2
@@ -282,12 +302,14 @@ print(clf.covariances_)
 
 ```
 
-The fit returned a model where the two components have equal weight. The means and covariance matrices can be compared directly to the values chosen to create the data. They are not identical but good estimates are obtained from a fit to 500 data points in each group. 
-
+<p style='text-align: justify;'>
+The fit returns a model where the two components have equal weight. The means and covariance matrices can be compared directly to the values chosen to create the data. They are not identical but good estimates are obtained from a fit to 500 data points in each group. 
+</p>
 
 ### **Create data from optimal model**
+<p style='text-align: justify;'>
 The result of the fitting are the parameters for two Gaussian distributions with two features each. These parameters can be used to create further model data with the same characteristics. In our demonstration we know the original sources but if the parameters are obtained from experimental or clinical data, it is useful to visualise the predicted distributions using as many samples as necessary. 
-
+</p>
 If we know the mean and the covariance matrix of a Gaussian, the function `multivariate_normal` can be used to create data from that Gaussian. 
 
 ```{python}
@@ -311,8 +333,9 @@ show()
 ### **Predicting Labels**
 
 Now we can apply what we have discussed in supervised machine learning and use the trained model to predict.
-
+<p style='text-align: justify;'>
 We can get the predictions of the group for new data. Here, for simplicity, we create test data from the same distribution as the train data. The label is obtained from the method `.predict`.
+</p>
 
 ```{python}
 n_samples = 10
@@ -347,8 +370,9 @@ y_test = clf.predict(X_test)
 print(y_test)
 
 ```
-
+<p style='text-align: justify;'>
 For simplicity, fit and predict can be combined with the `.fit_predict` method to directly get the labels for each sample. Here is an example where we fit the model to the test data and directly extract their predicted labels.
+</p>
 
 ```{python}
 components = 2
@@ -359,7 +383,9 @@ labels = clf_2.fit_predict(X_test)
 print(labels)
 ```
 
+<p style='text-align: justify;'>
 The probabilities of the predictions are obtained from the method `.predict_proba`. In this case, all probabilities are 0 and 1 respectively. The model is sure about their group signature. 
+</p>
 
 ```{python}
 y_proba = clf.predict_proba(X_test)
@@ -372,7 +398,9 @@ show()
 
 ```
 
+<p style='text-align: justify;'>
 The `.sample_` method produces individual samples from the trained model. It takes the number of required samples as an input argument and yields the sample values as well as the group for each sample. Samples for each group are given with probability according to the group weights. 
+</p>
 
 ```{python, results = 'hold'}
 samples = clf.sample(5)
@@ -481,9 +509,9 @@ print(y_predict)
 
 
 ### **Scoring of Predictions**
-
-Knowing the origin of the data we can now compare the predicted labels with the true labels and obtain a scoring. A function provided by scikit-learn is the (adjusted or unadjusted) __Rand index__. It measures the similarity of the predicted and the true assignments. However, random assignment of labels will (by chance) lead to a number of correct predictions. To adjust for this fact and ensure that randomly assigned labels get a scoring close to zero, the function to use is `adjusted_rand_score`:
-
+<p style='text-align: justify;'>
+Knowing the origin of the data we can now compare the predicted labels with the true labels (the ground truth) and obtain a scoring. A function provided by Scikit-learn is the (adjusted or unadjusted) __Rand index__. It measures the similarity of the predicted and the true assignments. However, random assignment of labels will (by chance) lead to a number of correct predictions. To adjust for this fact and ensure that randomly assigned labels get a scoring close to zero, the function to use is `adjusted_rand_score`:
+</p>
 
 ```{python}
 from sklearn.metrics.cluster import adjusted_rand_score
@@ -496,13 +524,15 @@ scoring = adjusted_rand_score(y_true, y_predict)
 print(scoring)
 
 ```
-
+<p style='text-align: justify;'>
 The result shows that even though the two distributions are strongly overlapping, there is still a reasonable score based on the known ground truth.
-
+</p>
+<p style='text-align: justify;'>
 It is important to remember that the ground truth is typically not known. There are therefore also measures to score the outcome based on within-data criteria. See [internal evaluation of the wikipedia article](https://en.wikipedia.org/wiki/Cluster_analysis) for some techniques.
-
+</p>
+<p style='text-align: justify;'>
 In general, the outcome of clustering is not easy to assess with confidence and specific measures need to be developed based on additional knowledge about the source of the data. 
-
+</p>
 
 ## Application to Example Data
 
@@ -563,7 +593,9 @@ axis('tight');
 show()
 ```
 
-These predictions can now be compared with labels in the data, for example the Gender. To check the outcome of the fitted model versus the gender, we obtain the predicted labels from the model. We can compoare this with the Gender labels in the data:
+<p style='text-align: justify;'>
+These predictions can now be compared with labels in the data, for example the Gender. To check the outcome of the fitted model versus the gender, we obtain the predicted labels from the model. We can compare this with the Gender labels in the data:
+</p>
 
 ```{python}
 y_predict = clf.predict(X_train)
@@ -593,7 +625,7 @@ print(scoring)
 ```
 
 
-This result shows that the GMM labelling is arbitrary when compared the the smoker labels in the data.
+This result shows that the GMM labelling is arbitrary when compared the smoker labels in the data.
 
 From the trained model we create the individual predicted distributions for each group.
 
@@ -647,8 +679,9 @@ Create the training and prediction workflow as above for a data set with two oth
 
 7. Create corresponding histograms of the Diastolic and Systolic blood pressure values from data and model. Try to guess where the differences in appearance come from.
 
-
+<p style='text-align: justify;'>
 The data show systematic gaps in the histogram meaning that some values do not occur (integer values only). In contrast, the model data from the random number generator can take any value. Therefore the counts per bin are generally lower for the model. 
+</p>
 
 ::::::::::::::::::::: solution
 
