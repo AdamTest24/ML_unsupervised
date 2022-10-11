@@ -1,5 +1,5 @@
 ---
-title: "Dimentionality Reduction"
+title: "Dimensionality Reduction"
 teaching: 10
 exercises: 2
 ---
@@ -20,15 +20,15 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-- Understanding working with high-dimensional datasets.
-- Applying dimensionality reduction to extract few, informative features.
+- Understanding high-dimensional datasets.
+- Applying dimensionality reduction to extract features.
 - Learning to use PCA for dimensionality reduction.
-- Estimating optimal number of features.
+- Estimating the optimal number of features.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::: prereq
-- Lesson Clustering Introduction
-- Lesson Clustering Images
+- [Clustering Introduction](01-clustering-intro.Rmd)
+- [Clustering Images](02-clustering-image.Rmd)
 :::::::::::::::::: 
 
 
@@ -54,12 +54,13 @@ import csv
 
 
 ## Introduction
-
+<p style='text-align: justify;'>
 Clinical and scientific datasets often contain measurements of many physiological variables, expression of many genes or metabolic markers. These datasets, where each individual observation/sample is described by many variables are referred to as __high-dimensional__. However, some of these features can be highly correlated or redundant, and we sometimes want a more condensed description of the data. This process of describing the data by a reduced number of new combined features that reduces redundancy, is called __dimensionality reduction__.
+</p>
 
 ![Goal of decomposition](fig/goal.png)
 
-There are several reasons for performing dimensionality reduction, both for data exploration and for preprocessing:
+There are several reasons for performing dimensionality reduction, both for data exploration and for pre-processing:
 
 - Data compression, to optimize memory usage/loading speed and visualisation of "important features". 
 
@@ -71,16 +72,17 @@ There are several reasons for performing dimensionality reduction, both for data
 
 
 ## Example: Predicting outcome from large-scale genetic or molecular studies
-
-Clinical research can involve doing an exhaustive measurement of all tentative diagnostic markers, for example levels of various cytokines and hormones, or searching for genetic markers for disease X. There is good reason to expect that these share regulatory/signalling mechanisms, and that their interaction determines disease outcome. Building a regression model including all measurements is problematic because of multicollinearity and the demand for a much larger number of observations.
-
+<p style='text-align: justify;'>
+Clinical research can involve doing an exhaustive measurement of all tentative diagnostic markers, for example levels of various cytokines and hormones, or searching for genetic markers of a disease. There is good reason to expect that these share regulatory/signalling mechanisms, and that their interaction determines disease outcome. Building a regression model including all measurements is problematic because of multicollinearity and the demand for a much larger number of observations.
+</p>
+<p style='text-align: justify;'>
 By performing dimensionality reduction, we first find features that capture the major patterns of covariation of these factors in the sample population. Then we will use these compact features, rather than individual measurements, to train our classifier or regression model, to study outcomes. With fewer features, we train models with less data.
-
+</p>
 
 ### **Loading example data: Childhood Onset Rheumatic Disease gene expression profile**
-
+<p style='text-align: justify;'>
 [Gene expression data](https://www.ebi.ac.uk/arrayexpress/experiments/E-GEOD-11083/) (for selected markers) is available for 83 individuals, including some patients with varying forms of early-onset rheumatic disease (available at EMBL-Bioinformatics database, also included in folder). This is a typical example of high dimensional datasets, with transcript levels for >50,000 genes measured!
-
+</p>
 Here, the data are read from individual files in the 'Dataset' folder and combined into a Pandas dataframe called 'geneData'. 
 
 
@@ -108,9 +110,9 @@ geneData = DataFrame( data=a[:,range(nGenes)]- mean(a[:,range(nGenes)], axis=0),
 ```
 
 The dataframe has 80 samples and 1000 features. 
-
+<p style='text-align: justify;'>
 Apart from the large number of variables (compared to number of samples), we also have strongly correlated expression of various markers. We can see that by plotting the correlation matrix of the dataframe.
-
+</p>
 
 
 ```python
@@ -125,16 +127,20 @@ show()
 
 <img src="fig/03-dimensionality-rendered-unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" />
 
+<p style='text-align: justify;'>
 The little yellow blocks indicate that various features are strongly correlation (values around 1). Further analyses (e.g. checking if we find clusters mapping to healthy individuals and patients, respectively, or whether patients with different patterns of marker expression can be identified for future diagnostic purposes) can be thus be improved if we perform a dimensionality reduction, i.e. decrease the number of features while maintaining relevant information. 
+</p>
 
 ## Principal Component Analysis
-
-Principal component analysis (PCA) is one of the most commonly used dimensionality reduction methods. Instead of describing the data using the orginal measurements, it finds a new set of ranked features (the "basis"). The new "features" are linear combinations of the original variables, such that they are all *orthogonal* to each other, and the "importance" of a feature (called the __principal component__) is generally given by how much of the variability in the dataset it captures (the so-called __explained variance__). Thus we first transform the data from the original variables into a new set of features or principal components (PCs). 
+<p style='text-align: justify;'>
+Principal component analysis (PCA) is one of the most commonly used dimensionality reduction methods. Instead of describing the data using the original measurements, it finds a new set of ranked features (the "basis"). The new "features" are linear combinations of the original variables, such that they are all *orthogonal* to each other, and the "importance" of a feature (called the __principal component__) is generally given by how much of the variability in the dataset it captures (the so-called __explained variance__). Thus, we first transform the data from the original variables into a new set of features or principal components (PCs). 
+</p>
 
 To get a lower dimensional description of the data, we retain only the top features (PCs) such that the largest variations or 'patterns' in the dataset are preserved.
 
-To apply __PCA__ from `scikit-learn`, we need to specify the number of components (`n_components`) we want to reduce the data to. `n_components` must be less than the *rank* of the dataset, i.e. less than the smaller of the number of samples and number of variables measured.
-
+<p style='text-align: justify;'>
+To apply __PCA__ from `Scikit-learn`, we need to specify the number of components (`n_components`) we want to reduce the data to. `n_components` must be less than the *rank* of the dataset, i.e. less than the smaller of the number of samples and number of variables measured.
+</p>
 
 ### **Simple example with 2D generated dataset**
 
@@ -199,19 +205,22 @@ _The last plot, with the samples plotted as scatter in the space of measured var
 
 :::::::::::::::::
 
+<p style='text-align: justify;'>
 Now if we want to represent data by a single feature, we can see that the individual variables are not ideal. If we only keep Dim 1, we lose substantial variability along Dim 2. We see that the data points are stretched along the main diagonal. This implies that the two variables co-vary to some extent. Thus, a linear combination of the two might capture this relevant pattern.
+</p>
 
-A linear combination correspond to a vector (or direction) in this 2D state space.
-
-For example, the x-axis vector (1, 0) = [1 x Dim1 + 0 x Dim2], i.e. it contains Dim 1 only. More generally, (a, b) represents the linear combination [a x Dim1 +  b x Dim2], i.e. a mixture of the two variables. Typically, we ensure that the length of these vectors is 1, to avoid artifactual rescaling of data.
-
+A linear combination corresponds to a vector (or direction) in this 2D state space.
+<p style='text-align: justify;'>
+For example, the x-axis vector (1, 0) = [1 x Dim1 + 0 x Dim2], i.e. it contains Dim 1 only. More generally, (a, b) represents the linear combination [a x Dim1 +  b x Dim2], i.e. a mixture of the two variables. Typically, we ensure that the length of these vectors is 1, to avoid artefactual rescaling of data.
+</p>
 
 ### **PCA as projection or rotation of basis**
-
+<p style='text-align: justify;'>
 Instead of representing data by their values along Dim 1 and Dim 2, we now try to describe them along different directions. We do so by *projecting* 2D data onto that vector. To quantify the importance of each direction, we measure the variance of the projected samples.
-
+</p>
+<p style='text-align: justify;'>
 Let us examine different vectors that point at various angles compared to the x-axis. Remember that the vector denoted by the angle = *( cos(angle), sin(angle) )* denotes the following linear combination of the 2D sample d=[d1, d2]:
-
+</p>
 f(d1,d2) = cos(angle) * d1 + sin(angle) * d2
 
 
@@ -267,7 +276,9 @@ show()
 Change the angle in the code above and see how distribution of projected data changes. Use e.g. 0,  $\pi$ /2,   2/3*$\pi$,  and $\pi$. Try to estimate how much the variance changes.
 :::::::::::::::::::::::::::::: 
 
+<p style='text-align: justify;'>
 Now let's formally calculate the variance by projecting along a set of different directions. We use angles between 0 and $\pi$ (i.e. between 0 and 180 degrees). For each direction (projection) we  calculate the variance and plot it against the angle. 
+</p>
 
 
 ```python
@@ -285,11 +296,14 @@ xlabel('Direction (angle in radians)', fontsize=14);
 ylabel('Variance of projected data', fontsize=14);
 ```
 
+<p style='text-align: justify;'>
 It can be seen there is a particular direction that retains maximal variance. This would be the optimal feature to give a 1D description of the 2D data while retaining maximum variability. PCA is the method that directly find this optimal direction. This makes it especially powerful for high dimensional datasets. 
+</p>
 
 ### **Find 1-D description using PCA**
-
-Let us now use dimensionality reduction `PCA` to directly find the direction that captures maximal variance. For an n-dimensional dataset, PCA finds a set of _n_ new features, ranked by the variance along each feature. See the [scikit-learn documentation](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html) for information. 
+<p style='text-align: justify;'>
+Let us now use dimensionality reduction `PCA` to directly find the direction that captures maximal variance. For an n-dimensional dataset, PCA finds a set of _n_ new features, ranked by the variance along each feature. See the [Scikit-learn documentation](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html) for information. 
+</p>
 
 To get the best 1D representation of data, we instantiate the class with one component (*n_components* = 1) to be returned, and transform the data to the feature space of that component.
 
@@ -352,9 +366,9 @@ Try to infer the relationship between the shape of the scatter, the strength of 
 ::::::::::::::::::::::::::::::: 
 
 ### **Find 2-D description using PCA**
-
+<p style='text-align: justify;'>
 Our dataset has two features. We can thus obtain two principal components. The two components must be orthogonal to each other (form a right angle). Let us get the corresponding vectors and plot them on the scatterplot.
-
+</p>
 
 
 ```python
@@ -404,17 +418,19 @@ show()
 
 <img src="fig/03-dimensionality-rendered-unnamed-chunk-10-7.png" width="576" style="display: block; margin: auto;" />
 
-
-The red arrows show the new coordinate system, defined by the principal components. It also shows that the more correlated the data are, the less information we loose by reducing the data representation using PCA.
+<p style='text-align: justify;'>
+The red arrows show the new coordinate system, defined by the principal components. It also shows that the more correlated the data are, the less information we lose by reducing the data representation using PCA.
+</p>
 
 :::::::::::::: callout
 ## Important
-When reading about PCA you will come across the term __Singular Value Decomposition__ (SVD). As mentioned in the [scikit-learn documentation for PCA](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA), when you apply `PCA` the algorithm in the background uses SVD to return the results. The difference between the two is technical but SVD is the more general method. Wikipedia has as [mathematical introduction to PCA](https://en.wikipedia.org/wiki/Principal_component_analysis#Singular_value_decomposition) which also discusses [the relationship to SVD](https://en.wikipedia.org/wiki/Principal_component_analysis#Singular_value_decomposition).
+When reading about PCA you will come across the term __Singular Value Decomposition__ (SVD). As mentioned in the [Scikit-learn documentation for PCA](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA), when you apply `PCA` the algorithm in the background uses SVD to return the results. The difference between the two is technical but SVD is the more general method. Wikipedia has as [mathematical introduction to PCA](https://en.wikipedia.org/wiki/Principal_component_analysis#Singular_value_decomposition) which also discusses [the relationship to SVD](https://en.wikipedia.org/wiki/Principal_component_analysis#Singular_value_decomposition).
 ::::::::::::::
 
 ## PCA of the Gene Expression Data
-
+<p style='text-align: justify;'>
 Now, we will use PCA to find a few features that capture most of the variability in the gene expression dataset. we arbitrarily start with 50 components assuming that this will include the important features. 
+</p>
 
 
 ```python
@@ -425,8 +441,9 @@ GenePCA = PCA(n_components=nComp, whiten=True)
 GenePCA = GenePCA.fit(geneData) #.values[trainIndx==1,:]
 ```
 
-
+<p style='text-align: justify;'>
 How many features should we retain? To investigate this question, we plot the total (cumulative) variance for retaining the top *k* modes. The more we use, the higher the cumulative variance. 
+</p>
 
 
 ```python
@@ -442,8 +459,10 @@ show()
 
 <img src="fig/03-dimensionality-rendered-unnamed-chunk-12-9.png" width="480" style="display: block; margin: auto;" />
 
+<p style='text-align: justify;'>
 A common heuristic for choosing the number of components is by defining a set threshold for the total explained variance.
-These threshold commonly vary betwen 0.8-0.9, depending on the structure of the PCs, e.g. depending on whether there are a few top PCs or many small PCs, but also depending on the expected noise in data, and on the desirable accuracy of the reduced data set. While a dimensionality reduction is convenient it always loses some information.
+Thresholds commonly vary between 0.8-0.9, depending on the structure of the PCs, e.g. depending on whether there are a few top PCs or many small PCs, but also depending on the expected noise in data, and on the desirable accuracy of the reduced data set. While a dimensionality reduction is convenient it always loses some information.
+</p>
 
 As an example, we can check how many PCs we need to retain 99 % of the variance.
 
@@ -547,7 +566,7 @@ Although PCA is the first and simplest method of exploring high-dimensional data
 
 1. *PCA is a linear method*
 
-Nonlinear patterns of co-expression will be seemingly broken up into many features. Thus the ability to find whether genes are co-regulated may be reduced if the effects are nonlinear.
+Nonlinear patterns of co-expression will be seemingly broken up into many features. Thus, the ability to find whether genes are co-regulated may be reduced if the effects are nonlinear.
 
 2. *PCA depends on scaling of individual measurements.*
 
@@ -573,7 +592,7 @@ The definition of what is the 'relevant' number of features can depend on:
   
   - [Manifold learning or topological methods](https://scikit-learn.org/stable/modules/manifold.html)
   
-  - [Example pipelines with scikit-learn](https://scikit-learn.org/stable/modules/unsupervised_reduction.html)
+  - [Example pipelines with Scikit-learn](https://scikit-learn.org/stable/modules/unsupervised_reduction.html)
 
 Dataset from:
 
@@ -584,8 +603,8 @@ Download data from: https://www.ebi.ac.uk/arrayexpress/experiments/E-GEOD-11083/
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Reduced features in a dataset reduce redundancy and process is called dimensionality reduction.
-- Principal component analysis (PCA) is one of the most commonly used dimensionality reduction methods.
-- `n_components` is used specify the number of components in `scikit-learn`.
+- Principal component analysis (PCA) is one of the commonly used dimensionality reduction methods.
+- `n_components` is used specify the number of components in `Scikit-learn`.
 - PCA can be helpful to find groups of genes that seem to be co-regulated.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
