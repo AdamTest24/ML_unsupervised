@@ -1,34 +1,34 @@
 ---
-title: "Clustering"
+title: "Clustering Images"
 teaching: 10
 exercises: 2
 ---
 
-[**Download Chapter pdf**](02-clustering.md.pdf)
+[**Download Chapter pdf**](02-clustering-image.md.pdf)
 
-[**Download Chapter notebook (ipynb)**](02-clustering.ipynb)
+[**Download Chapter notebook (ipynb)**](02-clustering-image.ipynb)
 
 [<span style="color: rgb(255, 0, 0);">**Mandatory Lesson Feedback Survey**</span>](https://docs.google.com/forms/d/e/1FAIpQLSdr0capF7jloJhPH3Pki1B3LZoKOG16poOpuVJ7SL2LkwLHQA/viewform?pli=1)
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - What makes image data unique for machine learning?
-- How can MRI images be clustered and segmented? 
-- What are the ways to improve segmentation?
-- How do we visualise clustering data?
+- How can MR images be clustered and segmented? 
+- How can segmentation be improved?
+- How do we visualise clustered image data?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-- Learning to work with a specialised Python package.
-- Clustering with Gaussian mixture models (GMM) to segment different parts of a medical image.
+- Learning to work with a domain-specific Python package.
+- Clustering with Gaussian Mixture Models (GMM) to segment a medical image.
 - Combining information from different imaging modalities for improved segmentation.
-- Understanding strategies to visualise clustering output.
+- Understanding strategies to visualise clustered output.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::: prereq
-- [Data Handling Images]()
+- [Data Handling Images](https://learntodiscover.github.io/Data_Handling/03-image_handling.html)
 :::::::::::::::::: 
 
 
@@ -36,12 +36,14 @@ exercises: 2
 ## Concept
 
 ### **Image Segmentation with Clustering**
-
-Medical imaging techniques are a valuable tool for probing diseases and disorders non-invasively. Processing medical images often consists of an expert, such as a radiologist, looking at the images and identifying, labelling and characterising potential lesions. This process can be time-consuming and reliant on a well-trained expert's eye. To make medical imaging techniques feasible in circumstances where there may me insufficient time or resources for expert labelling, there is current research into using artificial intelligence to label images. There are many supervised learning techniques that utilise previously labelled data from experts to train a computer algorithm to recognise certain features of an image. However, this may require large amounts of data that were previously labelled, which again is not always available. An alternative approach is to use unsupervised learning strategies, such as clustering, to group images into different regions. The interpretation of these regions may be ambiguous, but with some previous knowledge, we may still use it to infer information from an image.
+<p style='text-align: justify;'>
+Medical imaging techniques are a valuable tool for probing diseases and disorders non-invasively. Processing medical images often consists of an expert, such as a radiologist, looking at the images and identifying, labelling and characterising potential lesions. This process can be time-consuming and reliant on a well-trained expert's eye. To make medical imaging techniques feasible in circumstances where there may be insufficient time or resources for expert labelling, there is current research into using artificial intelligence to label images. There are many supervised learning techniques that utilise previously labelled data from experts to train a computer algorithm to recognise certain features of an image. However, this may require large amounts of data that were previously labelled, which again is not always available. An alternative approach is to use unsupervised learning strategies, such as clustering, to group images into different regions. The interpretation of these regions may be ambiguous, but with some previous knowledge, we may still use it to infer information from an image.
+</p>
 
 ### **Medical Image Example**
-
+<p style='text-align: justify;'>
 The example used in this lesson is part of the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium Glioblastoma Multiforme (CPTAC-GBM) cohort and is available at The Cancer Imaging Archive: https://wiki.cancerimagingarchive.net/display/Public/CPTAC-GBM. For each subject in this study, several different brain MRI scans were performed, each of which gives different contrast in the brain. Each subject has been diagnosed with glioblastoma, and a tumour is visible in the MRI scans. To analyse the images and to, for example, estimate the size of the tumour, we may wish to segment the brain into healthy tissue and tumour tissue. The figure below shows four images in the different modalities.
+</p>
 
 ![Figure 1: Example image, different MRI modalities imaging glioblastoma](fig/brain_images.png)
 
@@ -49,9 +51,9 @@ The example used in this lesson is part of the National Cancer Institute’s Cli
 ## Work Through Example
 
 ### **Code Preparation**
-
+<p style='text-align: justify;'>
 We first import the modules needed for this lesson. We use Numpy to store and process images and we use __nibabel__ to read the MRI images, which have a file type called 'nifti'. Nibabel is freely available for download here: https://nipy.org/nibabel/ 
-
+</p>
 
 
 ```python
@@ -69,10 +71,9 @@ To familiarise yourself with the nibabel package, try the [Getting started tutor
 
 
 ### **Reading Images into Numpy Arrays**
-
+<p style='text-align: justify;'>
 Next, we want to use the nibabel package to read the MRI images into Numpy arrays. In this example, we use four different images that were acquired with different MRI protocols.
-
-
+</p>
 
 
 ```python
@@ -100,9 +101,9 @@ print(img1.shape)
 ```{.output}
 (256, 256, 32)
 ```
-
+<p style='text-align: justify;'>
 For plotting, we select a slice from the images. In this example we will view axial slices, i.e. slices from the last dimension. Thus, we choose a slice number between 0 and 31, here we go with slice 20 and plot it.
-
+</p>
 
 
 ```python
@@ -126,11 +127,11 @@ ax[3].set_title("Apparent diffusion coefficient", fontsize=16);
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-5-1.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-5-1.png" width="1920" style="display: block; margin: auto;" />
 
 ### **Data Pre-processing**
 
-To analyse the images, we need to do a bit of preprocessing. First of all, lets plot the histogram of the voxel (volume pixel) intensities.
+To analyse the images, we need to do a bit of pre-processing. First of all, let us plot the histogram of the voxel (volume pixel) intensities.
 
 
 
@@ -165,9 +166,11 @@ show()
 Number of voxels with intensity equal to 0 is: 1848804
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-6-3.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-6-3.png" width="1920" style="display: block; margin: auto;" />
 
+<p style='text-align: justify;'>
 As we can see from these histograms, a large number of the values are zero. This corresponds to the background voxels shown in black. We want to remove these voxels, as they are not useful for our analysis. For this, we create a binary mask and apply it to the images.
+</p>
 
 :::::::::::::::::: callout
 ## Note
@@ -212,14 +215,15 @@ tight_layout()
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-8-5.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-8-5.png" width="1920" style="display: block; margin: auto;" />
 
 We can see that the data is no longer confounded by the zero-valued background voxels. The distribution of relevant intensities now becomes apparent.
 
 
 ### **Image scaling**
-
-In many machine learning applications (both supervised and unsupervised) an additional step of data preparation consists in normalising or scaling, i.e. adjustment of the values under certain conditions. For example, the numbers in a data file are all positive and very large but the algorithms work best for numbers with mean zero and variance 1. In scikit-learn this can be done by using `fit_transform` for an instance of the `StandardScaler`.
+<p style='text-align: justify;'>
+In many machine learning applications (both supervised and unsupervised) an additional step of data preparation consists in normalising or scaling, i.e. adjustment of the values under certain conditions. For example, the numbers in a data file are all positive and very large but the algorithms work best for numbers with mean zero and variance 1. In Scikit-learn this can be done by using `fit_transform` for an instance of the `StandardScaler`.
+</p>
 
 
 ```python
@@ -255,37 +259,41 @@ tight_layout()
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-9-7.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-9-7.png" width="1920" style="display: block; margin: auto;" />
 
 If you compare the histograms, you can see that the values in the data have changed (horizontal axis) but the shapes of the distributions are the same.
 
-We are not persuing this further here but you are encouraged to re-do the clustering below with the scaled images and check if there are any differences. 
+We are not pursuing this further here but you are encouraged to re-do the clustering below with the scaled images and check if there are any differences. 
 
 
 ### **Image Segmentation with Clustering**
-
-After this data cleaning, we can proceed with our analysis. We want to use the images to segment the images into brain tissue and tumour tissue. It is not obvious how to do this, as the intensity values in the above histogram are continuous with only one major peak in intensity. We will nonetheless attempt to cluster the images using a Gaussian Mixture Model (GMM).
-
-First, we import the GMM class from scikit-learn.
+<p style='text-align: justify;'>
+After this data cleaning step, we can proceed with our analysis. We want to segment the images into brain tissue and tumour tissue. It is not obvious how to do this, as the intensity values in the above histogram are continuous with only one major peak in intensity. We will nonetheless attempt to cluster the images using a Gaussian Mixture Model (GMM).
+</p>
+First, we import the GMM class from Scikit-learn.
 
 
 ```python
 from sklearn.mixture import GaussianMixture
 ```
 
-We then fit the instantiated model with a few different numbers of clusters (argument `n_components`, between n = 2-4) individually for each image. We use the `fit_predict` method to simultaneously fit and label the images. Note that we also add 1 to each image label. This is because each data point gets labelled with a number from 0 to _n-1_ where _n_ is the number of clusters we use to fit the model. At the plotting stage, we do not want any of our labels to be equal to 0, as this corresponds to the background.
+<p style='text-align: justify;'>
+We then fit the instantiated model with a few different numbers of clusters (argument `n_components`, between n = 2-4) individually for each image. We use the `fit_predict` method to simultaneously fit and label the images. Note that we also add 1 to each image label. This is because each data point gets labelled with a number from 0 to _n-1_ where _n_ is the number of clusters used to fit the model. At the plotting stage, we do not want any of our labels to be equal to 0, as this corresponds to the background.
+</p>
 
 
 ```python
-gmm_2 = GaussianMixture(2)
+RANDOM_SEED = 123
+
+gmm_2 = gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
 img1_n2_labels = gmm_2.fit_predict(img1_nz.reshape(-1, 1))
 img1_n2_labels += 1
 
-gmm_3 = GaussianMixture(3)
+gmm_3 = GaussianMixture(3, random_state=RANDOM_SEED)
 img1_n3_labels = gmm_3.fit_predict(img1_nz.reshape(-1, 1))
 img1_n3_labels += 1
 
-gmm_4 = GaussianMixture(4)
+gmm_4 = GaussianMixture(4, random_state=RANDOM_SEED)
 img1_n4_labels = gmm_4.fit_predict(img1_nz.reshape(-1, 1))
 img1_n4_labels += 1
 ```
@@ -293,15 +301,15 @@ img1_n4_labels += 1
 
 
 ```python
-gmm_2 = GaussianMixture(2)
+gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
 img2_n2_labels = gmm_2.fit_predict(img2_nz.reshape(-1, 1))
 img2_n2_labels += 1
 
-gmm_3 = GaussianMixture(3)
+gmm_3 = GaussianMixture(3, random_state=RANDOM_SEED)
 img2_n3_labels = gmm_3.fit_predict(img2_nz.reshape(-1, 1))
 img2_n3_labels += 1
 
-gmm_4 = GaussianMixture(4)
+gmm_4 = GaussianMixture(4, random_state=RANDOM_SEED)
 img2_n4_labels = gmm_4.fit_predict(img2_nz.reshape(-1, 1))
 img2_n4_labels += 1
 ```
@@ -309,15 +317,15 @@ img2_n4_labels += 1
 
 
 ```python
-gmm_2 = GaussianMixture(2)
+gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
 img3_n2_labels = gmm_2.fit_predict(img3_nz.reshape(-1, 1))
 img3_n2_labels += 1
 
-gmm_3 = GaussianMixture(3)
+gmm_3 = GaussianMixture(3, random_state=RANDOM_SEED)
 img3_n3_labels = gmm_3.fit_predict(img3_nz.reshape(-1, 1))
 img3_n3_labels += 1
 
-gmm_4 = GaussianMixture(4)
+gmm_4 = GaussianMixture(4, random_state=RANDOM_SEED)
 img3_n4_labels = gmm_4.fit_predict(img3_nz.reshape(-1, 1))
 img3_n4_labels += 1
 ```
@@ -325,20 +333,20 @@ img3_n4_labels += 1
 
 
 ```python
-gmm_2 = GaussianMixture(2)
+gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
 img4_n2_labels = gmm_2.fit_predict(img4_nz.reshape(-1, 1))
 img4_n2_labels += 1
 
-gmm_3 = GaussianMixture(3)
+gmm_3 = GaussianMixture(3, random_state=RANDOM_SEED)
 img4_n3_labels = gmm_3.fit_predict(img4_nz.reshape(-1, 1))
 img4_n3_labels += 1
 
-gmm_4 = GaussianMixture(4)
+gmm_4 = GaussianMixture(4, random_state=RANDOM_SEED)
 img4_n4_labels = gmm_4.fit_predict(img4_nz.reshape(-1, 1))
 img4_n4_labels += 1
 ```
 
-Once we have all our image labels, we map the labels back to the three-dimensional image array and plot the result.
+Once we have all our image labels, we map the labels back to the two-dimensional image array and plot the result.
 
 
 
@@ -426,16 +434,16 @@ tight_layout()
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-19-9.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-19-9.png" width="1920" style="display: block; margin: auto;" />
 
-
-This figure shows the labels acquired from each of the images, using different numbers of clusters. We see that using Image 3 (acquired with FLAIR protocol), the lesion is segmented quite well from the rest of the brain. The other images are less effective at clearly identifying the lesion. However, some of these images, e.g. image 3 (apparent diffusion coefficient) performs better at segmenting brain tissue from surrounding cerebrospinal fluid (CSF). CSF is not part of brain tissue and can contaminate our results. Ideally, we want to segment three key areas: brain, lesion and CSF.
-
+<p style='text-align: justify;'>
+This figure shows the labels acquired from each of the images, using different numbers of clusters. We see that using Image 3 (acquired with FLAIR protocol), the lesion is segmented quite well from the rest of the brain. The other images are less effective at clearly identifying the lesion. However, some of these images, e.g. Image 4 (apparent diffusion coefficient) performs better at segmenting brain tissue from surrounding cerebrospinal fluid (CSF). CSF is not part of brain tissue and can contaminate our results. Ideally, we want to segment three key areas: brain, lesion and CSF.
+</p>
 
 ### **Combining Contrast from Different Images**
-
+<p style='text-align: justify;'>
 So far, we only used the intensities of each image individually, i.e. using only one feature. We now try to combine the images into a single Numpy array containing four columns, one for each image.
-
+</p>
 
 
 ```python
@@ -449,7 +457,7 @@ all_img.shape
 
 
 ```python
-gmm_3 = GaussianMixture(3)
+gmm_3 = GaussianMixture(3, random_state=RANDOM_SEED)
 
 all_img_n3_labels = gmm_3.fit_predict(all_img)
 all_img_n3_labels += 1
@@ -485,11 +493,13 @@ tight_layout()
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-23-11.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-23-11.png" width="1920" style="display: block; margin: auto;" />
 
-Here, the last column shows the cluster results when all four images are used in the Gaussian mixture model. These results seem to be better than the individual images, and with three clusters, the lesion, CSF and brain tissue seem clearly identifyable.
+<p style='text-align: justify;'>
+Here, the last column shows the cluster results when all four images are used in the Gaussian mixture model. These results seem to be better than the individual images, and with three clusters, the lesion, CSF and brain tissue seem clearly identified.
+</p>
 
-Let's plot some of the other image slices to check that the segmentation performs well in the whole image.
+Let's plot some of the other image slices to check that the segmentation performs well on the whole 3D image.
 
 
 
@@ -541,13 +551,14 @@ ax[4, 0].set_ylabel("Clustered labels", fontsize=16);
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-24-13.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-24-13.png" width="1920" style="display: block; margin: auto;" />
 
 Overall, the lesion, shown in yellow, seems to be segmented well across the volume.
 
 ### **Checking the GMM Labels**
-
+<p style='text-align: justify;'>
 To investigate how the image intensities were clustered, we can look at the scatter plots for each combination of images. The diagonal plots show histograms of each image. This type of plot can be very useful in exploratory data analysis. 
+</p>
 
 :::::::::::::: callout
 ## Note
@@ -629,9 +640,11 @@ fig.tight_layout()
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-26-15.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-26-15.png" width="1920" style="display: block; margin: auto;" />
 
-The colours in the scatter plots above correspond to the labels we extracted using all four images and three clusters. I.e. blue corresponds to healthy brain tissue, green corresponds to CSF and yellow corresponds to the lesion. This figure shows reasonably well how CSF (green) and lesion (yellow) can be clustered. However, it is not as easy to see how the healthy tissue was separated from CSF and lesion tissue. To investigate further, we can plot the above slightly differently, using a 2-dimensional histogram instead of a scatter plot. 
+<p style='text-align: justify;'>
+The colours in the scatter plots above correspond to the labels we extracted using all four images and three clusters. I.e. green corresponds to healthy brain tissue, yellow corresponds to CSF and blue corresponds to the lesion. This figure shows reasonably well how CSF (yellow) and lesion (blue) can be clustered. However, it is not as easy to see how the healthy tissue was separated from CSF and lesion tissue. To investigate further, we can plot the above slightly differently, using a 2-dimensional histogram instead of a scatter plot.
+</p>
 
 ::::::::::::::::: callout
 ## 
@@ -667,19 +680,22 @@ ax[3, 3].hist(img4_nz, bins=50);
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-27-17.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-27-17.png" width="1920" style="display: block; margin: auto;" />
 
+<p style='text-align: justify;'>
 Note in the plot, we used a PowerNorm normalisation on the image intensities. This is just to aid with visualisation, and you are welcome to change or completely remove the normalisation.
-
+</p>
+<p style='text-align: justify;'>
 The plots show that there is a bright, high-density region corresponding to the clustered healthy tissue region. This gives us a better idea how the GMM algorithm found the three regions. Healthy tissue has low signal variance in all 4 images. Signal intensity in CSF and the lesion have much higher variance making it possible to distinguish them from healthy tissue. Furthermore, the relative intensities of CSF and lesion tissue are different as shown in the scatter plots, making it possible for the GMM to distinguish between the two.
+</p>
 
 ## Exercises
 :::::::::::::::::::::::::::::::::::::::: challenge
 
 #### End of chapter Exercises
-
+<p style='text-align: justify;'>
 In this assignment, we ask you to use the same set of images as in the work through example. However, instead of GMM, we want you to try a different clustering method called __KMeans__. The documentation for KMneans is available here: https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html. Some examples of how kmeans clustering can go wrong are shown in [this example code](https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_assumptions.html#sphx-glr-auto-examples-cluster-plot-kmeans-assumptions-py).
-
+</p>
 
 Using `KMeans` from 'sklearn.cluster', do the following tasks:
 
@@ -787,7 +803,7 @@ tight_layout();
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-32-19.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-32-19.png" width="1920" style="display: block; margin: auto;" />
 
 
 
@@ -846,7 +862,7 @@ tight_layout();
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-33-21.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-33-21.png" width="1920" style="display: block; margin: auto;" />
 
 
 ### **Without scaling**
@@ -914,7 +930,7 @@ tight_layout();
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-36-23.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-36-23.png" width="1920" style="display: block; margin: auto;" />
 
 
 ```python
@@ -972,24 +988,21 @@ tight_layout();
 show()
 ```
 
-<img src="fig/02-clustering-rendered-unnamed-chunk-37-25.png" width="1920" style="display: block; margin: auto;" />
+<img src="fig/02-clustering-image-rendered-unnamed-chunk-37-25.png" width="1920" style="display: block; margin: auto;" />
 :::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::
 
-## Furture Reading
+## Further Reading
 
 If after this lesson you want to deepen your understanding of clustering and, in particular, want to compare the performance of different clustering methods when dealing with images, try the article [Clustering techniques for
 neuroimaging applications](https://onlinelibrary.wiley.com/doi/pdf/10.1002/widm.1174). It is paywalled and you will need an institutional access to download.
 
-
-
-
-
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Image analysis almost always requires a bit of preprocessing.
-- Image scaling is performed by using `fit_transform ` method from module `StandardScaler` in `scikit-learn`.
-- The diagonal plots are very useful in exploratory data analysis.
+- Image analysis almost always requires a bit of pre-processing.
+- Image scaling is performed by using `fit_transform` method from module `StandardScaler` in `Scikit-learn`.
+- GMM offers a good startig point in image clustering.
+- Diagonal plots are very useful in exploratory data analysis.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

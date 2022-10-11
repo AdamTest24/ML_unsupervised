@@ -11,7 +11,7 @@ A virtual environment can be created by executing the command `venv` in your Ter
 python3 -m venv pyML
 ```
 
-By running this command a new environment will be installed at your home directory.
+By running this command, a new environment will be installed in your home directory.
 
 The environment can be activated as:
 
@@ -19,7 +19,7 @@ The environment can be activated as:
 source pyML/bin/activate 
 ```
 
-Now the packages required for machine learning can be installed as:
+Now the packages required for a specific purpose can be installed. E.g. for the Clustering lessons we need Pandas, Scikit-learn, Matplotlib, and a package called "Nibabel":
 
 ```
 pip3 install pandas scikit-learn matplotlib nibabel
