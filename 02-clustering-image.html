@@ -210,7 +210,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Clustering Images</h1>
-        <p> Last updated on 2022-10-11 | <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-clustering-image.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <p> Last updated on 2022-10-12 | <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-clustering-image.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -950,32 +950,34 @@ In this assignment, we ask you to use the same set of images as in the work thro
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>RANDOM_SEED <span class="op">=</span> <span class="dv">123</span></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img1_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels_mapped <span class="op">=</span> np.zeros(img1.shape)</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels_mapped[mask] <span class="op">=</span> img1_kmeans_labels</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img2_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels_mapped <span class="op">=</span> np.zeros(img2.shape)</span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels_mapped[mask] <span class="op">=</span> img2_kmeans_labels</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img3_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels_mapped <span class="op">=</span> np.zeros(img3.shape)</span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels_mapped[mask] <span class="op">=</span> img3_kmeans_labels</span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img4_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels_mapped <span class="op">=</span> np.zeros(img4.shape)</span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels_mapped[mask] <span class="op">=</span> img4_kmeans_labels</span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels <span class="op">=</span> kmeans.fit_predict(all_img)</span>
-<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels_mapped <span class="op">=</span> np.zeros(img1.shape)</span>
-<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels_mapped[mask] <span class="op">=</span> all_img_kmeans_labels</span></code></pre>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span>RANDOM_SEED)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img1_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels_mapped <span class="op">=</span> np.zeros(img1.shape)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>img1_kmeans_labels_mapped[mask] <span class="op">=</span> img1_kmeans_labels</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img2_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels_mapped <span class="op">=</span> np.zeros(img2.shape)</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>img2_kmeans_labels_mapped[mask] <span class="op">=</span> img2_kmeans_labels</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img3_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels_mapped <span class="op">=</span> np.zeros(img3.shape)</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>img3_kmeans_labels_mapped[mask] <span class="op">=</span> img3_kmeans_labels</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels <span class="op">=</span> kmeans.fit_predict(img4_nz.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels_mapped <span class="op">=</span> np.zeros(img4.shape)</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>img4_kmeans_labels_mapped[mask] <span class="op">=</span> img4_kmeans_labels</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels <span class="op">=</span> kmeans.fit_predict(all_img)</span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels_mapped <span class="op">=</span> np.zeros(img1.shape)</span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>all_img_kmeans_labels_mapped[mask] <span class="op">=</span> all_img_kmeans_labels</span></code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1250,9 +1252,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://carpentries.github.io/workbench-template-md/02-clustering-image.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/02-clustering-image.html",
-  "dateCreated": "2022-10-11",
-  "dateModified": "2022-10-11",
-  "datePublished": "2022-10-11"
+  "dateCreated": "2022-10-12",
+  "dateModified": "2022-10-12",
+  "datePublished": "2022-10-12"
 }
 
   </script><script>
