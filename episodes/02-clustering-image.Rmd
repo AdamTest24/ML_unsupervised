@@ -708,7 +708,9 @@ all_img = np.stack([img1_nz, img2_nz, img3_nz, img4_nz], axis=1)
 ```{python}
 from sklearn.cluster import KMeans
 
-kmeans = KMeans(n_clusters=3)
+RANDOM_SEED = 123
+
+kmeans = KMeans(n_clusters=3, random_state=RANDOM_SEED)
 
 img1_kmeans_labels = kmeans.fit_predict(img1_nz.reshape(-1, 1))
 img1_kmeans_labels += 1
