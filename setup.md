@@ -40,4 +40,4 @@ Dataset for this lesson includes:
 - [patients_data.csv](data/patients_data.csv)
 - [heightweight.csv](data/heightweight.csv)
 - [Archive.zip](data/Archive.zip)
-- [Image dataset](data/fig)
+- [Images.zip](data/fig.zip)
