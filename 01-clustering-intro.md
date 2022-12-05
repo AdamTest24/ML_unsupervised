@@ -26,6 +26,16 @@ exercises: 2
 - Obtaining a basic quality score using a ground truth.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+<br>
+<p align = "center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/skuOor8jjlU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+</p>
+<br>
+<p align = "center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/czt2rKrfIzw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+<br>
+
 :::::::::::::::::: prereq
 - [Classification Introduction](https://learntodiscover.github.io/ML_supervised/01-classification_intro.html)
 - [Classification Improvement](https://learntodiscover.github.io/ML_supervised/02-improvement.html)
