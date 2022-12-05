@@ -27,6 +27,17 @@ exercises: 2
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+<br>
+<p align = "center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/IuvEj39rM7k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+<br>
+<p align = "center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6LaIhEdco8g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+<br>
+
 :::::::::::::::::: prereq
 - [Data Handling Images](https://learntodiscover.github.io/Data_Handling/03-image_handling.html)
 :::::::::::::::::: 
