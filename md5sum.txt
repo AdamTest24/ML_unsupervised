@@ -8,6 +8,6 @@
 "episodes/02-clustering-image.Rmd" "713560fcb465e7c6ebe605cc04c8908e" "site/built/02-clustering-image.md" "2022-12-05"
 "episodes/03-dimensionality.Rmd" "60309766cbecff3adee4f1c64697cd7e" "site/built/03-dimensionality.md" "2022-12-05"
 "instructors/instructor-notes.md" "60b93493cf1da06dfd63255d73854461" "site/built/instructor-notes.md" "2022-12-05"
-"learners/setup.md" "926e6c59be055531d1b558ff31abbf4c" "site/built/setup.md" "2022-12-05"
+"learners/setup.md" "b5aabdddd8e33be87e6ad06f3a7db665" "site/built/setup.md" "2022-12-05"
 "profiles/learner-profiles.md" "60b93493cf1da06dfd63255d73854461" "site/built/learner-profiles.md" "2022-12-05"
 "renv/profiles/lesson-requirements/renv.lock" "a3243164c1e1f008f453867365101310" "site/built/renv.lock" "2022-12-05"
