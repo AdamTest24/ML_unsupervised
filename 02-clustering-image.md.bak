@@ -10,6 +10,13 @@ exercises: 2
 
 [<span style="color: rgb(255, 0, 0);">**Mandatory Lesson Feedback Survey**</span>](https://docs.google.com/forms/d/e/1FAIpQLSdr0capF7jloJhPH3Pki1B3LZoKOG16poOpuVJ7SL2LkwLHQA/viewform?pli=1)
 
+:::::::::: checklist
+## Submissions
+- [**Lesson Assignment**](#assign)
+
+- [**Lesson Forum**](#forum)
+::::::::::
+
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - What makes image data unique for machine learning?
@@ -700,10 +707,35 @@ Note in the plot, we used a PowerNorm normalisation on the image intensities. Th
 The plots show that there is a bright, high-density region corresponding to the clustered healthy tissue region. This gives us a better idea how the GMM algorithm found the three regions. Healthy tissue has low signal variance in all 4 images. Signal intensity in CSF and the lesion have much higher variance making it possible to distinguish them from healthy tissue. Furthermore, the relative intensities of CSF and lesion tissue are different as shown in the scatter plots, making it possible for the GMM to distinguish between the two.
 </p>
 
-## Exercises
+### **Lesson Assignment** [(Tutorial Video)](https://www.youtube.com/watch?app=desktop&v=5UzoWit0Ewc) {#assign}
+
+-------------------------------
+
+The assignment for this lesson consists of the questions shown below in the next section and can be accessed via GitHub classroom. 
+
+- For **L2D online cohort**, please click this link: [**GitHub classroom assignment link**](https://classroom.github.com/a/4D0rtg9Z)
+
+- For **LiDo cohort**, please click this link: [**GitHub classroom assignment link**](https://classroom.github.com/a/sou5liZV)
+
+
+:::::::::::::::: callout
+## Note
+
+1. You will need to login to your GitHub account.
+
+2. Choose your name from the list of students.
+
+3. Accept the assignment.
+
+4. Refresh the page.
+
+By doing these steps, you will be able to access the assignment repository at GitHub. Instructions for completing the assignment are displayed beneath the file browser containing all the files you will need. These instructions are contained in the `README.md` file.
+
+:::::::::::::::: 
+
 :::::::::::::::::::::::::::::::::::::::: challenge
 
-#### End of chapter Exercises
+#### Assignment Questions
 <p style='text-align: justify;'>
 In this assignment, we ask you to use the same set of images as in the work through example. However, instead of GMM, we want you to try a different clustering method called __KMeans__. The documentation for KMneans is available here: https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html. Some examples of how kmeans clustering can go wrong are shown in [this example code](https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_assumptions.html#sphx-glr-auto-examples-cluster-plot-kmeans-assumptions-py).
 </p>
@@ -766,26 +798,66 @@ RANDOM_SEED = 123
 kmeans = KMeans(n_clusters=3, random_state=RANDOM_SEED)
 
 img1_kmeans_labels = kmeans.fit_predict(img1_nz.reshape(-1, 1))
+```
+
+```{.output}
+/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+```
+
+```python
 img1_kmeans_labels += 1
 img1_kmeans_labels_mapped = np.zeros(img1.shape)
 img1_kmeans_labels_mapped[mask] = img1_kmeans_labels
 
 img2_kmeans_labels = kmeans.fit_predict(img2_nz.reshape(-1, 1))
+```
+
+```{.output}
+/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+```
+
+```python
 img2_kmeans_labels += 1
 img2_kmeans_labels_mapped = np.zeros(img2.shape)
 img2_kmeans_labels_mapped[mask] = img2_kmeans_labels
 
 img3_kmeans_labels = kmeans.fit_predict(img3_nz.reshape(-1, 1))
+```
+
+```{.output}
+/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+```
+
+```python
 img3_kmeans_labels += 1
 img3_kmeans_labels_mapped = np.zeros(img3.shape)
 img3_kmeans_labels_mapped[mask] = img3_kmeans_labels
 
 img4_kmeans_labels = kmeans.fit_predict(img4_nz.reshape(-1, 1))
+```
+
+```{.output}
+/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+```
+
+```python
 img4_kmeans_labels += 1
 img4_kmeans_labels_mapped = np.zeros(img4.shape)
 img4_kmeans_labels_mapped[mask] = img4_kmeans_labels
 
 all_img_kmeans_labels = kmeans.fit_predict(all_img)
+```
+
+```{.output}
+/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+```
+
+```python
 all_img_kmeans_labels += 1
 all_img_kmeans_labels_mapped = np.zeros(img1.shape)
 all_img_kmeans_labels_mapped[mask] = all_img_kmeans_labels
@@ -895,26 +967,66 @@ all_img_scaled = np.concatenate([img1_scaled, img2_scaled, img3_scaled, img4_sca
 
 ```python
 img1_kmeans_labels = kmeans.fit_predict(img1_scaled)
+```
+
+```{.output}
+/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+```
+
+```python
 img1_kmeans_labels += 1
 img1_kmeans_labels_mapped = np.zeros(img1.shape)
 img1_kmeans_labels_mapped[mask] = img1_kmeans_labels
 
 img2_kmeans_labels = kmeans.fit_predict(img2_scaled)
+```
+
+```{.output}
+/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+```
+
+```python
 img2_kmeans_labels += 1
 img2_kmeans_labels_mapped = np.zeros(img2.shape)
 img2_kmeans_labels_mapped[mask] = img2_kmeans_labels
 
 img3_kmeans_labels = kmeans.fit_predict(img3_scaled)
+```
+
+```{.output}
+/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+```
+
+```python
 img3_kmeans_labels += 1
 img3_kmeans_labels_mapped = np.zeros(img3.shape)
 img3_kmeans_labels_mapped[mask] = img3_kmeans_labels
 
 img4_kmeans_labels = kmeans.fit_predict(img4_scaled)
+```
+
+```{.output}
+/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+```
+
+```python
 img4_kmeans_labels += 1
 img4_kmeans_labels_mapped = np.zeros(img4.shape)
 img4_kmeans_labels_mapped[mask] = img4_kmeans_labels
 
 all_img_kmeans_labels = kmeans.fit_predict(all_img_scaled)
+```
+
+```{.output}
+/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+```
+
+```python
 all_img_kmeans_labels += 1
 all_img_kmeans_labels_mapped = np.zeros(img1.shape)
 all_img_kmeans_labels_mapped[mask] = all_img_kmeans_labels
@@ -1004,6 +1116,23 @@ show()
 <img src="fig/02-clustering-image-rendered-unnamed-chunk-37-25.png" width="1920" style="display: block; margin: auto;" />
 :::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::
+
+### **Forum for Questions** [(Tutorial Video)](https://www.youtube.com/watch?app=desktop&v=N5N7QbLwztQ){#forum}
+
+----------------------
+Any questions related to this lesson, code or assignment can be posted at our forum (**Students_team**) on GitHub.
+
+- For **L2D online cohort**, the forum can be accessed at: [**Students_team**](https://github.com/orgs/L2D-Oct2022/teams/students_team)
+
+- For **LiDo cohort**, the forum can be accessed at: [**LiDo_students_team**](https://github.com/orgs/LIDo-2022/teams/lido_students_team)
+
+
+:::::::::::::::: callout
+## Note
+
+The forum can only be accessed via your GitHub account once you have accepted the invitation to be included in the team.
+
+::::::::::::::::
 
 ## Further Reading
 

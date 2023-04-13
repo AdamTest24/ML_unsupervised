@@ -17,9 +17,19 @@
     <header id="top" class="navbar navbar-expand-md navbar-light bg-white top-nav l2d"><a class="visually-hidden-focusable skip-link" href="#main-content">Skip to main content</a>
   <div class="container-fluid top-nav-container">
     <div class="col-md-6">
-      <div class="large-logo"><img alt="l2d" src="../assets/images/l2d-logo.svg"></div>
+      <div class="large-logo">
+        <img alt="l2d" src="../assets/images/l2d-logo.svg"><abbr class="icon" title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught." style="text-decoration: unset">
+           
+          <a href="https://cdh.carpentries.org/the-lesson-life-cycle.html#early-development-pre-alpha-through-alpha" class="external-link alert-link" style="color: #383838">Pre-Alpha
+            <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="color: #FF4955; border-radius: 5px"></i>
+          </a>
+          <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
+        </abbr>
+        
+      </div>
     </div>
     <div class="selector-container ">
+      
       
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,7 +50,9 @@
       Machine Learning - Unsupervised
     </div>
     <div class="search-icon-sm">
+      <!-- TODO: do not show until we have search
       <i role="img" aria-label="search button" data-feather="search"></i>
+      -->
     </div>
     <div class="desktop-nav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0"><li class="nav-item">
@@ -64,8 +76,10 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown"></ul></li>
       </ul></div>
     <form class="d-flex col-md-2 search-form">
-      <input class="form-control me-2 searchbox" type="search" placeholder="Search" aria-label="Search"><button class="btn btn-outline-success tablet-search-button" type="submit"><i class="search-icon" data-feather="search" role="img" aria-label="search button"></i></button>
-    </form>
+      <fieldset disabled><input class="form-control me-2 searchbox" type="search" placeholder="Search" aria-label="Search"><button class="btn btn-outline-success tablet-search-button" type="submit">
+          <i class="search-icon" data-feather="search" role="img" aria-label="search button"></i>
+        </button>
+      </fieldset></form>
   </div><!--/div.container-fluid -->
 </nav><div class="col-md-12 mobile-title">
   Machine Learning - Unsupervised
@@ -112,7 +126,7 @@
 
               <button id="chapters" class="accordion-button show" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseEleven">
                 <h2 class="accordion-header chapters" id="flush-headingEleven">
-                  CHAPTERS
+                  EPISODES
                 </h2>
               </button>
               <div id="flush-collapseEleven" class="accordion-collapse show collapse" aria-labelledby="flush-headingEleven" data-bs-parent="#accordionFlush11">
@@ -144,7 +158,6 @@
 <li><a href="#gaussian-mixture-models">Gaussian Mixture Models</a></li>
 <li><a href="#work-through-example">Work Through Example</a></li>
 <li><a href="#application-to-example-data">Application to Example Data</a></li>
-<li><a href="#exercises">Exercises</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
         
@@ -182,12 +195,21 @@
                 </h2>
                 <div id="flush-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="flush-headingTwelve" data-bs-parent="#accordionFlush12">
                   <div class="accordion-body">
-                    <ul></ul></div>
+                    <ul><li>
+                        <a href="../instructor/key-points.html">Key Points</a>
+                      </li>
+                      <li>
+                        <a href="../instructor/instructor-notes.html">Instructor Notes</a>
+                      </li>
+                      <li>
+                        <a href="../instructor/images.html">Extract All Images</a>
+                      </li>
+                      
+                    </ul></div>
                 </div>
               </div>
             </div>
-
-            <a href="../instructor/aio.html">See all in one page</a>
+            <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
             
@@ -211,7 +233,12 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Clustering Introduction</h1>
-        <p> Last updated on 2022-12-05 | <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-clustering-intro.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <p> Last updated on 2023-04-13 | 
+        
+        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-clustering-intro.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        
+        
+        
         <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
         
         <div class="text-end">
@@ -220,9 +247,22 @@
 
         
 
-<p><a href="01-clustering-intro.md.pdf"><strong>Download Chapter pdf</strong></a></p>
-<p><a href="01-clustering-intro.ipynb"><strong>Download Chapter notebook (ipynb)</strong></a></p>
+<p><a href="../01-clustering-intro.md.pdf"><strong>Download Chapter pdf</strong></a></p>
+<p><a href="../01-clustering-intro.ipynb"><strong>Download Chapter notebook (ipynb)</strong></a></p>
 <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdr0capF7jloJhPH3Pki1B3LZoKOG16poOpuVJ7SL2LkwLHQA/viewform?pli=1" class="external-link"><span style="color: rgb(255, 0, 0);"><strong>Mandatory Lesson Feedback Survey</strong></span></a></p>
+<div id="checklist1" class="callout checklist">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check-square"></i>
+</div>
+<div id="submissions" class="callout-inner">
+<h3 class="callout-title">Submissions<a class="anchor" aria-label="anchor" href="#checklist1"></a>
+</h3>
+<div class="callout-content">
+<ul><li><p><a href="#assign"><strong>Lesson Assignment</strong></a></p></li>
+<li><p><a href="#forum"><strong>Lesson Forum</strong></a></p></li>
+</ul></div>
+</div>
+</div>
 <div class="overview card">
 <h2 class="card-header">Overview</h2>
 <div class="row g-0">
@@ -264,7 +304,8 @@
 <i class="callout-icon" data-feather="check"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Prereq</h3>
+<h3 class="callout-title">Prereq<a class="anchor" aria-label="anchor" href="#prereq1"></a>
+</h3>
 <div class="callout-content">
 <ul><li><a href="https://learntodiscover.github.io/ML_supervised/01-classification_intro.html" class="external-link">Classification Introduction</a></li>
 <li><a href="https://learntodiscover.github.io/ML_supervised/02-improvement.html" class="external-link">Classification Improvement</a></li>
@@ -287,7 +328,8 @@
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> read_csv</span></code></pre>
 </div>
 </div>
-<section id="example"><h2 class="section-heading">Example</h2>
+<section id="example"><h2 class="section-heading">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
 <hr class="half-width"><p>Import the patients data, scatter the data for Weight and Height and get a summary statistics for both.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -356,7 +398,8 @@ Thus, visual inspection suggests to analyse the data in terms of more than one u
 <p style="text-align: justify;">
 We now want to learn to use the Gaussian Mixture Model approach to find those groups. As we will not provide any labels for the training, this presents an example of unsupervised machine learning. Algorithms of this type of machine learning are designed to learn to optimally assign labels through training. As a result, we will be able to separate a dataset into groups and be able to predict the labels of new, unlabelled data.
 </p>
-</section><section id="gaussian-mixture-models"><h2 class="section-heading">Gaussian Mixture Models</h2>
+</section><section id="gaussian-mixture-models"><h2 class="section-heading">Gaussian Mixture Models<a class="anchor" aria-label="anchor" href="#gaussian-mixture-models"></a>
+</h2>
 <hr class="half-width"><p style="text-align: justify;">
 A Gaussian Mixture Models (GMM) approach assumes that the data are composed of two or more normal distributions that may overlap. In a scatter plot that means that there is more than one centre in the density distribution of the data (see scatter plot above). The task is to find the centres and the spread of each distribution in the mixture. The GMM algorithm thus belongs to the category of (probability) Density Estimators. Another way of grouping is to find a curve that splits the plane into two areas.
 </p>
@@ -372,7 +415,8 @@ As its name suggests, it assumes that the distribution of each group is normal. 
 <p style="text-align: justify;">
 GMM is one example of clustering or <a href="https://en.wikipedia.org/wiki/Cluster_analysis" class="external-link">cluster analysis</a>. Whenever we suspect that a data set contains contributions of qualitatively different types, we can consider doing a cluster analysis to separate those types. However, this is a vague notion and clustering is therefore a complex field. We can only provide an introduction to its basic components. The main point to keep in mind is that the algorithms provided e.g. by Scikit-learn will always give some result but that it is not easy to assess the quality of the results. Scikit-learn has a good <a href="https://scikit-learn.org/stable/modules/clustering.html#c" class="external-link">overview of clustering methods</a> showing advantages and disadvantages of each. Here is a link to a readable introduction about the cautious application and the <a href="https://stke.sciencemag.org/content/9/432/re6.full" class="external-link">pitfalls of clustering</a>.
 </p>
-</section><section id="work-through-example"><h2 class="section-heading">Work Through Example</h2>
+</section><section id="work-through-example"><h2 class="section-heading">Work Through Example<a class="anchor" aria-label="anchor" href="#work-through-example"></a>
+</h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="creating-test-data"><strong>Creating test data</strong><a class="anchor" aria-label="anchor" href="#creating-test-data"></a></h3>
 <p style="text-align: justify;">
@@ -916,7 +960,8 @@ It is important to remember that the ground truth is typically not known. There 
 In general, the outcome of clustering is not easy to assess with confidence and specific measures need to be developed based on additional knowledge about the source of the data.
 </p>
 </div>
-</section><section id="application-to-example-data"><h2 class="section-heading">Application to Example Data</h2>
+</section><section id="application-to-example-data"><h2 class="section-heading">Application to Example Data<a class="anchor" aria-label="anchor" href="#application-to-example-data"></a>
+</h2>
 <hr class="half-width"><p>Let us now apply the GMM approach to the example at the beginning of the lesson.</p>
 <div class="codewrapper sourceCode" id="cb32">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1057,13 +1102,36 @@ These predictions can now be compared with labels in the data, for example the G
 <span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
 </div>
-<figure><img src="../fig/01-clustering-intro-rendered-unnamed-chunk-23-21.png" width="1152" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="exercises"><h2 class="section-heading">Exercises</h2>
-<hr class="half-width"><div id="challenge1" class="callout challenge">
+<figure><img src="../fig/01-clustering-intro-rendered-unnamed-chunk-23-21.png" width="1152" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="section level3">
+<h3 id="assign">
+<strong>Lesson Assignment</strong> <a href="https://www.youtube.com/watch?app=desktop&amp;v=5UzoWit0Ewc" class="external-link">(Tutorial Video)</a>
+<a class="anchor" aria-label="anchor" href="#assign"></a></h3>
+<hr><p>The assignment for this lesson consists of the questions shown below in the next section and can be accessed via GitHub classroom.</p>
+<ul><li><p>For <strong>L2D online cohort</strong>, please click this link: <a href="https://classroom.github.com/a/xmv-iPCM" class="external-link"><strong>GitHub classroom assignment link</strong></a></p></li>
+<li><p>For <strong>LiDo cohort</strong>, please click this link: <a href="https://classroom.github.com/a/D_bQk3jW" class="external-link"><strong>GitHub classroom assignment link</strong></a></p></li>
+</ul><div id="callout1" class="callout callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="note" class="callout-inner">
+<h3 class="callout-title">Note<a class="anchor" aria-label="anchor" href="#callout1"></a>
+</h3>
+<div class="callout-content">
+<ol style="list-style-type: decimal"><li><p>You will need to login to your GitHub account.</p></li>
+<li><p>Choose your name from the list of students.</p></li>
+<li><p>Accept the assignment.</p></li>
+<li><p>Refresh the page.</p></li>
+</ol><p>By doing these steps, you will be able to access the assignment repository at GitHub. Instructions for completing the assignment are displayed beneath the file browser containing all the files you will need. These instructions are contained in the <code>README.md</code> file.</p>
+</div>
+</div>
+</div>
+<div id="challenge1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="end-of-chapter-exercises" class="callout-inner">
-<h3 class="callout-title">End of chapter Exercises</h3>
+<div id="assignment-questions" class="callout-inner">
+<h3 class="callout-title">Assignment Questions<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+</h3>
 <div class="callout-content">
 <p>Create the training and prediction workflow as above for a data set with two other features, namely: Diastole and Systole values from the ‘patients_data.csv’ file.</p>
 <ol style="list-style-type: decimal"><li><p>Extract the Diastole and Systole columns.</p></li>
@@ -1086,7 +1154,7 @@ The data show systematic gaps in the histogram meaning that some values do not o
   Please check these solutions only after submitting the assignments.
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1301,12 +1369,33 @@ Covariance Matrices:
 </div>
 </div>
 </div>
+</div>
+<div class="section level3">
+<h3 id="forum-for-questions-tutorial-video">
+<strong>Forum for Questions</strong> <a href="https://www.youtube.com/watch?app=desktop&amp;v=N5N7QbLwztQ" id="forum" class="external-link">(Tutorial Video)</a>
+<a class="anchor" aria-label="anchor" href="#forum-for-questions-tutorial-video"></a></h3>
+<hr><p>Any questions related to this lesson, code or assignment can be posted at our forum (<strong>Students_team</strong>) on GitHub.</p>
+<ul><li><p>For <strong>L2D online cohort</strong>, the forum can be accessed at: <a href="https://github.com/orgs/L2D-Oct2022/teams/students_team" class="external-link"><strong>Students_team</strong></a></p></li>
+<li><p>For <strong>LiDo cohort</strong>, the forum can be accessed at: <a href="https://github.com/orgs/LIDo-2022/teams/lido_students_team" class="external-link"><strong>LiDo_students_team</strong></a></p></li>
+</ul><div id="callout2" class="callout callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="note-1" class="callout-inner">
+<h3 class="callout-title">Note<a class="anchor" aria-label="anchor" href="#callout2"></a>
+</h3>
+<div class="callout-content">
+<p>The forum can only be accessed via your GitHub account once you have accepted the invitation to be included in the team.</p>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Keypoints</h3>
+<h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
 <div class="callout-content">
 <ul><li>The automated assignment of data points to distinct groups is called <code>clustering</code>.</li>
 <li>Gaussian Mixture Models (GMM) is one example of cluster analysis.</li>
@@ -1321,6 +1410,7 @@ Covariance Matrices:
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use. 
  -->
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -1336,8 +1426,14 @@ any links that you are not going to use.
 
       </div><!--/div.row-->
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
-				<p>All Carpentry lessons are subject to the <a href="https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html" class="external-link">Code of Conduct</a></p>
-				<p><a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-clustering-intro.Rmd" class="external-link">Edit on Github</a> | <a href="https://github.com/carpentries/workbench-template-md/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a> | <a href="https://github.com/carpentries/workbench-template-md/" class="external-link">Source</a></p>
+				<p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
+        <p>
+        
+        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-clustering-intro.Rmd" class="external-link">Edit on GitHub</a>
+        
+	
+        | <a href="https://github.com/carpentries/workbench-template-md/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a> 
+        | <a href="https://github.com/carpentries/workbench-template-md/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/carpentries/workbench-template-md/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
@@ -1345,9 +1441,9 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper" class="external-link">sandpaper (0.9.0)</a>,
-      <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.3.2)</a>,
-      and <a href="https://github.com/carpentries/varnish" class="external-link">varnish (0.1.4)</a>.</p>
+        <p>Built with <a href="https://github.com/LearnToDiscover/sandpaper/tree/l2d" class="external-link">sandpaper (0.11.9)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/d19ac71c590ad9a56a8e5547be02c19663b4a5d6" class="external-link">pegboard (0.5.2)</a>,
+      and <a href="https://github.com/LearnToDiscover/varnish/tree/f412e8bbc14a5110120155e1af9282842877c62f" class="external-link">varnish (0.2.14)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1360,35 +1456,41 @@ any links that you are not going to use.
   "@context": "https://schema.org",
   "@type": "TrainingMaterial",
   "@id": "https://carpentries.github.io/workbench-template-md/instructor/01-clustering-intro.html",
-  "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/0.9-DRAFT-2020_12_08",
+  "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
   "keywords": "software, data, lesson, The Carpentries",
   "name": "Clustering Introduction",
   "creativeWorkStatus": "active",
   "url": "https://carpentries.github.io/workbench-template-md/instructor/01-clustering-intro.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/01-clustering-intro.html",
-  "dateCreated": "2022-12-20",
-  "dateModified": "2022-12-05",
-  "datePublished": "2022-12-20"
+  "dateCreated": "2023-04-13",
+  "dateModified": "2023-04-13",
+  "datePublished": "2023-04-13"
 }
 
   </script><script>
 		feather.replace();
-	</script><!-- Matomo --><script>
-          var _paq = window._paq = window._paq || [];
-          /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-          _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-          _paq.push(["setDomains", ["*.lessons.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io", "*.carpentries.github.io"]]);
-          _paq.push(["setDoNotTrack", true]);
-          _paq.push(["disableCookies"]);
-          _paq.push(['trackPageView']);
-          _paq.push(['enableLinkTracking']);
-          (function() {
-              var u="https://carpentries.matomo.cloud/";
-              _paq.push(['setTrackerUrl', u+'matomo.php']);
-              _paq.push(['setSiteId', '1']);
-              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-              g.async=true; g.src='https://cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
-          })();
-        </script><!-- End Matomo Code --></body></html><!-- END:   inst/pkgdown/templates/layout.html-->
+	</script><!-- Matomo
+    2022-11-07: we have gotten a notification that we have an overage for our
+    tracking and I'm pretty sure this has to do with Workbench usage.
+    Considering that I am not _currently_ using this tracking because I do not
+    yet know how to access the data, I am turning this off for now.
+  <script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+    _paq.push(["setDomains", ["*.preview.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io", "*.carpentries.github.io"]]);
+    _paq.push(["setDoNotTrack", true]);
+    _paq.push(["disableCookies"]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+          var u="https://carpentries.matomo.cloud/";
+          _paq.push(['setTrackerUrl', u+'matomo.php']);
+          _paq.push(['setSiteId', '1']);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.async=true; g.src='https://cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+        })();
+  </script>
+  End Matomo Code --></body></html><!-- END:   inst/pkgdown/templates/layout.html-->
 

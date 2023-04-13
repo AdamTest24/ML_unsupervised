@@ -17,9 +17,19 @@
     <header id="top" class="navbar navbar-expand-md navbar-light bg-white top-nav l2d"><a class="visually-hidden-focusable skip-link" href="#main-content">Skip to main content</a>
   <div class="container-fluid top-nav-container">
     <div class="col-md-6">
-      <div class="large-logo"><img alt="l2d" src="assets/images/l2d-logo.svg"></div>
+      <div class="large-logo">
+        <img alt="l2d" src="assets/images/l2d-logo.svg"><abbr class="icon" title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught." style="text-decoration: unset">
+           
+          <a href="https://cdh.carpentries.org/the-lesson-life-cycle.html#early-development-pre-alpha-through-alpha" class="external-link alert-link" style="color: #383838">Pre-Alpha
+            <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="color: #FF4955; border-radius: 5px"></i>
+          </a>
+          <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
+        </abbr>
+        
+      </div>
     </div>
     <div class="selector-container ">
+      
       
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,7 +50,9 @@
       Machine Learning - Unsupervised
     </div>
     <div class="search-icon-sm">
+      <!-- TODO: do not show until we have search
       <i role="img" aria-label="search button" data-feather="search"></i>
+      -->
     </div>
     <div class="desktop-nav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0"><li class="nav-item">
@@ -64,18 +76,20 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown"></ul></li>
       </ul></div>
     <form class="d-flex col-md-2 search-form">
-      <input class="form-control me-2 searchbox" type="search" placeholder="Search" aria-label="Search"><button class="btn btn-outline-success tablet-search-button" type="submit"><i class="search-icon" data-feather="search" role="img" aria-label="search button"></i></button>
-    </form>
+      <fieldset disabled><input class="form-control me-2 searchbox" type="search" placeholder="Search" aria-label="Search"><button class="btn btn-outline-success tablet-search-button" type="submit">
+          <i class="search-icon" data-feather="search" role="img" aria-label="search button"></i>
+        </button>
+      </fieldset></form>
   </div><!--/div.container-fluid -->
 </nav><div class="col-md-12 mobile-title">
   Machine Learning - Unsupervised
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 100%" class="percentage">
-    100%
+<aside class="col-md-12 lesson-progress"><div style="width: 67%" class="percentage">
+    67%
   </div>
   <div class="progress l2d">
-    <div class="progress-bar l2d" role="progressbar" style="width: 100%" aria-valuenow="100" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar l2d" role="progressbar" style="width: 67%" aria-valuenow="67" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -112,7 +126,7 @@
 
               <button id="chapters" class="accordion-button show" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseEleven">
                 <h2 class="accordion-header chapters" id="flush-headingEleven">
-                  CHAPTERS
+                  EPISODES
                 </h2>
               </button>
               <div id="flush-collapseEleven" class="accordion-collapse show collapse" aria-labelledby="flush-headingEleven" data-bs-parent="#accordionFlush11">
@@ -183,12 +197,21 @@
                 </h2>
                 <div id="flush-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="flush-headingTwelve" data-bs-parent="#accordionFlush12">
                   <div class="accordion-body">
-                    <ul></ul></div>
+                    <ul><li>
+                        <a href="key-points.html">Key Points</a>
+                      </li>
+                      <li>
+                        <a href="reference.html#glossary">Glossary</a>
+                      </li>
+                      <li>
+                        <a href="profiles.html">Learner Profiles</a>
+                      </li>
+                      
+                    </ul></div>
                 </div>
               </div>
             </div>
-
-            <a href="aio.html">See all in one page</a>
+            <hr class="half-width resources"><a href="aio.html">See all in one page</a>
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
             
@@ -212,7 +235,12 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Dimensionality Reduction</h1>
-        <p> Last updated on 2022-12-20 | <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-dimensionality.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <p> Last updated on 2023-04-13 | 
+        
+        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-dimensionality.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        
+        
+        
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -222,6 +250,19 @@
 <p><a href="03-dimensionality.md.pdf"><strong>Download Chapter pdf</strong></a></p>
 <p><a href="03-dimensionality.ipynb"><strong>Download Chapter notebook (ipynb)</strong></a></p>
 <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdr0capF7jloJhPH3Pki1B3LZoKOG16poOpuVJ7SL2LkwLHQA/viewform?pli=1" class="external-link"><span style="color: rgb(255, 0, 0);"><strong>Mandatory Lesson Feedback Survey</strong></span></a></p>
+<div id="checklist1" class="callout checklist">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check-square"></i>
+</div>
+<div id="submissions" class="callout-inner">
+<h3 class="callout-title">Submissions<a class="anchor" aria-label="anchor" href="#checklist1"></a>
+</h3>
+<div class="callout-content">
+<ul><li><p><a href="#assign"><strong>Lesson Assignment</strong></a></p></li>
+<li><p><a href="#forum"><strong>Lesson Forum</strong></a></p></li>
+</ul></div>
+</div>
+</div>
 <div class="overview card">
 <h2 class="card-header">Overview</h2>
 <div class="row g-0">
@@ -267,7 +308,8 @@
 <i class="callout-icon" data-feather="check"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Prereq</h3>
+<h3 class="callout-title">Prereq<a class="anchor" aria-label="anchor" href="#prereq1"></a>
+</h3>
 <div class="callout-content">
 <ul><li><a href="01-clustering-intro.html">Clustering Introduction</a></li>
 <li><a href="02-clustering-image.html">Clustering Images</a></li>
@@ -293,7 +335,8 @@
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span></code></pre>
 </div>
 </div>
-<section id="introduction"><h2 class="section-heading">Introduction</h2>
+<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <hr class="half-width"><p style="text-align: justify;">
 Clinical and scientific datasets often contain measurements of many physiological variables, expression of many genes or metabolic markers. These datasets, where each individual observation/sample is described by many variables are referred to as <strong>high-dimensional</strong>. However, some of these features can be highly correlated or redundant, and we sometimes want a more condensed description of the data. This process of describing the data by a reduced number of new combined features that reduces redundancy, is called <strong>dimensionality reduction</strong>.
 </p>
@@ -302,7 +345,8 @@ Clinical and scientific datasets often contain measurements of many physiologica
 <li><p>To find the individual variable or combinations of variables that give a condensed but accurate description of the data (sometimes also called feature extraction).</p></li>
 <li><p>It can also be used for “denoising” - removing features that only account for small variability.</p></li>
 <li><p>It is also useful to perform this step before other supervised (regression, classification) or unsupervised learning procedures (like clustering), by reducing data to “main features” to improve robustness of learning, especially with a limited number of independent observations.</p></li>
-</ul></section><section id="example-predicting-outcome-from-large-scale-genetic-or-molecular-studies"><h2 class="section-heading">Example: Predicting outcome from large-scale genetic or molecular studies</h2>
+</ul></section><section id="example-predicting-outcome-from-large-scale-genetic-or-molecular-studies"><h2 class="section-heading">Example: Predicting outcome from large-scale genetic or molecular studies<a class="anchor" aria-label="anchor" href="#example-predicting-outcome-from-large-scale-genetic-or-molecular-studies"></a>
+</h2>
 <hr class="half-width"><p style="text-align: justify;">
 Clinical research can involve doing an exhaustive measurement of all tentative diagnostic markers, for example levels of various cytokines and hormones, or searching for genetic markers of a disease. There is good reason to expect that these share regulatory/signalling mechanisms, and that their interaction determines disease outcome. Building a regression model including all measurements is problematic because of multicollinearity and the demand for a much larger number of observations.
 </p>
@@ -357,7 +401,8 @@ Apart from the large number of variables (compared to number of samples), we als
 The little yellow blocks indicate that various features are strongly correlation (values around 1). Further analyses (e.g. checking if we find clusters mapping to healthy individuals and patients, respectively, or whether patients with different patterns of marker expression can be identified for future diagnostic purposes) can be thus be improved if we perform a dimensionality reduction, i.e. decrease the number of features while maintaining relevant information.
 </p>
 </div>
-</section><section id="principal-component-analysis"><h2 class="section-heading">Principal Component Analysis</h2>
+</section><section id="principal-component-analysis"><h2 class="section-heading">Principal Component Analysis<a class="anchor" aria-label="anchor" href="#principal-component-analysis"></a>
+</h2>
 <hr class="half-width"><p style="text-align: justify;">
 Principal component analysis (PCA) is one of the most commonly used dimensionality reduction methods. Instead of describing the data using the original measurements, it finds a new set of ranked features (the “basis”). The new “features” are linear combinations of the original variables, such that they are all <em>orthogonal</em> to each other, and the “importance” of a feature (called the <strong>principal component</strong>) is generally given by how much of the variability in the dataset it captures (the so-called <strong>explained variance</strong>). Thus, we first transform the data from the original variables into a new set of features or principal components (PCs).
 </p>
@@ -423,7 +468,8 @@ To apply <strong>PCA</strong> from <code>Scikit-learn</code>, we need to specify
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="note" class="callout-inner">
-<h3 class="callout-title">Note</h3>
+<h3 class="callout-title">Note<a class="anchor" aria-label="anchor" href="#callout1"></a>
+</h3>
 <div class="callout-content">
 <p><em>The last plot, with the samples plotted as scatter in the space of measured variables is called a “state space plot”. The main axes correspond to individual variables.</em></p>
 </div>
@@ -495,7 +541,8 @@ Let us examine different vectors that point at various angles compared to the x-
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="do-it-yourself" class="callout-inner">
-<h3 class="callout-title">Do it Yourself</h3>
+<h3 class="callout-title">Do it Yourself<a class="anchor" aria-label="anchor" href="#discussion1"></a>
+</h3>
 <div class="callout-content">
 <p>Change the angle in the code above and see how distribution of projected data changes. Use e.g. 0, <span class="math inline">\(\pi\)</span> /2, 2/3*<span class="math inline">\(\pi\)</span>, and <span class="math inline">\(\pi\)</span>. Try to estimate how much the variance changes.</p>
 </div>
@@ -586,7 +633,8 @@ Let us now use dimensionality reduction <code>PCA</code> to directly find the di
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="do-it-yourself-1" class="callout-inner">
-<h3 class="callout-title">Do it Yourself</h3>
+<h3 class="callout-title">Do it Yourself<a class="anchor" aria-label="anchor" href="#discussion2"></a>
+</h3>
 <div class="callout-content">
 <p>Exercise (DIY): Change the covariance of the synthetic data, and repeat the above steps. Try to infer the relationship between the shape of the scatter, the strength of correlation between the two dimensions, and the variance captured by the first PC.</p>
 </div>
@@ -656,14 +704,16 @@ The red arrows show the new coordinate system, defined by the principal componen
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="important" class="callout-inner">
-<h3 class="callout-title">Important</h3>
+<h3 class="callout-title">Important<a class="anchor" aria-label="anchor" href="#callout2"></a>
+</h3>
 <div class="callout-content">
 <p>When reading about PCA you will come across the term <strong>Singular Value Decomposition</strong> (SVD). As mentioned in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" class="external-link">Scikit-learn documentation for PCA</a>, when you apply <code>PCA</code> the algorithm in the background uses SVD to return the results. The difference between the two is technical but SVD is the more general method. Wikipedia has as <a href="https://en.wikipedia.org/wiki/Principal_component_analysis#Singular_value_decomposition" class="external-link">mathematical introduction to PCA</a> which also discusses <a href="https://en.wikipedia.org/wiki/Principal_component_analysis#Singular_value_decomposition" class="external-link">the relationship to SVD</a>.</p>
 </div>
 </div>
 </div>
 </div>
-</section><section id="pca-of-the-gene-expression-data"><h2 class="section-heading">PCA of the Gene Expression Data</h2>
+</section><section id="pca-of-the-gene-expression-data"><h2 class="section-heading">PCA of the Gene Expression Data<a class="anchor" aria-label="anchor" href="#pca-of-the-gene-expression-data"></a>
+</h2>
 <hr class="half-width"><p style="text-align: justify;">
 Now, we will use PCA to find a few features that capture most of the variability in the gene expression dataset. we arbitrarily start with 50 components assuming that this will include the important features.
 </p>
@@ -770,7 +820,8 @@ A common heuristic for choosing the number of components is by defining a set th
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="optional-exercises" class="callout-inner">
-<h3 class="callout-title">Optional Exercises</h3>
+<h3 class="callout-title">Optional Exercises<a class="anchor" aria-label="anchor" href="#discussion3"></a>
+</h3>
 <div class="callout-content">
 <ol style="list-style-type: decimal"><li><p>The dataset contains two types of samples, expression in neutrophil and expression in peripheral blood mononuclear cells (PBMC). Download the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-GEOD-11083/samples/" class="external-link">sample-data table</a> to get the category of each sample. Make a scatter plot of two (original) features and set the colour of the scatter based on the sample’s origin. Do a PCA, scatter the top scoring components and colour the samples in the same way. Do the top PCs capture gene expression differences in the two types of cells?</p></li>
 <li><p>The dataset similarly contains samples from individuals with differing phenotypes - healthy, as well as 2 different disease characteristics. Similar to the previous exercise, colour the scatter based on the disease phenotypes. Do the top PCs capture variability in gene expression for different phenotypes?</p></li>
@@ -778,7 +829,8 @@ A common heuristic for choosing the number of components is by defining a set th
 </div>
 </div>
 </div>
-</section><section id="when-does-pca-fail"><h2 class="section-heading">When does PCA fail?</h2>
+</section><section id="when-does-pca-fail"><h2 class="section-heading">When does PCA fail?<a class="anchor" aria-label="anchor" href="#when-does-pca-fail"></a>
+</h2>
 <hr class="half-width"><p>Although PCA is the first and simplest method of exploring high-dimensional datasets, there are important caveats to keep in mind:</p>
 <ol style="list-style-type: decimal"><li><em>PCA is a linear method</em></li>
 </ol><p>Nonlinear patterns of co-expression will be seemingly broken up into many features. Thus, the ability to find whether genes are co-regulated may be reduced if the effects are nonlinear.</p>
@@ -789,7 +841,20 @@ A common heuristic for choosing the number of components is by defining a set th
 </ol><p>The definition of what is the ‘relevant’ number of features can depend on:</p>
 <ul><li>the signal-to-noise ratio in data. For example, noisier or smaller datasets make it harder to accurately estimate smaller PCs. In such cases, a more conservative threshold should be used.</li>
 <li>the classifier or regression performance following the dimensionality reduction.</li>
-</ul></section><section id="resources"><h2 class="section-heading">Resources</h2>
+</ul><div class="section level3">
+<h3 id="assign"><strong>Lesson Assignment</strong><a class="anchor" aria-label="anchor" href="#assign"></a></h3>
+<hr><p>There are no assignments for this lesson. However, you can go through the additional resources below for more insights and practice.</p>
+</div>
+<div class="section level3">
+<h3 id="forum-for-questions-tutorial-video">
+<strong>Forum for Questions</strong> <a href="https://www.youtube.com/watch?app=desktop&amp;v=N5N7QbLwztQ" id="forum" class="external-link">(Tutorial Video)</a>
+<a class="anchor" aria-label="anchor" href="#forum-for-questions-tutorial-video"></a></h3>
+<hr><p>Any questions related to this lesson, code or assignment can be posted at our forum (<strong>Students_team</strong>) on GitHub.</p>
+<ul><li><p>For <strong>L2D online cohort</strong>, the forum can be accessed at: <a href="https://github.com/orgs/L2D-Oct2022/teams/students_team" class="external-link"><strong>Students_team</strong></a></p></li>
+<li><p>For <strong>LiDo cohort</strong>, the forum can be accessed at: <a href="https://github.com/orgs/LIDo-2022/teams/lido_students_team" class="external-link"><strong>LiDo_students_team</strong></a></p></li>
+</ul></div>
+</section><section id="resources"><h2 class="section-heading">Resources<a class="anchor" aria-label="anchor" href="#resources"></a>
+</h2>
 <hr class="half-width"><ul><li><p><a href="http://sebastianraschka.com/Articles/2015_pca_in_3_steps.html" class="external-link">Detailed tutorial on PCA</a></p></li>
 <li>
 <p><a href="https://towardsdatascience.com/dimension-reduction-techniques-with-python-f36ca7009e5c" class="external-link">Other methods for dimensionality reduction</a>:</p>
@@ -805,7 +870,8 @@ A common heuristic for choosing the number of components is by defining a set th
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Keypoints</h3>
+<h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
 <div class="callout-content">
 <ul><li>Reduced features in a dataset reduce redundancy and process is called dimensionality reduction.</li>
 <li>Principal component analysis (PCA) is one of the commonly used dimensionality reduction methods.</li>
@@ -834,8 +900,14 @@ any links that you are not going to use.
 
       </div><!--/div.row-->
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
-				<p>All Carpentry lessons are subject to the <a href="https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html" class="external-link">Code of Conduct</a></p>
-				<p><a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-dimensionality.Rmd" class="external-link">Edit on Github</a> | <a href="https://github.com/carpentries/workbench-template-md/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a> | <a href="https://github.com/carpentries/workbench-template-md/" class="external-link">Source</a></p>
+				<p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
+        <p>
+        
+        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-dimensionality.Rmd" class="external-link">Edit on GitHub</a>
+        
+	
+        | <a href="https://github.com/carpentries/workbench-template-md/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a> 
+        | <a href="https://github.com/carpentries/workbench-template-md/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/carpentries/workbench-template-md/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
@@ -843,9 +915,9 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper" class="external-link">sandpaper (0.9.0)</a>,
-      <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.3.2)</a>,
-      and <a href="https://github.com/carpentries/varnish" class="external-link">varnish (0.1.4)</a>.</p>
+        <p>Built with <a href="https://github.com/LearnToDiscover/sandpaper/tree/l2d" class="external-link">sandpaper (0.11.9)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/d19ac71c590ad9a56a8e5547be02c19663b4a5d6" class="external-link">pegboard (0.5.2)</a>,
+      and <a href="https://github.com/LearnToDiscover/varnish/tree/f412e8bbc14a5110120155e1af9282842877c62f" class="external-link">varnish (0.2.14)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -858,35 +930,41 @@ any links that you are not going to use.
   "@context": "https://schema.org",
   "@type": "TrainingMaterial",
   "@id": "https://carpentries.github.io/workbench-template-md/03-dimensionality.html",
-  "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/0.9-DRAFT-2020_12_08",
+  "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
   "keywords": "software, data, lesson, The Carpentries",
   "name": "Dimensionality Reduction",
   "creativeWorkStatus": "active",
   "url": "https://carpentries.github.io/workbench-template-md/03-dimensionality.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/03-dimensionality.html",
-  "dateCreated": "2022-12-20",
-  "dateModified": "2022-12-20",
-  "datePublished": "2022-12-20"
+  "dateCreated": "2023-04-13",
+  "dateModified": "2023-04-13",
+  "datePublished": "2023-04-13"
 }
 
   </script><script>
 		feather.replace();
-	</script><!-- Matomo --><script>
-          var _paq = window._paq = window._paq || [];
-          /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-          _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-          _paq.push(["setDomains", ["*.lessons.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io", "*.carpentries.github.io"]]);
-          _paq.push(["setDoNotTrack", true]);
-          _paq.push(["disableCookies"]);
-          _paq.push(['trackPageView']);
-          _paq.push(['enableLinkTracking']);
-          (function() {
-              var u="https://carpentries.matomo.cloud/";
-              _paq.push(['setTrackerUrl', u+'matomo.php']);
-              _paq.push(['setSiteId', '1']);
-              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-              g.async=true; g.src='https://cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
-          })();
-        </script><!-- End Matomo Code --></body></html><!-- END:   inst/pkgdown/templates/layout.html-->
+	</script><!-- Matomo
+    2022-11-07: we have gotten a notification that we have an overage for our
+    tracking and I'm pretty sure this has to do with Workbench usage.
+    Considering that I am not _currently_ using this tracking because I do not
+    yet know how to access the data, I am turning this off for now.
+  <script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+    _paq.push(["setDomains", ["*.preview.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io", "*.carpentries.github.io"]]);
+    _paq.push(["setDoNotTrack", true]);
+    _paq.push(["disableCookies"]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+          var u="https://carpentries.matomo.cloud/";
+          _paq.push(['setTrackerUrl', u+'matomo.php']);
+          _paq.push(['setSiteId', '1']);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.async=true; g.src='https://cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+        })();
+  </script>
+  End Matomo Code --></body></html><!-- END:   inst/pkgdown/templates/layout.html-->
 
