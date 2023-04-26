@@ -61,6 +61,13 @@ from numpy import vstack, sqrt, logspace, amin, amax, equal, invert, count_nonze
 from numpy.random import uniform, seed, randint, randn, multivariate_normal
 
 from matplotlib.pyplot import subplots, scatter, xlabel, ylabel, axis, figure, colorbar, title, show
+```
+
+```{.output}
+Matplotlib is building the font cache; this may take a moment.
+```
+
+```python
 from matplotlib.colors import LogNorm
 
 from pandas import read_csv
