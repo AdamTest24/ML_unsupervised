@@ -62,8 +62,8 @@ contact: team@carpentries.org
 # Order of episodes in your lesson
 episodes:
   - 01-clustering-intro.Rmd
-#  - 02-clustering-image.Rmd
-#  - 03-dimensionality.Rmd
+  - 02-clustering-image.Rmd
+  - 03-dimensionality.Rmd
 
 # Information for Learners
 learners:
