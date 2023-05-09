@@ -63,7 +63,7 @@ contact: team@carpentries.org
 episodes:
   - 01-clustering-intro.Rmd
   - 02-clustering-image.Rmd
-#  - 03-dimensionality.Rmd
+  - 03-dimensionality.Rmd
 
 # Information for Learners
 learners:
