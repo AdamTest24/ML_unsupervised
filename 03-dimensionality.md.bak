@@ -53,9 +53,6 @@ exercises: 2
 - [Clustering Images](02-clustering-image.Rmd)
 :::::::::::::::::: 
 
-
-
-
 ### **Code Preparation**
 
 

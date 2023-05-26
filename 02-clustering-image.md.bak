@@ -49,8 +49,6 @@ exercises: 2
 - [Data Handling Images](https://learntodiscover.github.io/Data_Handling/03-image_handling.html)
 :::::::::::::::::: 
 
-
-
 ## Concept
 
 ### **Image Segmentation with Clustering**
@@ -801,7 +799,7 @@ img1_kmeans_labels = kmeans.fit_predict(img1_nz.reshape(-1, 1))
 ```
 
 ```{.output}
-/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
@@ -814,7 +812,7 @@ img2_kmeans_labels = kmeans.fit_predict(img2_nz.reshape(-1, 1))
 ```
 
 ```{.output}
-/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
@@ -827,7 +825,7 @@ img3_kmeans_labels = kmeans.fit_predict(img3_nz.reshape(-1, 1))
 ```
 
 ```{.output}
-/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
@@ -840,7 +838,7 @@ img4_kmeans_labels = kmeans.fit_predict(img4_nz.reshape(-1, 1))
 ```
 
 ```{.output}
-/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
@@ -853,7 +851,7 @@ all_img_kmeans_labels = kmeans.fit_predict(all_img)
 ```
 
 ```{.output}
-/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
@@ -970,7 +968,7 @@ img1_kmeans_labels = kmeans.fit_predict(img1_scaled)
 ```
 
 ```{.output}
-/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
@@ -983,7 +981,7 @@ img2_kmeans_labels = kmeans.fit_predict(img2_scaled)
 ```
 
 ```{.output}
-/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
@@ -996,7 +994,7 @@ img3_kmeans_labels = kmeans.fit_predict(img3_scaled)
 ```
 
 ```{.output}
-/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
@@ -1009,7 +1007,7 @@ img4_kmeans_labels = kmeans.fit_predict(img4_scaled)
 ```
 
 ```{.output}
-/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
@@ -1022,7 +1020,7 @@ all_img_kmeans_labels = kmeans.fit_predict(all_img_scaled)
 ```
 
 ```{.output}
-/home/runner/.virtualenvs/r-env/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
