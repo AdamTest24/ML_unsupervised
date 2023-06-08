@@ -63,6 +63,13 @@ from numpy.linalg import norm
 
 from math import cos, sin, atan2
 from matplotlib.pyplot import subplots, xlabel, ylabel, scatter, title 
+```
+
+```{.output}
+Matplotlib is building the font cache; this may take a moment.
+```
+
+```python
 from matplotlib.pyplot import figure, plot, xticks, xlabel, ylabel, suptitle, show
 
 import glob
@@ -608,6 +615,7 @@ The definition of what is the 'relevant' number of features can depend on:
 There are no assignments for this lesson. However, you can go through the additional resources below for more insights and practice. 
 
 The webinar notebook and data for this lesson can be accessed [here](https://github.com/L2D-Oct2022/ML6_Webinar).
+
 
 ### **Forum for Questions** [(Tutorial Video)](https://www.youtube.com/watch?app=desktop&v=N5N7QbLwztQ){#forum}
 
