@@ -38,7 +38,7 @@ branch: main
 contact: team@carpentries.org
 
 # Generate PDFs of episodes?
-pdf: TRUE
+pdf: FALSE
 
 # Generate ipynb notebooks of episodes?
 ipynb: TRUE
