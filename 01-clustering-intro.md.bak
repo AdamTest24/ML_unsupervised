@@ -4,7 +4,6 @@ teaching: 10
 exercises: 2
 ---
 
-[**Download Chapter pdf**](01-clustering-intro.md.pdf)
 
 [**Download Chapter notebook (ipynb)**](01-clustering-intro.ipynb)
 
@@ -18,7 +17,7 @@ exercises: 2
 - [**Lesson Forum**](#forum)
 ::::::::::
 
-:::::::::::::::::::::::::::::::::::::: questions 
+:::::::::::::::::::::::::::::::::::::: questions
 
 - How to search for multiple distributions in a dataset?
 - How to use Scikit-learn to perform clustering?
@@ -36,7 +35,7 @@ exercises: 2
 
 <br>
 <p align = "center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/skuOor8jjlU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/skuOor8jjlU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
 <br>
 <p align = "center">
@@ -47,7 +46,7 @@ exercises: 2
 :::::::::::::::::: prereq
 - [Classification Introduction](https://learntodiscover.github.io/ML_supervised/01-classification_intro.html)
 - [Classification Improvement](https://learntodiscover.github.io/ML_supervised/02-improvement.html)
-:::::::::::::::::: 
+::::::::::::::::::
 
 ### **Import functions**
 
@@ -64,13 +63,13 @@ from matplotlib.colors import LogNorm
 from pandas import read_csv
 ```
 
-## Example 
+## Example
 Import the patients data, scatter the data for Weight and Height and get a summary statistics for both.
 
 
 
 ```python
-df = read_csv("data/patients_data.csv") 
+df = read_csv("data/patients_data.csv")
 
 # Weigth to kg and height to cm
 pound_kg_conversion = 0.45
@@ -109,7 +108,7 @@ show()
 <img src="fig/01-clustering-intro-rendered-unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" />
 
 <p style='text-align: justify;'>
-Looking at the data, one might expect that there are two distinct groups, visually identified as two clouds separated e.g. by a vertical line at Weight $\approx$ 70 (kg). A consequence is that the mean value of 69.3 kg (which was calculated over all samples) should better be replaced by two mean values, one for each of the clouds. Visually, these can be estimated at around 60 and 80 kg. 
+Looking at the data, one might expect that there are two distinct groups, visually identified as two clouds separated e.g. by a vertical line at Weight $\approx$ 70 (kg). A consequence is that the mean value of 69.3 kg (which was calculated over all samples) should better be replaced by two mean values, one for each of the clouds. Visually, these can be estimated at around 60 and 80 kg.
 </p>
 
 We can make this even clearer by looking at the two individual distributions.
@@ -131,7 +130,7 @@ show()
 <img src="fig/01-clustering-intro-rendered-unnamed-chunk-3-3.png" width="672" style="display: block; margin: auto;" />
 
 <p style='text-align: justify;'>
-The Weight histogram shows two distributions (at the chosen number of bins) which now also points to the two mean values as guessed above. The Height histogram is at least not compatible with the assumption of a normal distribution as would be expected for a typically noisy variable. 
+The Weight histogram shows two distributions (at the chosen number of bins) which now also points to the two mean values as guessed above. The Height histogram is at least not compatible with the assumption of a normal distribution as would be expected for a typically noisy variable.
 </p>
 <p style='text-align: justify;'>
 Thus, visual inspection suggests to analyse the data in terms of more than one underlying distribution. The automated assignment of data points to distinct groups is called clustering.
@@ -143,16 +142,16 @@ We now want to learn to use the Gaussian Mixture Model approach to find those gr
 ## Gaussian Mixture Models
 
 <p style='text-align: justify;'>
-A Gaussian Mixture Models (GMM) approach assumes that the data are composed of two or more normal distributions that may overlap. In a scatter plot that means that there is more than one centre in the density distribution of the data (see scatter plot above). The task is to find the centres and the spread of each distribution in the mixture. The GMM algorithm thus belongs to the category of (probability) Density Estimators. Another way of grouping is to find a curve that splits the plane into two areas. 
+A Gaussian Mixture Models (GMM) approach assumes that the data are composed of two or more normal distributions that may overlap. In a scatter plot that means that there is more than one centre in the density distribution of the data (see scatter plot above). The task is to find the centres and the spread of each distribution in the mixture. The GMM algorithm thus belongs to the category of (probability) Density Estimators. Another way of grouping is to find a curve that splits the plane into two areas.
 </p>
 <p style='text-align: justify;'>
 The GMM assumes normally distributed data structure from at least two sources. Other than that it does not make assumptions about the data.
 </p>
 <p style='text-align: justify;'>
-GMM is a parametric learning approach as it optimises the parameters of a normal distributions, i.e. the mean and the covariance matrix of each group. It is therefore an example of a model fitting method. 
+GMM is a parametric learning approach as it optimises the parameters of a normal distributions, i.e. the mean and the covariance matrix of each group. It is therefore an example of a model fitting method.
 </p>
 <p style='text-align: justify;'>
-As its name suggests, it assumes that the distribution of each group is normal. If the groups are known to have a non-normal distribution, it may not be the optimal approach. 
+As its name suggests, it assumes that the distribution of each group is normal. If the groups are known to have a non-normal distribution, it may not be the optimal approach.
 </p>
 <p style='text-align: justify;'>
 GMM is one example of clustering or [cluster analysis](https://en.wikipedia.org/wiki/Cluster_analysis).
@@ -163,7 +162,7 @@ Whenever we suspect that a data set contains contributions of qualitatively diff
 
 ### **Creating test data**
 <p style='text-align: justify;'>
-Let us create synthetic data for testing of the clustering algorithm. We do this according to the assumptions of GMM: we create two Gaussian data sets with different means and different standard distributions and add them together. For illustration we only use two features. 
+Let us create synthetic data for testing of the clustering algorithm. We do this according to the assumptions of GMM: we create two Gaussian data sets with different means and different standard distributions and add them together. For illustration we only use two features.
 </p>
 The example is adapted from a [Scikit-learn example](https://scikit-learn.org/stable/modules/mixture.html#mixture). It uses the concept of [covariance matrix](https://datascienceplus.com/understanding-the-covariance-matrix/) which is the extension of variance (or standard deviation) to multivariate datasets.
 
@@ -211,7 +210,7 @@ show()
 The scatter plot showes that this method allows the adjustment of the centres of the distributions as well as the elliptic shape of the distribution.
 </p>
 <p style='text-align: justify;'>
-Now we fit a GMM. Note that the GMM needs to be told how many components one wants to fit. Modifications that estimate the optimal number of components exist but we will restrict the demonstration to the method that directly sets the number. 
+Now we fit a GMM. Note that the GMM needs to be told how many components one wants to fit. Modifications that estimate the optimal number of components exist but we will restrict the demonstration to the method that directly sets the number.
 </p>
 <p style='text-align: justify;'>
 Analogous to the classifier in supervised learning, we instantiate the model from the imported class `GaussianMixture`. The instantiation takes the number of independent data sets (clusters) as an argument. By default, the classifier tries to fit the full covariance matrix of each group. The fitting is done using the method `fit`.
@@ -235,7 +234,7 @@ clf.fit(X_train)
 ```
 
 <p style='text-align: justify;'>
-After the fitting of the model, we first create a meshgrid of the (two-dimensional) state space. For each point in this state space, we obtain the predicted scores using the method `.score_samples`. These are the weighted logarithmic probabilities which show the predicted distribution of points in the state space. 
+After the fitting of the model, we first create a meshgrid of the (two-dimensional) state space. For each point in this state space, we obtain the predicted scores using the method `.score_samples`. These are the weighted logarithmic probabilities which show the predicted distribution of points in the state space.
 </p>
 
 
@@ -268,7 +267,7 @@ Now we can display the predicted scores as a contour plot. Typically, the negati
 ```python
 fig, ax = subplots(figsize=(8, 6))
 
-cax = ax.contour(grid_a, grid_b, -Z_s, 
+cax = ax.contour(grid_a, grid_b, -Z_s,
            norm=LogNorm(vmin=1.0, vmax=1000.0),
            levels=logspace(0, 3, 10),
            cmap='magma'
@@ -306,7 +305,7 @@ Z_s_3 = Z_score_3.reshape(grid_a.shape)
 
 fig, ax = subplots(figsize=(8, 6))
 
-cax = ax.contour(grid_a, grid_b, -Z_s_3, 
+cax = ax.contour(grid_a, grid_b, -Z_s_3,
            norm=LogNorm(vmin=1.0, vmax=1000.0),
            levels=logspace(0, 3, 10),
            cmap='magma'
@@ -374,14 +373,14 @@ Covariance Matrices:
 ```
 
 <p style='text-align: justify;'>
-The fit returns a model where the two components have equal weight. The means and covariance matrices can be compared directly to the values chosen to create the data. They are not identical but good estimates are obtained from a fit to 500 data points in each group. 
+The fit returns a model where the two components have equal weight. The means and covariance matrices can be compared directly to the values chosen to create the data. They are not identical but good estimates are obtained from a fit to 500 data points in each group.
 </p>
 
 ### **Create data from optimal model**
 <p style='text-align: justify;'>
-The result of the fitting are the parameters for two Gaussian distributions with two features each. These parameters can be used to create further model data with the same characteristics. In our demonstration we know the original sources but if the parameters are obtained from experimental or clinical data, it is useful to visualise the predicted distributions using as many samples as necessary. 
+The result of the fitting are the parameters for two Gaussian distributions with two features each. These parameters can be used to create further model data with the same characteristics. In our demonstration we know the original sources but if the parameters are obtained from experimental or clinical data, it is useful to visualise the predicted distributions using as many samples as necessary.
 </p>
-If we know the mean and the covariance matrix of a Gaussian, the function `multivariate_normal` can be used to create data from that Gaussian. 
+If we know the mean and the covariance matrix of a Gaussian, the function `multivariate_normal` can be used to create data from that Gaussian.
 
 
 ```python
@@ -466,7 +465,7 @@ print(labels)
 ```
 
 <p style='text-align: justify;'>
-The probabilities of the predictions are obtained from the method `.predict_proba`. In this case, all probabilities are 0 and 1 respectively. The model is sure about their group signature. 
+The probabilities of the predictions are obtained from the method `.predict_proba`. In this case, all probabilities are 0 and 1 respectively. The model is sure about their group signature.
 </p>
 
 
@@ -483,7 +482,7 @@ show()
 <img src="fig/01-clustering-intro-rendered-unnamed-chunk-13-13.png" width="672" style="display: block; margin: auto;" />
 
 <p style='text-align: justify;'>
-The `.sample_` method produces individual samples from the trained model. It takes the number of required samples as an input argument and yields the sample values as well as the group for each sample. Samples for each group are given with probability according to the group weights. 
+The `.sample_` method produces individual samples from the trained model. It takes the number of required samples as an input argument and yields the sample values as well as the group for each sample. Samples for each group are given with probability according to the group weights.
 </p>
 
 
@@ -505,7 +504,7 @@ print(samples[1])
 [0 0 1 1 1]
 ```
 
-We can now redo the example with two distributions that lie closer together, i.e. making the clustering task harder. 
+We can now redo the example with two distributions that lie closer together, i.e. making the clustering task harder.
 
 
 ```python
@@ -548,7 +547,7 @@ show()
 ```
 
 <img src="fig/01-clustering-intro-rendered-unnamed-chunk-15-15.png" width="672" style="display: block; margin: auto;" />
-    
+
 
 ```python
 components = 2
@@ -578,7 +577,7 @@ Z_s = Z_score.reshape(grid_a.shape)
 
 fig, ax = subplots(figsize=(8, 6))
 
-cax = ax.contour(grid_a, grid_b, -Z_s, 
+cax = ax.contour(grid_a, grid_b, -Z_s,
            norm=LogNorm(vmin=1.0, vmax=1000.0),
            levels=logspace(0, 3, 10),
            cmap='magma'
@@ -690,7 +689,7 @@ The result shows that even though the two distributions are strongly overlapping
 It is important to remember that the ground truth is typically not known. There are therefore also measures to score the outcome based on within-data criteria. See [internal evaluation of the wikipedia article](https://en.wikipedia.org/wiki/Cluster_analysis) for some techniques.
 </p>
 <p style='text-align: justify;'>
-In general, the outcome of clustering is not easy to assess with confidence and specific measures need to be developed based on additional knowledge about the source of the data. 
+In general, the outcome of clustering is not easy to assess with confidence and specific measures need to be developed based on additional knowledge about the source of the data.
 </p>
 
 ## Application to Example Data
@@ -701,7 +700,7 @@ Let us now apply the GMM approach to the example at the beginning of the lesson.
 ```python
 from pandas import read_csv
 
-df = read_csv("data/patients_data.csv") 
+df = read_csv("data/patients_data.csv")
 
 df['Weight'] = 0.45*df['Weight']
 df['Height'] = 2.54*df['Height']
@@ -747,7 +746,7 @@ Z_s = Z_score.reshape(grid_a.shape)
 
 fig, ax = subplots(figsize=(8, 6))
 
-cax = ax.contour(grid_a, grid_b, -Z_s, 
+cax = ax.contour(grid_a, grid_b, -Z_s,
            norm=LogNorm(vmin=1.0, vmax=1000.0),
            levels=logspace(0, 3, 10),
            cmap='magma'
@@ -787,7 +786,7 @@ print(scoring)
 ```
 
 
-In this case, the predictions from the GMM coincide 100 % with the gender label in the data. The outcome is therefore perfect in both cases. 
+In this case, the predictions from the GMM coincide 100 % with the gender label in the data. The outcome is therefore perfect in both cases.
 
 We can also compare the predictions with the smoker labels:
 
@@ -846,7 +845,7 @@ show()
 
 -------------------------------
 
-The assignment for this lesson consists of the questions shown below in the next section and can be accessed via GitHub classroom. 
+The assignment for this lesson consists of the questions shown below in the next section and can be accessed via GitHub classroom.
 
 - For **L2D online cohort**, please click this link: [**GitHub classroom assignment link**](https://classroom.github.com/a/xmv-iPCM)
 
@@ -866,7 +865,7 @@ The assignment for this lesson consists of the questions shown below in the next
 
 By doing these steps, you will be able to access the assignment repository at GitHub. Instructions for completing the assignment are displayed beneath the file browser containing all the files you will need. These instructions are contained in the `README.md` file.
 
-:::::::::::::::: 
+::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: challenge
 
@@ -884,12 +883,12 @@ Create the training and prediction workflow as above for a data set with two oth
 
 5. Compare the original scatter plot versus the model generated scatter plot. Use a total of 100 samples for the model generated data and distribute them according to the model weights.
 
-6. Repeat the plot multiple times to see how the degree of overlap in the model output changes with each choice of samples from the fitted distribution. 
+6. Repeat the plot multiple times to see how the degree of overlap in the model output changes with each choice of samples from the fitted distribution.
 
 7. Create corresponding histograms of the Diastolic and Systolic blood pressure values from data and model. Try to guess where the differences in appearance come from.
 
 <p style='text-align: justify;'>
-The data show systematic gaps in the histogram meaning that some values do not occur (integer values only). In contrast, the model data from the random number generator can take any value. Therefore the counts per bin are generally lower for the model. 
+The data show systematic gaps in the histogram meaning that some values do not occur (integer values only). In contrast, the model data from the random number generator can take any value. Therefore the counts per bin are generally lower for the model.
 </p>
 
 ::::::::::::::::::::: solution
@@ -918,7 +917,7 @@ from sklearn.metrics.cluster import adjusted_rand_score
 ```python
 from pandas import read_csv
 
-df = read_csv('data/patients_data.csv') 
+df = read_csv('data/patients_data.csv')
 
 df_np = df.to_numpy()
 
@@ -960,7 +959,7 @@ Z_s = Z_score.reshape(grid_a.shape);
 
 fig, ax = subplots(figsize=(8, 6))
 
-cax = ax.contour(grid_a, grid_b, -Z_s, 
+cax = ax.contour(grid_a, grid_b, -Z_s,
            norm=LogNorm(vmin=1.0, vmax=100.0),
            levels=logspace(0, 2, 10),
            cmap='magma'
@@ -1089,7 +1088,7 @@ show()
 
 <img src="fig/01-clustering-intro-rendered-unnamed-chunk-31-27.png" width="1152" style="display: block; margin: auto;" />
 
-The data show systematic gaps in the histogram meaning that some values do not occur (integer values only). In contrast, the model data from the random number generator can take any value. Therefore the counts per bin are generally lower for the model. 
+The data show systematic gaps in the histogram meaning that some values do not occur (integer values only). In contrast, the model data from the random number generator can take any value. Therefore the counts per bin are generally lower for the model.
 
 :::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::
@@ -1112,7 +1111,7 @@ The forum can only be accessed via your GitHub account once you have accepted th
 
 ::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: keypoints 
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - The automated assignment of data points to distinct groups is called `clustering`.
 - Gaussian Mixture Models (GMM) is one example of cluster analysis.

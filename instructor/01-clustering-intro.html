@@ -226,7 +226,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Clustering Introduction</h1>
-        <p> Last updated on 2023-05-26 | 
+        <p> Last updated on 2023-06-12 | 
         
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-clustering-intro.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -240,8 +240,6 @@
 
         
 
-<p><a href="../01-clustering-intro.md.pdf"><strong>Download Chapter
-pdf</strong></a></p>
 <p><a href="../01-clustering-intro.ipynb"><strong>Download Chapter notebook
 (ipynb)</strong></a></p>
 <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdr0capF7jloJhPH3Pki1B3LZoKOG16poOpuVJ7SL2LkwLHQA/viewform?pli=1" class="external-link"><span style="color: rgb(255, 0, 0);"><strong>Mandatory Lesson Feedback
@@ -334,7 +332,7 @@ get a summary statistics for both.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_csv(<span class="st">"data/patients_data.csv"</span>) </span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_csv(<span class="st">"data/patients_data.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Weigth to kg and height to cm</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pound_kg_conversion <span class="op">=</span> <span class="fl">0.45</span></span>
@@ -592,7 +590,7 @@ are shown as a landscape with two minima.
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cax <span class="op">=</span> ax.contour(grid_a, grid_b, <span class="op">-</span>Z_s, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cax <span class="op">=</span> ax.contour(grid_a, grid_b, <span class="op">-</span>Z_s,</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>           norm<span class="op">=</span>LogNorm(vmin<span class="op">=</span><span class="fl">1.0</span>, vmax<span class="op">=</span><span class="fl">1000.0</span>),</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>           levels<span class="op">=</span>logspace(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">10</span>),</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>           cmap<span class="op">=</span><span class="st">'magma'</span></span>
@@ -634,7 +632,7 @@ the result. E.g. picking 3 components:</p>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>cax <span class="op">=</span> ax.contour(grid_a, grid_b, <span class="op">-</span>Z_s_3, </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>cax <span class="op">=</span> ax.contour(grid_a, grid_b, <span class="op">-</span>Z_s_3,</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>           norm<span class="op">=</span>LogNorm(vmin<span class="op">=</span><span class="fl">1.0</span>, vmax<span class="op">=</span><span class="fl">1000.0</span>),</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>           levels<span class="op">=</span>logspace(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">10</span>),</span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>           cmap<span class="op">=</span><span class="st">'magma'</span></span>
@@ -946,7 +944,7 @@ together, i.e. making the clustering task harder.</p>
 <span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
 <span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>cax <span class="op">=</span> ax.contour(grid_a, grid_b, <span class="op">-</span>Z_s, </span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>cax <span class="op">=</span> ax.contour(grid_a, grid_b, <span class="op">-</span>Z_s,</span>
 <span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>           norm<span class="op">=</span>LogNorm(vmin<span class="op">=</span><span class="fl">1.0</span>, vmax<span class="op">=</span><span class="fl">1000.0</span>),</span>
 <span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>           levels<span class="op">=</span>logspace(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">10</span>),</span>
 <span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>           cmap<span class="op">=</span><span class="st">'magma'</span></span>
@@ -1084,7 +1082,7 @@ the lesson.</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> read_csv</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_csv(<span class="st">"data/patients_data.csv"</span>) </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_csv(<span class="st">"data/patients_data.csv"</span>)</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Weight'</span>] <span class="op">=</span> <span class="fl">0.45</span><span class="op">*</span>df[<span class="st">'Weight'</span>]</span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Height'</span>] <span class="op">=</span> <span class="fl">2.54</span><span class="op">*</span>df[<span class="st">'Height'</span>]</span>
@@ -1136,7 +1134,7 @@ components.</p>
 <span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
 <span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>cax <span class="op">=</span> ax.contour(grid_a, grid_b, <span class="op">-</span>Z_s, </span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>cax <span class="op">=</span> ax.contour(grid_a, grid_b, <span class="op">-</span>Z_s,</span>
 <span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>           norm<span class="op">=</span>LogNorm(vmin<span class="op">=</span><span class="fl">1.0</span>, vmax<span class="op">=</span><span class="fl">1000.0</span>),</span>
 <span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>           levels<span class="op">=</span>logspace(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">10</span>),</span>
 <span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>           cmap<span class="op">=</span><span class="st">'magma'</span></span>
@@ -1328,7 +1326,7 @@ are generally lower for the model.
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> read_csv</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_csv(<span class="st">'data/patients_data.csv'</span>) </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_csv(<span class="st">'data/patients_data.csv'</span>)</span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>df_np <span class="op">=</span> df.to_numpy()</span>
 <span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -1379,7 +1377,7 @@ are generally lower for the model.
 <span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
 <span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>cax <span class="op">=</span> ax.contour(grid_a, grid_b, <span class="op">-</span>Z_s, </span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>cax <span class="op">=</span> ax.contour(grid_a, grid_b, <span class="op">-</span>Z_s,</span>
 <span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>           norm<span class="op">=</span>LogNorm(vmin<span class="op">=</span><span class="fl">1.0</span>, vmax<span class="op">=</span><span class="fl">100.0</span>),</span>
 <span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>           levels<span class="op">=</span>logspace(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">10</span>),</span>
 <span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>           cmap<span class="op">=</span><span class="st">'magma'</span></span>
@@ -1625,7 +1623,7 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/01-clustering-intro.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/01-clustering-intro.html",
   "dateCreated": "2023-06-12",
-  "dateModified": "2023-05-26",
+  "dateModified": "2023-06-12",
   "datePublished": "2023-06-12"
 }
 
