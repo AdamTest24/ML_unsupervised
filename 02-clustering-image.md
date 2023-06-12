@@ -4,7 +4,6 @@ teaching: 10
 exercises: 2
 ---
 
-[**Download Chapter pdf**](02-clustering-image.md.pdf)
 
 [**Download Chapter notebook (ipynb)**](02-clustering-image.ipynb)
 
@@ -17,10 +16,10 @@ exercises: 2
 - [**Lesson Forum**](#forum)
 ::::::::::
 
-:::::::::::::::::::::::::::::::::::::: questions 
+:::::::::::::::::::::::::::::::::::::: questions
 
 - What makes image data unique for machine learning?
-- How can MR images be clustered and segmented? 
+- How can MR images be clustered and segmented?
 - How can segmentation be improved?
 - How do we visualise clustered image data?
 
@@ -47,7 +46,7 @@ exercises: 2
 
 :::::::::::::::::: prereq
 - [Data Handling Images](https://learntodiscover.github.io/Data_Handling/03-image_handling.html)
-:::::::::::::::::: 
+::::::::::::::::::
 
 ## Concept
 
@@ -68,7 +67,7 @@ The example used in this lesson is part of the National Cancer Institute’s Cli
 
 ### **Code Preparation**
 <p style='text-align: justify;'>
-We first import the modules needed for this lesson. We use Numpy to store and process images and we use __nibabel__ to read the MRI images, which have a file type called 'nifti'. Nibabel is freely available for download here: https://nipy.org/nibabel/ 
+We first import the modules needed for this lesson. We use Numpy to store and process images and we use __nibabel__ to read the MRI images, which have a file type called 'nifti'. Nibabel is freely available for download here: https://nipy.org/nibabel/
 </p>
 
 
@@ -80,7 +79,7 @@ from matplotlib.pyplot import subplots, tight_layout, show
 
 :::::::::::::::::: callout
 ## Note
-Note how we import the nibabel package as 'nib'. You can use any abbreviation to access the package's functions from within your programme. 
+Note how we import the nibabel package as 'nib'. You can use any abbreviation to access the package's functions from within your programme.
 ::::::::::::::::::
 
 To familiarise yourself with the nibabel package, try the [Getting started tutorial](https://nipy.org/nibabel/gettingstarted.html) using an example image file.
@@ -279,7 +278,7 @@ show()
 
 If you compare the histograms, you can see that the values in the data have changed (horizontal axis) but the shapes of the distributions are the same.
 
-We are not pursuing this further here but you are encouraged to re-do the clustering below with the scaled images and check if there are any differences. 
+We are not pursuing this further here but you are encouraged to re-do the clustering below with the scaled images and check if there are any differences.
 
 
 ### **Image Segmentation with Clustering**
@@ -573,12 +572,12 @@ Overall, the lesion, shown in yellow, seems to be segmented well across the volu
 
 ### **Checking the GMM Labels**
 <p style='text-align: justify;'>
-To investigate how the image intensities were clustered, we can look at the scatter plots for each combination of images. The diagonal plots show histograms of each image. This type of plot can be very useful in exploratory data analysis. 
+To investigate how the image intensities were clustered, we can look at the scatter plots for each combination of images. The diagonal plots show histograms of each image. This type of plot can be very useful in exploratory data analysis.
 </p>
 
 :::::::::::::: callout
 ## Note
-Note that this plot might take a bit longer to run, as there are a very large number of data points. 
+Note that this plot might take a bit longer to run, as there are a very large number of data points.
 ::::::::::::::
 
 In a python plotting library called [seaborn](https://seaborn.pydata.org), such plots are called `pairplots` and can be very easily plotted if your data is in a pandas dataframe.
@@ -663,7 +662,7 @@ The colours in the scatter plots above correspond to the labels we extracted usi
 </p>
 
 ::::::::::::::::: callout
-## 
+##
 A 2-dimensional histogram plots the counts of values in bins for two variables. The results are displayed as a heatmap. An intuitive example with code using the Matplotlib function `hist2d` [is available here](https://matplotlib.org/3.1.1/gallery/scales/power_norm.html#sphx-glr-gallery-scales-power-norm-py).|
 :::::::::::::::::
 
@@ -709,7 +708,7 @@ The plots show that there is a bright, high-density region corresponding to the 
 
 -------------------------------
 
-The assignment for this lesson consists of the questions shown below in the next section and can be accessed via GitHub classroom. 
+The assignment for this lesson consists of the questions shown below in the next section and can be accessed via GitHub classroom.
 
 - For **L2D online cohort**, please click this link: [**GitHub classroom assignment link**](https://classroom.github.com/a/4D0rtg9Z)
 
@@ -729,7 +728,7 @@ The assignment for this lesson consists of the questions shown below in the next
 
 By doing these steps, you will be able to access the assignment repository at GitHub. Instructions for completing the assignment are displayed beneath the file browser containing all the files you will need. These instructions are contained in the `README.md` file.
 
-:::::::::::::::: 
+::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: challenge
 
@@ -1137,7 +1136,7 @@ The forum can only be accessed via your GitHub account once you have accepted th
 If after this lesson you want to deepen your understanding of clustering and, in particular, want to compare the performance of different clustering methods when dealing with images, try the article [Clustering techniques for
 neuroimaging applications](https://onlinelibrary.wiley.com/doi/pdf/10.1002/widm.1174). It is paywalled and you will need an institutional access to download.
 
-::::::::::::::::::::::::::::::::::::: keypoints 
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - Image analysis almost always requires a bit of pre-processing.
 - Image scaling is performed by using `fit_transform` method from module `StandardScaler` in `Scikit-learn`.
