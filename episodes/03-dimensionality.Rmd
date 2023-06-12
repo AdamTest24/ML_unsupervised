@@ -4,12 +4,11 @@ teaching: 10
 exercises: 2
 ---
 
-[**Download Chapter pdf**](03-dimensionality.md.pdf)
 
 [**Download Chapter notebook (ipynb)**](03-dimensionality.ipynb)
 
 [<span style="color: rgb(255, 0, 0);">**Mandatory Lesson Feedback Survey**</span>](https://docs.google.com/forms/d/e/1FAIpQLSdr0capF7jloJhPH3Pki1B3LZoKOG16poOpuVJ7SL2LkwLHQA/viewform?pli=1)
- 
+
 
 :::::::::: checklist
 ## Submissions
@@ -18,7 +17,7 @@ exercises: 2
 - [**Lesson Forum**](#forum)
 ::::::::::
 
-:::::::::::::::::::::::::::::::::::::: questions 
+:::::::::::::::::::::::::::::::::::::: questions
 
 - Why is it important to perform dimensionality reduction?
 - How is dimensionality reduction performed?
@@ -51,7 +50,7 @@ exercises: 2
 :::::::::::::::::: prereq
 - [Clustering Introduction](01-clustering-intro.Rmd)
 - [Clustering Images](02-clustering-image.Rmd)
-:::::::::::::::::: 
+::::::::::::::::::
 
 ### **Code Preparation**
 
@@ -61,7 +60,7 @@ from numpy.random import seed, multivariate_normal, binomial
 from numpy.linalg import norm
 
 from math import cos, sin, atan2
-from matplotlib.pyplot import subplots, xlabel, ylabel, scatter, title 
+from matplotlib.pyplot import subplots, xlabel, ylabel, scatter, title
 from matplotlib.pyplot import figure, plot, xticks, xlabel, ylabel, suptitle, show
 
 import glob
@@ -81,7 +80,7 @@ Clinical and scientific datasets often contain measurements of many physiologica
 
 There are several reasons for performing dimensionality reduction, both for data exploration and for pre-processing:
 
-- Data compression, to optimize memory usage/loading speed and visualisation of "important features". 
+- Data compression, to optimize memory usage/loading speed and visualisation of "important features".
 
 - To find the individual variable or combinations of variables that give a condensed but accurate description of the data (sometimes also called feature extraction).
 
@@ -102,7 +101,7 @@ By performing dimensionality reduction, we first find features that capture the 
 <p style='text-align: justify;'>
 [Gene expression data](https://www.ebi.ac.uk/arrayexpress/experiments/E-GEOD-11083/) (for selected markers) is available for 83 individuals, including some patients with varying forms of early-onset rheumatic disease (available at EMBL-Bioinformatics database, also included in folder). This is a typical example of high dimensional datasets, with transcript levels for >50,000 genes measured!
 </p>
-Here, the data are read from individual files in the 'Dataset' folder and combined into a Pandas dataframe called 'geneData'. 
+Here, the data are read from individual files in the 'Dataset' folder and combined into a Pandas dataframe called 'geneData'.
 
 
 ```{python}
@@ -122,13 +121,13 @@ for txt in datapath.glob("*.txt"):
     else:
         a=append( a, b, axis=0)
     filectr+=1
-    
-# convert 2D array to dataframe    
-geneData = DataFrame( data=a[:,range(nGenes)]- mean(a[:,range(nGenes)], axis=0), columns = coln.values[range(nGenes)]) 
+
+# convert 2D array to dataframe
+geneData = DataFrame( data=a[:,range(nGenes)]- mean(a[:,range(nGenes)], axis=0), columns = coln.values[range(nGenes)])
 
 ```
 
-The dataframe has 80 samples and 1000 features. 
+The dataframe has 80 samples and 1000 features.
 <p style='text-align: justify;'>
 Apart from the large number of variables (compared to number of samples), we also have strongly correlated expression of various markers. We can see that by plotting the correlation matrix of the dataframe.
 </p>
@@ -144,12 +143,12 @@ show()
 ```
 
 <p style='text-align: justify;'>
-The little yellow blocks indicate that various features are strongly correlation (values around 1). Further analyses (e.g. checking if we find clusters mapping to healthy individuals and patients, respectively, or whether patients with different patterns of marker expression can be identified for future diagnostic purposes) can be thus be improved if we perform a dimensionality reduction, i.e. decrease the number of features while maintaining relevant information. 
+The little yellow blocks indicate that various features are strongly correlation (values around 1). Further analyses (e.g. checking if we find clusters mapping to healthy individuals and patients, respectively, or whether patients with different patterns of marker expression can be identified for future diagnostic purposes) can be thus be improved if we perform a dimensionality reduction, i.e. decrease the number of features while maintaining relevant information.
 </p>
 
 ## Principal Component Analysis
 <p style='text-align: justify;'>
-Principal component analysis (PCA) is one of the most commonly used dimensionality reduction methods. Instead of describing the data using the original measurements, it finds a new set of ranked features (the "basis"). The new "features" are linear combinations of the original variables, such that they are all *orthogonal* to each other, and the "importance" of a feature (called the __principal component__) is generally given by how much of the variability in the dataset it captures (the so-called __explained variance__). Thus, we first transform the data from the original variables into a new set of features or principal components (PCs). 
+Principal component analysis (PCA) is one of the most commonly used dimensionality reduction methods. Instead of describing the data using the original measurements, it finds a new set of ranked features (the "basis"). The new "features" are linear combinations of the original variables, such that they are all *orthogonal* to each other, and the "importance" of a feature (called the __principal component__) is generally given by how much of the variability in the dataset it captures (the so-called __explained variance__). Thus, we first transform the data from the original variables into a new set of features or principal components (PCs).
 </p>
 
 To get a lower dimensional description of the data, we retain only the top features (PCs) such that the largest variations or 'patterns' in the dataset are preserved.
@@ -190,19 +189,19 @@ zdata = data - mean(data, axis=0)
 
 fig, ax = subplots(ncols=3, nrows=1, figsize=(15, 4))
 
-ax[0].hist(zdata[:, 0]); 
+ax[0].hist(zdata[:, 0]);
 ax[0].set_title('Dim 1', fontsize=16, fontweight='bold');
-ax[0].set_xlabel('Values', fontsize=14); 
-ax[0].set_ylabel('Frequency', fontsize=14); 
+ax[0].set_xlabel('Values', fontsize=14);
+ax[0].set_ylabel('Frequency', fontsize=14);
 
-ax[1].hist(zdata[:, 1]); 
+ax[1].hist(zdata[:, 1]);
 ax[1].set_title('Dim 2', fontsize=16, fontweight='bold');
-ax[1].set_xlabel('Values', fontsize=14); 
+ax[1].set_xlabel('Values', fontsize=14);
 
 
 ax[2].scatter(zdata[:, 0], zdata[:, 1]);
 ax[2].set_title('Sample Data', fontsize=16, fontweight='bold')
-ax[2].set_xlabel('Dim 1', fontsize=14);  
+ax[2].set_xlabel('Dim 1', fontsize=14);
 ax[2].set_ylabel('Dim 2', fontsize=14);
 
 show()
@@ -245,7 +244,7 @@ angle = pi/4
 vec = [cos(angle), sin(angle)] # has norm=1 by definition, otherwise:  vec = vec/norm(vec)
 
 # Project 2D data onto this single dimension
-dim1_data = zdata.dot(vec) 
+dim1_data = zdata.dot(vec)
 
 
 fig, ax = subplots(ncols=2, nrows=1, figsize=(15, 6))
@@ -259,23 +258,23 @@ ax[0].set_xlabel('Dim 1', fontsize=14); ax[0].set_xlim([-4,4]);
 ax[0].set_ylabel('Dim 2', fontsize=14); ax[0].set_ylim([-4,4]);
 
 # Plot histogram of new projected data
-ax[1].hist(dim1_data, bins = linspace(-3,3,9)); 
+ax[1].hist(dim1_data, bins = linspace(-3,3,9));
 ax[1].set_title('Along vec', fontsize=16, fontweight='bold');
-ax[1].set_xlabel('Values', fontsize=14); 
+ax[1].set_xlabel('Values', fontsize=14);
 ax[1].set_ylabel('Frequency', fontsize=14);
 
 show()
 ```
 
-::::::::::::::::::::::::::::::: challenge 
+::::::::::::::::::::::::::::::: challenge
 
 ## Do it Yourself
 
 Change the angle in the code above and see how distribution of projected data changes. Use e.g. 0,  $\pi$ /2,   2/3*$\pi$,  and $\pi$. Try to estimate how much the variance changes.
-:::::::::::::::::::::::::::::: 
+::::::::::::::::::::::::::::::
 
 <p style='text-align: justify;'>
-Now let's formally calculate the variance by projecting along a set of different directions. We use angles between 0 and $\pi$ (i.e. between 0 and 180 degrees). For each direction (projection) we  calculate the variance and plot it against the angle. 
+Now let's formally calculate the variance by projecting along a set of different directions. We use angles between 0 and $\pi$ (i.e. between 0 and 180 degrees). For each direction (projection) we  calculate the variance and plot it against the angle.
 </p>
 
 ```{python}
@@ -283,10 +282,10 @@ allAngles = linspace( start=0, stop=pi, num=20)
 allVar = []
 for angle in allAngles:
     vec = array([cos(angle), sin(angle)]) #Unit length vector on which data will be projected
-    dim1_data = data.dot(vec) 
+    dim1_data = data.dot(vec)
     allVar.append( var(dim1_data))
 
-# Plot variance captured by different features    
+# Plot variance captured by different features
 scatter( allAngles, allVar );
 title('Variance along different directions', fontsize=16, fontweight='bold')
 xlabel('Direction (angle in radians)', fontsize=14);
@@ -295,12 +294,12 @@ ylabel('Variance of projected data', fontsize=14);
 ```
 
 <p style='text-align: justify;'>
-It can be seen there is a particular direction that retains maximal variance. This would be the optimal feature to give a 1D description of the 2D data while retaining maximum variability. PCA is the method that directly find this optimal direction. This makes it especially powerful for high dimensional datasets. 
+It can be seen there is a particular direction that retains maximal variance. This would be the optimal feature to give a 1D description of the 2D data while retaining maximum variability. PCA is the method that directly find this optimal direction. This makes it especially powerful for high dimensional datasets.
 </p>
 
 ### **Find 1-D description using PCA**
 <p style='text-align: justify;'>
-Let us now use dimensionality reduction `PCA` to directly find the direction that captures maximal variance. For an n-dimensional dataset, PCA finds a set of _n_ new features, ranked by the variance along each feature. See the [Scikit-learn documentation](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html) for information. 
+Let us now use dimensionality reduction `PCA` to directly find the direction that captures maximal variance. For an n-dimensional dataset, PCA finds a set of _n_ new features, ranked by the variance along each feature. See the [Scikit-learn documentation](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html) for information.
 </p>
 
 To get the best 1D representation of data, we instantiate the class with one component (*n_components* = 1) to be returned, and transform the data to the feature space of that component.
@@ -341,12 +340,12 @@ vec1 = pcaResults.components_[0,:]
 print("Direction of PC1 is at angle = {:1.2f} radians".format(atan2(vec1[1],vec1[0])))
 ```
 
-::::::::::::::::::::::::::::::: challenge 
+::::::::::::::::::::::::::::::: challenge
 
 ## Do it Yourself
-Exercise (DIY): Change the covariance of the synthetic data, and repeat the above steps. 
+Exercise (DIY): Change the covariance of the synthetic data, and repeat the above steps.
 Try to infer the relationship between the shape of the scatter, the strength of correlation between the two dimensions, and the variance captured by the first PC.
-::::::::::::::::::::::::::::::: 
+:::::::::::::::::::::::::::::::
 
 ### **Find 2-D description using PCA**
 <p style='text-align: justify;'>
@@ -396,7 +395,7 @@ When reading about PCA you will come across the term __Singular Value Decomposit
 
 ## PCA of the Gene Expression Data
 <p style='text-align: justify;'>
-Now, we will use PCA to find a few features that capture most of the variability in the gene expression dataset. we arbitrarily start with 50 components assuming that this will include the important features. 
+Now, we will use PCA to find a few features that capture most of the variability in the gene expression dataset. we arbitrarily start with 50 components assuming that this will include the important features.
 </p>
 
 ```{python}
@@ -409,7 +408,7 @@ GenePCA = GenePCA.fit(geneData) #.values[trainIndx==1,:]
 ```
 
 <p style='text-align: justify;'>
-How many features should we retain? To investigate this question, we plot the total (cumulative) variance for retaining the top *k* modes. The more we use, the higher the cumulative variance. 
+How many features should we retain? To investigate this question, we plot the total (cumulative) variance for retaining the top *k* modes. The more we use, the higher the cumulative variance.
 </p>
 
 ```{python}
@@ -439,7 +438,7 @@ print('Number of features needed to explain {:1.2f} fraction of total variance i
 ```
 
 There are many alternative methods for estimating the number of features. These include:
-    
+
 - Plot explained variance of individual PCs and cut off when there is a sharp drop/saturation in the values.
 
 - Cross-validation - Find number of PCs that maximize explained variance on heldout data (using a bi-cross validation scheme).
@@ -504,16 +503,16 @@ After reducing dataset from hundreds or thousands of genes to fewer features (PC
 
 - To discover co-expression patterns of multiple genes.
 
-::::::::::::::::::::::::::::::: challenge 
+::::::::::::::::::::::::::::::: challenge
 
-## Optional Exercises 
+## Optional Exercises
 
 1. The dataset contains two types of samples, expression in neutrophil and expression in peripheral blood mononuclear cells (PBMC). Download the [sample-data table](https://www.ebi.ac.uk/arrayexpress/experiments/E-GEOD-11083/samples/) to get the category of each sample. Make a scatter plot of two (original) features and set the colour of the scatter based on the sample's origin. Do a PCA, scatter the top scoring components and colour the samples in the same way.  Do the top PCs capture gene expression differences in the two types of cells?
 
 2. The dataset similarly contains samples from individuals with differing phenotypes - healthy, as well as 2 different disease characteristics. Similar to the previous exercise, colour the scatter based on the disease phenotypes. Do the top PCs capture variability in gene expression for different phenotypes?
 
 
-::::::::::::::::::::::::::::::: 
+:::::::::::::::::::::::::::::::
 
 
 ## When does PCA fail?
@@ -526,7 +525,7 @@ Nonlinear patterns of co-expression will be seemingly broken up into many featur
 
 2. *PCA depends on scaling of individual measurements.*
 
-As PCA measures variance along different directions, changing the scale of one variable (for example from cm to mm, or fold-change to actual levels) may drastically change the dominant "features" extracted. 
+As PCA measures variance along different directions, changing the scale of one variable (for example from cm to mm, or fold-change to actual levels) may drastically change the dominant "features" extracted.
 
 The lesson on clustering of images with Gaussian mixture models contained instructions to scale data. You can explore the original dataset of this lesson, to investigate how scaling of variables impacts the results.
 
@@ -535,14 +534,14 @@ The lesson on clustering of images with Gaussian mixture models contained instru
 The definition of what is the 'relevant' number of features can depend on:
 
 - the signal-to-noise ratio in data. For example, noisier or smaller datasets make it harder to accurately estimate smaller PCs. In such cases, a more conservative threshold should be used.
-- the classifier or regression performance following the dimensionality reduction. 
+- the classifier or regression performance following the dimensionality reduction.
 
 
 ### **Lesson Assignment** {#assign}
 
 ----------------------
 
-There are no assignments for this lesson. However, you can go through the additional resources below for more insights and practice. 
+There are no assignments for this lesson. However, you can go through the additional resources below for more insights and practice.
 
 The webinar notebook and data for this lesson can be accessed [here](https://github.com/L2D-Oct2022/ML6_Webinar).
 
@@ -564,9 +563,9 @@ Any questions related to this lesson, code or assignment can be posted at our fo
 - [Other methods for dimensionality reduction](https://towardsdatascience.com/dimension-reduction-techniques-with-python-f36ca7009e5c):
 
   - [Matrix factorization methods](https://scikit-learn.org/stable/modules/decomposition.html)
-  
+
   - [Manifold learning or topological methods](https://scikit-learn.org/stable/modules/manifold.html)
-  
+
   - [Example pipelines with Scikit-learn](https://scikit-learn.org/stable/modules/unsupervised_reduction.html)
 
 Dataset from:
@@ -575,7 +574,7 @@ Frank MB, Wang S, Aggarwal A, et al. **Disease-associated pathophysiologic struc
 
 Download data from: https://www.ebi.ac.uk/arrayexpress/experiments/E-GEOD-11083/
 
-::::::::::::::::::::::::::::::::::::: keypoints 
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - Reduced features in a dataset reduce redundancy and process is called dimensionality reduction.
 - Principal component analysis (PCA) is one of the commonly used dimensionality reduction methods.
