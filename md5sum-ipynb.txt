@@ -1,2 +1,2 @@
 "file" "checksum" "built" "date"
-"episodes/01-clustering-intro.Rmd" "a0b551e3e2edefc487a873f2278095a0" "site/built/01-clustering-intro.ipynb" "2023-08-15"
+"episodes/01-clustering-intro.Rmd" "a0b551e3e2edefc487a873f2278095a0" "site/built/01-clustering-intro.ipynb" "2023-08-22"
