@@ -1,3 +1,3 @@
 "file" "checksum" "built" "date"
-"01-clustering-intro.Rmd" "a0b551e3e2edefc487a873f2278095a0" "../site/built/01-clustering-intro.ipynb" "2023-08-25"
-"02-clustering-image.Rmd" "eb6b76dab1962ac678f9a12588d96dd5" "../site/built/02-clustering-image.ipynb" "2023-08-25"
+"01-clustering-intro.Rmd" "a0b551e3e2edefc487a873f2278095a0" "../site/built/01-clustering-intro.ipynb" "2023-08-29"
+"02-clustering-image.Rmd" "eb6b76dab1962ac678f9a12588d96dd5" "../site/built/02-clustering-image.ipynb" "2023-08-29"
