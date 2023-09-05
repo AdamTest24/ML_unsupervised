@@ -1,4 +1,4 @@
 "file" "checksum" "built" "date"
-"01-clustering-intro.Rmd" "a0b551e3e2edefc487a873f2278095a0" "../site/built/01-clustering-intro.ipynb" "2023-09-01"
-"02-clustering-image.Rmd" "eb6b76dab1962ac678f9a12588d96dd5" "../site/built/02-clustering-image.ipynb" "2023-09-01"
-"03-dimensionality.Rmd" "3fe4d750197c4a6ab48d87df0942abaf" "../site/built/03-dimensionality.ipynb" "2023-09-01"
+"01-clustering-intro.Rmd" "a0b551e3e2edefc487a873f2278095a0" "../site/built/01-clustering-intro.ipynb" "2023-09-05"
+"02-clustering-image.Rmd" "eb6b76dab1962ac678f9a12588d96dd5" "../site/built/02-clustering-image.ipynb" "2023-09-05"
+"03-dimensionality.Rmd" "3fe4d750197c4a6ab48d87df0942abaf" "../site/built/03-dimensionality.ipynb" "2023-09-05"
