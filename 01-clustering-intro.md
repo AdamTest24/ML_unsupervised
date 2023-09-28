@@ -10,13 +10,6 @@ exercises: 2
 [<span style="color: rgb(255, 0, 0);">**Mandatory Lesson Feedback Survey**</span>](https://docs.google.com/forms/d/e/1FAIpQLSdr0capF7jloJhPH3Pki1B3LZoKOG16poOpuVJ7SL2LkwLHQA/viewform?pli=1)
 
 
-:::::::::: checklist
-## Submissions
-- [**Lesson Assignment**](#assign)
-
-- [**Lesson Forum**](#forum)
-::::::::::
-
 :::::::::::::::::::::::::::::::::::::: questions
 
 - How to search for multiple distributions in a dataset?
@@ -841,35 +834,11 @@ show()
 
 <img src="fig/01-clustering-intro-rendered-unnamed-chunk-23-21.png" width="1152" style="display: block; margin: auto;" />
 
-### **Lesson Assignment** [(Tutorial Video)](https://www.youtube.com/watch?app=desktop&v=5UzoWit0Ewc) {#assign}
 
--------------------------------
-
-The assignment for this lesson consists of the questions shown below in the next section and can be accessed via GitHub classroom.
-
-- For **L2D online cohort**, please click this link: [**GitHub classroom assignment link**](https://classroom.github.com/a/xmv-iPCM)
-
-- For **LiDo cohort**, please click this link: [**GitHub classroom assignment link**](https://classroom.github.com/a/D_bQk3jW)
-
-
-:::::::::::::::: callout
-## Note
-
-1. You will need to login to your GitHub account.
-
-2. Choose your name from the list of students.
-
-3. Accept the assignment.
-
-4. Refresh the page.
-
-By doing these steps, you will be able to access the assignment repository at GitHub. Instructions for completing the assignment are displayed beneath the file browser containing all the files you will need. These instructions are contained in the `README.md` file.
-
-::::::::::::::::
-
+## Exercises
 :::::::::::::::::::::::::::::::::::::::: challenge
 
-#### Assignment Questions
+#### End of chapter Exercises
 
 Create the training and prediction workflow as above for a data set with two other features, namely: Diastole and Systole values from the 'patients_data.csv' file.
 
@@ -1092,24 +1061,6 @@ The data show systematic gaps in the histogram meaning that some values do not o
 
 :::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::
-
-
-### **Forum for Questions** [(Tutorial Video)](https://www.youtube.com/watch?app=desktop&v=N5N7QbLwztQ){#forum}
-
-----------------------
-Any questions related to this lesson, code or assignment can be posted at our forum (**Students_team**) on GitHub.
-
-- For **L2D online cohort**, the forum can be accessed at: [**Students_team**](https://github.com/orgs/L2D-Oct2022/teams/students_team)
-
-- For **LiDo cohort**, the forum can be accessed at: [**LiDo_students_team**](https://github.com/orgs/LIDo-2022/teams/lido_students_team)
-
-
-:::::::::::::::: callout
-## Note
-
-The forum can only be accessed via your GitHub account once you have accepted the invitation to be included in the team.
-
-::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
