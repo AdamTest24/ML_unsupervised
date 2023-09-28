@@ -10,12 +10,6 @@ exercises: 2
 [<span style="color: rgb(255, 0, 0);">**Mandatory Lesson Feedback Survey**</span>](https://docs.google.com/forms/d/e/1FAIpQLSdr0capF7jloJhPH3Pki1B3LZoKOG16poOpuVJ7SL2LkwLHQA/viewform?pli=1)
 
 
-:::::::::: checklist
-## Submissions
-- [**Lesson Assignment**](#assign)
-
-- [**Lesson Forum**](#forum)
-::::::::::
 
 :::::::::::::::::::::::::::::::::::::: questions
 
@@ -535,25 +529,6 @@ The definition of what is the 'relevant' number of features can depend on:
 
 - the signal-to-noise ratio in data. For example, noisier or smaller datasets make it harder to accurately estimate smaller PCs. In such cases, a more conservative threshold should be used.
 - the classifier or regression performance following the dimensionality reduction.
-
-
-### **Lesson Assignment** {#assign}
-
-----------------------
-
-There are no assignments for this lesson. However, you can go through the additional resources below for more insights and practice.
-
-The webinar notebook and data for this lesson can be accessed [here](https://github.com/L2D-Oct2022/ML6_Webinar).
-
-
-### **Forum for Questions** [(Tutorial Video)](https://www.youtube.com/watch?app=desktop&v=N5N7QbLwztQ){#forum}
-
-----------------------
-Any questions related to this lesson, code or assignment can be posted at our forum (**Students_team**) on GitHub.
-
-- For **L2D online cohort**, the forum can be accessed at: [**Students_team**](https://github.com/orgs/L2D-Oct2022/teams/students_team)
-
-- For **LiDo cohort**, the forum can be accessed at: [**LiDo_students_team**](https://github.com/orgs/LIDo-2022/teams/lido_students_team)
 
 
 ## Resources
