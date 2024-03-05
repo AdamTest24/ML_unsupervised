@@ -312,18 +312,18 @@ Survey</strong></span></a></p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> reshape, append, mean, pi, linspace, var, array, cumsum, arange</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> seed, multivariate_normal, binomial</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.linalg <span class="im">import</span> norm</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> cos, sin, atan2</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> subplots, xlabel, ylabel, scatter, title</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> figure, plot, xticks, xlabel, ylabel, suptitle, show</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> read_csv, DataFrame</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> reshape, append, mean, pi, linspace, var, array, cumsum, arange</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> seed, multivariate_normal, binomial</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">from</span> numpy.linalg <span class="im">import</span> norm</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> cos, sin, atan2</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> subplots, xlabel, ylabel, scatter, title</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> figure, plot, xticks, xlabel, ylabel, suptitle, show</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> read_csv, DataFrame</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="im">import</span> csv</span></code></pre>
 </div>
 </div>
 <section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
@@ -339,7 +339,8 @@ process of describing the data by a reduced number of new combined
 features that reduces redundancy, is called <strong>dimensionality
 reduction</strong>.
 </p>
-<figure><img src="../fig/goal.png" alt="" class="figure mx-auto d-block"><figcaption>Goal of decomposition</figcaption></figure><p>There are several reasons for performing dimensionality reduction,
+<figure><img src="../fig/goal.png" alt="Goal of decomposition" class="figure mx-auto d-block"><div class="figcaption">Goal of decomposition</div>
+</figure><p>There are several reasons for performing dimensionality reduction,
 both for data exploration and for pre-processing:</p>
 <ul><li><p>Data compression, to optimize memory usage/loading speed and
 visualisation of “important features”.</p></li>
@@ -389,25 +390,25 @@ and combined into a Pandas dataframe called ‘geneData’.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>nGenes <span class="op">=</span> <span class="dv">1000</span> <span class="co"># keep only these genes for now</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>filectr<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>datapath <span class="op">=</span> Path(<span class="st">"data"</span>)    <span class="co">#/relative/path/to/folder/with/datsets</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> txt <span class="kw">in</span> datapath.glob(<span class="st">"*.txt"</span>):</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    b<span class="op">=</span>read_csv(txt, sep<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>, usecols<span class="op">=</span>[<span class="dv">1</span>])</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    b<span class="op">=</span>reshape(b.values, (<span class="dv">1</span>,<span class="dv">54675</span>)) <span class="co"># each file is 1 observation sample i.e. 1 row.</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> filectr<span class="op">==</span><span class="dv">0</span>:</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        coln <span class="op">=</span>  read_csv(txt, sep<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>, usecols<span class="op">=</span>[<span class="dv">0</span>])</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> b</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        a<span class="op">=</span>append( a, b, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    filectr<span class="op">+=</span><span class="dv">1</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># convert 2D array to dataframe</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>geneData <span class="op">=</span> DataFrame( data<span class="op">=</span>a[:,<span class="bu">range</span>(nGenes)]<span class="op">-</span> mean(a[:,<span class="bu">range</span>(nGenes)], axis<span class="op">=</span><span class="dv">0</span>), columns <span class="op">=</span> coln.values[<span class="bu">range</span>(nGenes)])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Load all data</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>nGenes <span class="op">=</span> <span class="dv">1000</span> <span class="co"># keep only these genes for now</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>filectr<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>datapath <span class="op">=</span> Path(<span class="st">"data"</span>)    <span class="co">#/relative/path/to/folder/with/datsets</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="cf">for</span> txt <span class="kw">in</span> datapath.glob(<span class="st">"*.txt"</span>):</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    b<span class="op">=</span>read_csv(txt, sep<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>, usecols<span class="op">=</span>[<span class="dv">1</span>])</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>    b<span class="op">=</span>reshape(b.values, (<span class="dv">1</span>,<span class="dv">54675</span>)) <span class="co"># each file is 1 observation sample i.e. 1 row.</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>    <span class="cf">if</span> filectr<span class="op">==</span><span class="dv">0</span>:</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>        coln <span class="op">=</span>  read_csv(txt, sep<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>, usecols<span class="op">=</span>[<span class="dv">0</span>])</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>        a <span class="op">=</span> b</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>        a<span class="op">=</span>append( a, b, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>    filectr<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co"># convert 2D array to dataframe</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>geneData <span class="op">=</span> DataFrame( data<span class="op">=</span>a[:,<span class="bu">range</span>(nGenes)]<span class="op">-</span> mean(a[:,<span class="bu">range</span>(nGenes)], axis<span class="op">=</span><span class="dv">0</span>), columns <span class="op">=</span> coln.values[<span class="bu">range</span>(nGenes)])</span></code></pre>
 </div>
 The dataframe has 80 samples and 1000 features.
 <p style="text-align: justify;">
@@ -419,13 +420,13 @@ dataframe.
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> ax.matshow(geneData.corr())</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(im, shrink<span class="op">=</span><span class="fl">0.82</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>xlabel(<span class="st">'Locus #'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ylabel(<span class="st">'Locus #'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>im <span class="op">=</span> ax.matshow(geneData.corr())</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(im, shrink<span class="op">=</span><span class="fl">0.82</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>xlabel(<span class="st">'Locus #'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>ylabel(<span class="st">'Locus #'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>show()</span></code></pre>
 </div>
 <figure><img src="../fig/03-dimensionality-rendered-unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p style="text-align: justify;">
 The little yellow blocks indicate that various features are strongly
@@ -472,20 +473,20 @@ specified.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>RND_SEED <span class="op">=</span> <span class="dv">7890</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>seed(RND_SEED)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up 2D multivariate Gaussians</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> [<span class="dv">20</span>, <span class="dv">20</span>]</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>cov_mat <span class="op">=</span> [[<span class="dv">1</span>, <span class="fl">.85</span>], [<span class="fl">.85</span>, <span class="fl">1.5</span>]] <span class="co"># 2x2 covariance matrix must be symmetric and positive-semidefinite(&gt;=0)</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>nSamples <span class="op">=</span> <span class="dv">300</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> multivariate_normal(means, cov_mat, nSamples)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>RND_SEED <span class="op">=</span> <span class="dv">7890</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>seed(RND_SEED)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># Set up 2D multivariate Gaussians</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>means <span class="op">=</span> [<span class="dv">20</span>, <span class="dv">20</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>cov_mat <span class="op">=</span> [[<span class="dv">1</span>, <span class="fl">.85</span>], [<span class="fl">.85</span>, <span class="fl">1.5</span>]] <span class="co"># 2x2 covariance matrix must be symmetric and positive-semidefinite(&gt;=0)</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co"># Generate data</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>nSamples <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>data <span class="op">=</span> multivariate_normal(means, cov_mat, nSamples)</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="bu">print</span>(data.shape)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -498,35 +499,34 @@ scatter plot.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Center data</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>zdata <span class="op">=</span> data <span class="op">-</span> mean(data, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(ncols<span class="op">=</span><span class="dv">3</span>, nrows<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">4</span>))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].hist(zdata[:, <span class="dv">0</span>])<span class="op">;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Dim 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)<span class="op">;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Values'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Frequency'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].hist(zdata[:, <span class="dv">1</span>])<span class="op">;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'Dim 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)<span class="op">;</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Values'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].scatter(zdata[:, <span class="dv">0</span>], zdata[:, <span class="dv">1</span>])<span class="op">;</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="st">'Sample Data'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_xlabel(<span class="st">'Dim 1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_ylabel(<span class="st">'Dim 2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Center data</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>zdata <span class="op">=</span> data <span class="op">-</span> mean(data, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(ncols<span class="op">=</span><span class="dv">3</span>, nrows<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">4</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>ax[<span class="dv">0</span>].hist(zdata[:, <span class="dv">0</span>])<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Dim 1'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Values'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Frequency'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>ax[<span class="dv">1</span>].hist(zdata[:, <span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'Dim 2'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)<span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Values'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>ax[<span class="dv">2</span>].scatter(zdata[:, <span class="dv">0</span>], zdata[:, <span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="st">'Sample Data'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>ax[<span class="dv">2</span>].set_xlabel(<span class="st">'Dim 1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>ax[<span class="dv">2</span>].set_ylabel(<span class="st">'Dim 2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>show()</span></code></pre>
 </div>
-<figure><img src="../fig/03-dimensionality-rendered-unnamed-chunk-5-3.png" width="1440" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="note" class="callout callout">
+<figure><img src="../fig/03-dimensionality-rendered-unnamed-chunk-5-3.png" width="1440" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="note" class="callout-inner">
-<h3 class="callout-title">Note<a class="anchor" aria-label="anchor" href="#note"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h3>
 <div class="callout-content">
 <p><em>The last plot, with the samples plotted as scatter in the space
 of measured variables is called a “state space plot”. The main axes
@@ -570,30 +570,30 @@ of the 2D sample d=[d1, d2]:
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Centre data at origin by subtracting mean</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>zdata <span class="op">=</span> data <span class="op">-</span> mean(data, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a feature as a direction in the 2D space using the angle</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>angle <span class="op">=</span> pi<span class="op">/</span><span class="dv">4</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain the vector</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>vec <span class="op">=</span> [cos(angle), sin(angle)] <span class="co"># has norm=1 by definition, otherwise:  vec = vec/norm(vec)</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Project 2D data onto this single dimension</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>dim1_data <span class="op">=</span> zdata.dot(vec)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(ncols<span class="op">=</span><span class="dv">2</span>, nrows<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">6</span>))</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot data and the feature direction</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].scatter(zdata[:, <span class="dv">0</span>], zdata[:, <span class="dv">1</span>])<span class="op">;</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].quiver([<span class="dv">0</span>], [<span class="dv">0</span>], vec[<span class="dv">0</span>], vec[<span class="dv">1</span>], scale<span class="op">=</span><span class="dv">3</span>)<span class="op">;</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Sample Data'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Dim 1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>].set_xlim([<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>])<span class="op">;</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Dim 2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>].set_ylim([<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>])<span class="op">;</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot histogram of new projected data</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">## Centre data at origin by subtracting mean</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>zdata <span class="op">=</span> data <span class="op">-</span> mean(data, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Define a feature as a direction in the 2D space using the angle</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>angle <span class="op">=</span> pi<span class="op">/</span><span class="dv">4</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># Obtain the vector</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>vec <span class="op">=</span> [cos(angle), sin(angle)] <span class="co"># has norm=1 by definition, otherwise:  vec = vec/norm(vec)</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co"># Project 2D data onto this single dimension</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>dim1_data <span class="op">=</span> zdata.dot(vec)</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(ncols<span class="op">=</span><span class="dv">2</span>, nrows<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">6</span>))</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co"># Plot data and the feature direction</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>ax[<span class="dv">0</span>].scatter(zdata[:, <span class="dv">0</span>], zdata[:, <span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>ax[<span class="dv">0</span>].quiver([<span class="dv">0</span>], [<span class="dv">0</span>], vec[<span class="dv">0</span>], vec[<span class="dv">1</span>], scale<span class="op">=</span><span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Sample Data'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Dim 1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>].set_xlim([<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>])<span class="op">;</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Dim 2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>].set_ylim([<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>])<span class="op">;</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="co"># Plot histogram of new projected data</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -604,12 +604,12 @@ of the 2D sample d=[d1, d2]:
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].hist(dim1_data, bins <span class="op">=</span> linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">9</span>))<span class="op">;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'Along vec'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)<span class="op">;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Values'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="st">'Frequency'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>ax[<span class="dv">1</span>].hist(dim1_data, bins <span class="op">=</span> linspace(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">9</span>))<span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'Along vec'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Values'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="st">'Frequency'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>show()</span></code></pre>
 </div>
 <figure><img src="../fig/03-dimensionality-rendered-unnamed-chunk-6-5.png" width="1440" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="do-it-yourself" class="callout discussion">
 <div class="callout-square">
@@ -634,18 +634,18 @@ against the angle.
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>allAngles <span class="op">=</span> linspace( start<span class="op">=</span><span class="dv">0</span>, stop<span class="op">=</span>pi, num<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>allVar <span class="op">=</span> []</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> angle <span class="kw">in</span> allAngles:</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    vec <span class="op">=</span> array([cos(angle), sin(angle)]) <span class="co">#Unit length vector on which data will be projected</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    dim1_data <span class="op">=</span> data.dot(vec)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    allVar.append( var(dim1_data))</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot variance captured by different features</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>scatter( allAngles, allVar )<span class="op">;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>title(<span class="st">'Variance along different directions'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>xlabel(<span class="st">'Direction (angle in radians)'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>ylabel(<span class="st">'Variance of projected data'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>allAngles <span class="op">=</span> linspace( start<span class="op">=</span><span class="dv">0</span>, stop<span class="op">=</span>pi, num<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>allVar <span class="op">=</span> []</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="cf">for</span> angle <span class="kw">in</span> allAngles:</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>    vec <span class="op">=</span> array([cos(angle), sin(angle)]) <span class="co">#Unit length vector on which data will be projected</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>    dim1_data <span class="op">=</span> data.dot(vec)</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>    allVar.append( var(dim1_data))</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co"># Plot variance captured by different features</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>scatter( allAngles, allVar )<span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>title(<span class="st">'Variance along different directions'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>xlabel(<span class="st">'Direction (angle in radians)'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>ylabel(<span class="st">'Variance of projected data'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span></code></pre>
 </div>
 <p style="text-align: justify;">
 It can be seen there is a particular direction that retains maximal
@@ -670,18 +670,18 @@ transform the data to the feature space of that component.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the PCA model</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>pcaResults <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">1</span>, whiten<span class="op">=</span><span class="va">False</span>) <span class="co"># specify no. of components, and whether to standardize</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit to data</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>pcaResults <span class="op">=</span> pcaResults.fit(data)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform the data, using our learned PCA representation</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>dim1_data <span class="op">=</span> pcaResults.transform(data)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"Size of new dataset: "</span>, dim1_data.shape )</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co"># Initialize the PCA model</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>pcaResults <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">1</span>, whiten<span class="op">=</span><span class="va">False</span>) <span class="co"># specify no. of components, and whether to standardize</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co"># Fit to data</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>pcaResults <span class="op">=</span> pcaResults.fit(data)</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co"># Transform the data, using our learned PCA representation</span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>dim1_data <span class="op">=</span> pcaResults.transform(data)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"Size of new dataset: "</span>, dim1_data.shape )</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -691,7 +691,7 @@ transform the data to the feature space of that component.</p>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Size</span> of new dataset:  <span class="er">(</span><span class="ex">300,</span> 1<span class="kw">)</span></span></code></pre>
+<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">Size</span> of new dataset:  <span class="er">(</span><span class="ex">300,</span> 1<span class="kw">)</span></span></code></pre>
 </div>
 <p>From the fitted model ‘pcaResults’ we can now get:</p>
 <ul><li><p>The fractional variance using
@@ -704,8 +704,8 @@ directly to the angle in the above plot.</p></li>
 </ul><div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How much variance was captured compared to original data?</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Fractional variance captured by first PC: </span><span class="sc">{:1.4f}</span><span class="st">."</span>.<span class="bu">format</span>(pcaResults.explained_variance_ratio_[<span class="dv">0</span>]))</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># How much variance was captured compared to original data?</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Fractional variance captured by first PC: </span><span class="sc">{:1.4f}</span><span class="st">."</span>.<span class="bu">format</span>(pcaResults.explained_variance_ratio_[<span class="dv">0</span>]))</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -715,8 +715,8 @@ directly to the angle in the above plot.</p></li>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>vec1 <span class="op">=</span> pcaResults.components_[<span class="dv">0</span>,:]</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Direction of PC1 is at angle = </span><span class="sc">{:1.2f}</span><span class="st"> radians"</span>.<span class="bu">format</span>(atan2(vec1[<span class="dv">1</span>],vec1[<span class="dv">0</span>])))</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>vec1 <span class="op">=</span> pcaResults.components_[<span class="dv">0</span>,:]</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Direction of PC1 is at angle = </span><span class="sc">{:1.2f}</span><span class="st"> radians"</span>.<span class="bu">format</span>(atan2(vec1[<span class="dv">1</span>],vec1[<span class="dv">0</span>])))</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -750,16 +750,16 @@ scatterplot.
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the PCA model</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>pcaResults <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>, whiten<span class="op">=</span><span class="va">False</span>) <span class="co"># specify no. of components, and whether to standardize</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit to data</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>pcaResults <span class="op">=</span> pcaResults.fit(data)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform the data, using our learned PCA representation</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>dim1_data <span class="op">=</span> pcaResults.transform(data)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"Size of new dataset: "</span>, dim1_data.shape )</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Initialize the PCA model</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>pcaResults <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>, whiten<span class="op">=</span><span class="va">False</span>) <span class="co"># specify no. of components, and whether to standardize</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co"># Fit to data</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>pcaResults <span class="op">=</span> pcaResults.fit(data)</span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co"># Transform the data, using our learned PCA representation</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>dim1_data <span class="op">=</span> pcaResults.transform(data)</span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"Size of new dataset: "</span>, dim1_data.shape )</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -769,7 +769,7 @@ scatterplot.
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pcaResults.components_)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="bu">print</span>(pcaResults.components_)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -780,35 +780,34 @@ scatterplot.
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>vec1 <span class="op">=</span> pcaResults.components_[<span class="dv">0</span>,:]</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>vec2 <span class="op">=</span> pcaResults.components_[<span class="dv">1</span>,:]</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot data and the feature direction</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>ax.scatter(zdata[:, <span class="dv">0</span>], zdata[:, <span class="dv">1</span>])<span class="op">;</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>ax.quiver([<span class="dv">0</span>], [<span class="dv">0</span>], vec1[<span class="dv">0</span>], vec1[<span class="dv">1</span>], scale<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">'r'</span>)<span class="op">;</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>ax.quiver([<span class="dv">0</span>], [<span class="dv">0</span>], vec2[<span class="dv">0</span>], vec2[<span class="dv">1</span>], scale<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">'r'</span>)<span class="op">;</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Sample Data'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Dim 1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax.set_xlim([<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>])<span class="op">;</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Dim 2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax.set_ylim([<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>])<span class="op">;</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>vec1 <span class="op">=</span> pcaResults.components_[<span class="dv">0</span>,:]</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>vec2 <span class="op">=</span> pcaResults.components_[<span class="dv">1</span>,:]</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co"># Plot data and the feature direction</span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>ax.scatter(zdata[:, <span class="dv">0</span>], zdata[:, <span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>ax.quiver([<span class="dv">0</span>], [<span class="dv">0</span>], vec1[<span class="dv">0</span>], vec1[<span class="dv">1</span>], scale<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">'r'</span>)<span class="op">;</span></span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>ax.quiver([<span class="dv">0</span>], [<span class="dv">0</span>], vec2[<span class="dv">0</span>], vec2[<span class="dv">1</span>], scale<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">'r'</span>)<span class="op">;</span></span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>ax.set_title(<span class="st">'Sample Data'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Dim 1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax.set_xlim([<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>])<span class="op">;</span></span>
+<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Dim 2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax.set_ylim([<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>])<span class="op">;</span></span>
+<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a>show()</span></code></pre>
 </div>
 <figure><img src="../fig/03-dimensionality-rendered-unnamed-chunk-10-7.png" width="576" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p style="text-align: justify;">
 The red arrows show the new coordinate system, defined by the principal
 components. It also shows that the more correlated the data are, the
 less information we lose by reducing the data representation using PCA.
 </p>
-<div id="important" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="important" class="callout-inner">
-<h3 class="callout-title">Important<a class="anchor" aria-label="anchor" href="#important"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="important">Important<a class="anchor" aria-label="anchor" href="#important"></a></h3>
 <div class="callout-content">
 <p>When reading about PCA you will come across the term <strong>Singular
 Value Decomposition</strong> (SVD). As mentioned in the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" class="external-link">Scikit-learn
@@ -832,11 +831,11 @@ components assuming that this will include the important features.
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nComp <span class="op">=</span> <span class="dv">50</span> <span class="co"># Number of PCs to be returned</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#trainIndx = binomial(1,0.9,size=filectr)</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>GenePCA <span class="op">=</span> PCA(n_components<span class="op">=</span>nComp, whiten<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>GenePCA <span class="op">=</span> GenePCA.fit(geneData) <span class="co">#.values[trainIndx==1,:]</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>nComp <span class="op">=</span> <span class="dv">50</span> <span class="co"># Number of PCs to be returned</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="co">#trainIndx = binomial(1,0.9,size=filectr)</span></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>GenePCA <span class="op">=</span> PCA(n_components<span class="op">=</span>nComp, whiten<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>GenePCA <span class="op">=</span> GenePCA.fit(geneData) <span class="co">#.values[trainIndx==1,:]</span></span></code></pre>
 </div>
 <p style="text-align: justify;">
 How many features should we retain? To investigate this question, we
@@ -846,14 +845,14 @@ modes. The more we use, the higher the cumulative variance.
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cumExpVar <span class="op">=</span> cumsum(GenePCA.explained_variance_ratio_)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>im  <span class="op">=</span> plot( <span class="bu">range</span>(nComp), cumExpVar )</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>xticks(arange(<span class="dv">0</span>,nComp,<span class="dv">5</span>))<span class="op">;</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>xlabel( <span class="st">'Number of PCs'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>ylabel(<span class="st">'Cumulative explained variance'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>cumExpVar <span class="op">=</span> cumsum(GenePCA.explained_variance_ratio_)</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>fig <span class="op">=</span> figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>im  <span class="op">=</span> plot( <span class="bu">range</span>(nComp), cumExpVar )</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>xticks(arange(<span class="dv">0</span>,nComp,<span class="dv">5</span>))<span class="op">;</span></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>xlabel( <span class="st">'Number of PCs'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>ylabel(<span class="st">'Cumulative explained variance'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>show()</span></code></pre>
 </div>
 <figure><img src="../fig/03-dimensionality-rendered-unnamed-chunk-12-9.png" width="480" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p style="text-align: justify;">
 A common heuristic for choosing the number of components is by defining
@@ -869,11 +868,11 @@ the variance.</p>
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="op">=</span> <span class="fl">0.99</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>keepPC <span class="op">=</span> [pc <span class="cf">for</span> pc <span class="kw">in</span> <span class="bu">range</span>(nComp) <span class="cf">if</span> cumExpVar[pc]<span class="op">&gt;=</span>threshold][<span class="dv">0</span>]</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Number of features needed to explain </span><span class="sc">{:1.2f}</span><span class="st"> fraction of total variance is </span><span class="sc">{:2d}</span><span class="st">. '</span>.<span class="bu">format</span>(threshold, keepPC) )</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>threshold <span class="op">=</span> <span class="fl">0.99</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>keepPC <span class="op">=</span> [pc <span class="cf">for</span> pc <span class="kw">in</span> <span class="bu">range</span>(nComp) <span class="cf">if</span> cumExpVar[pc]<span class="op">&gt;=</span>threshold][<span class="dv">0</span>]</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Number of features needed to explain </span><span class="sc">{:1.2f}</span><span class="st"> fraction of total variance is </span><span class="sc">{:2d}</span><span class="st">. '</span>.<span class="bu">format</span>(threshold, keepPC) )</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -894,42 +893,42 @@ see what the data along those features looks like.</p>
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>newGeneData <span class="op">=</span> GenePCA.transform(geneData)[:,<span class="bu">range</span>(keepPC)]</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(ncols<span class="op">=</span><span class="dv">3</span>, nrows<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">18</span>, <span class="dv">8</span>))</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>suptitle(<span class="st">'Data in new Feature space'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].scatter(newGeneData[:,<span class="dv">0</span>], newGeneData[:,<span class="dv">1</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'PC1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">0</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'PC2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">0</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].scatter(newGeneData[:,<span class="dv">0</span>], newGeneData[:,<span class="dv">2</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'PC1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">1</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'PC3'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">1</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].scatter(newGeneData[:,<span class="dv">0</span>], newGeneData[:,<span class="dv">3</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].set_xlabel(<span class="st">'PC1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">2</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].set_ylabel(<span class="st">'PC4'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">2</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].scatter(newGeneData[:,<span class="dv">1</span>], newGeneData[:,<span class="dv">2</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'PC2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">0</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'PC3'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">0</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].scatter(newGeneData[:,<span class="dv">1</span>], newGeneData[:,<span class="dv">3</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'PC2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">1</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'PC4'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">1</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].scatter(newGeneData[:,<span class="dv">3</span>], newGeneData[:,<span class="dv">2</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].set_xlabel(<span class="st">'PC4'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">2</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].set_ylabel(<span class="st">'PC3'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">2</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
-<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>newGeneData <span class="op">=</span> GenePCA.transform(geneData)[:,<span class="bu">range</span>(keepPC)]</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(ncols<span class="op">=</span><span class="dv">3</span>, nrows<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">18</span>, <span class="dv">8</span>))</span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a>suptitle(<span class="st">'Data in new Feature space'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].scatter(newGeneData[:,<span class="dv">0</span>], newGeneData[:,<span class="dv">1</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'PC1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">0</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'PC2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">0</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].scatter(newGeneData[:,<span class="dv">0</span>], newGeneData[:,<span class="dv">2</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
+<span id="cb27-12"><a href="#cb27-12" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'PC1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">1</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-13"><a href="#cb27-13" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'PC3'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">1</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-14"><a href="#cb27-14" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" tabindex="-1"></a></span>
+<span id="cb27-16"><a href="#cb27-16" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].scatter(newGeneData[:,<span class="dv">0</span>], newGeneData[:,<span class="dv">3</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
+<span id="cb27-17"><a href="#cb27-17" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].set_xlabel(<span class="st">'PC1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">2</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-18"><a href="#cb27-18" tabindex="-1"></a>ax[<span class="dv">0</span>, <span class="dv">2</span>].set_ylabel(<span class="st">'PC4'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">0</span>, <span class="dv">2</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-19"><a href="#cb27-19" tabindex="-1"></a></span>
+<span id="cb27-20"><a href="#cb27-20" tabindex="-1"></a></span>
+<span id="cb27-21"><a href="#cb27-21" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="#cb27-22" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].scatter(newGeneData[:,<span class="dv">1</span>], newGeneData[:,<span class="dv">2</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
+<span id="cb27-23"><a href="#cb27-23" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'PC2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">0</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-24"><a href="#cb27-24" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'PC3'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">0</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-25"><a href="#cb27-25" tabindex="-1"></a></span>
+<span id="cb27-26"><a href="#cb27-26" tabindex="-1"></a></span>
+<span id="cb27-27"><a href="#cb27-27" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].scatter(newGeneData[:,<span class="dv">1</span>], newGeneData[:,<span class="dv">3</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
+<span id="cb27-28"><a href="#cb27-28" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'PC2'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">1</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-29"><a href="#cb27-29" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'PC4'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">1</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-30"><a href="#cb27-30" tabindex="-1"></a></span>
+<span id="cb27-31"><a href="#cb27-31" tabindex="-1"></a></span>
+<span id="cb27-32"><a href="#cb27-32" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].scatter(newGeneData[:,<span class="dv">3</span>], newGeneData[:,<span class="dv">2</span>], c<span class="op">=</span><span class="bu">range</span>(filectr), cmap<span class="op">=</span><span class="st">'summer'</span>)<span class="op">;</span></span>
+<span id="cb27-33"><a href="#cb27-33" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].set_xlabel(<span class="st">'PC4'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">2</span>].set_xlim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-34"><a href="#cb27-34" tabindex="-1"></a>ax[<span class="dv">1</span>, <span class="dv">2</span>].set_ylabel(<span class="st">'PC3'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)<span class="op">;</span> ax[<span class="dv">1</span>, <span class="dv">2</span>].set_ylim([<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>])<span class="op">;</span></span>
+<span id="cb27-35"><a href="#cb27-35" tabindex="-1"></a></span>
+<span id="cb27-36"><a href="#cb27-36" tabindex="-1"></a>show()</span></code></pre>
 </div>
 <figure><img src="../fig/03-dimensionality-rendered-unnamed-chunk-14-11.png" width="1728" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 <div class="section level3">
@@ -1105,7 +1104,7 @@ any links that you are not going to use.
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/03-dimensionality.html",
   "dateCreated": "2023-09-28",
   "dateModified": "2024-02-27",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>
