@@ -65,7 +65,7 @@ We first import the modules needed for this lesson. We use Numpy to store and pr
 </p>
 
 
-```python
+``` python
 from numpy import zeros, sum, stack
 import nibabel as nib
 from matplotlib.pyplot import subplots, tight_layout, show
@@ -85,7 +85,7 @@ Next, we want to use the nibabel package to read the MRI images into Numpy array
 </p>
 
 
-```python
+``` python
 img_3d = nib.load('fig/t1.nii')
 img1 = img_3d.get_fdata()
 
@@ -103,11 +103,11 @@ Let's have a look at the data shape:
 
 
 
-```python
+``` python
 print(img1.shape)
 ```
 
-```{.output}
+``` output
 (256, 256, 32)
 ```
 <p style='text-align: justify;'>
@@ -115,13 +115,13 @@ For plotting, we select a slice from the images. In this example we will view ax
 </p>
 
 
-```python
+``` python
 img_slice = 20
 ```
 
 
 
-```python
+``` python
 fig, ax = subplots(nrows=1, ncols=4, figsize=(20, 10))
 
 ax[0].imshow(img1[:, :, img_slice], cmap='gray')
@@ -144,7 +144,7 @@ To analyse the images, we need to do a bit of pre-processing. First of all, let 
 
 
 
-```python
+``` python
 fig, ax = subplots(nrows=1, ncols=4, figsize=(20, 4))
 
 ax[0].hist(img1.flatten(), bins=50);
@@ -171,7 +171,7 @@ print('')
 show()
 ```
 
-```{.output}
+``` output
 Number of voxels with intensity equal to 0 is: 1848804
 ```
 
@@ -187,7 +187,7 @@ Note the use of `tight_layout` in the cell above. It is a [Matplotlib function](
 ::::::::::::::::::
 
 
-```python
+``` python
 mask = (img1>0) & (img2>0) & (img3>0) & (img4>0)
 
 img1_nz = img1[mask]
@@ -200,7 +200,7 @@ With the mask applied, let us plot the histograms of the non-zero voxels again:
 
 
 
-```python
+``` python
 fig, ax = subplots(1, 4, figsize=(20, 4))
 
 ax[0].hist(img1_nz, bins=50);
@@ -235,7 +235,7 @@ In many machine learning applications (both supervised and unsupervised) an addi
 </p>
 
 
-```python
+``` python
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
@@ -282,7 +282,7 @@ After this data cleaning step, we can proceed with our analysis. We want to segm
 First, we import the GMM class from Scikit-learn.
 
 
-```python
+``` python
 from sklearn.mixture import GaussianMixture
 ```
 
@@ -291,7 +291,7 @@ We then fit the instantiated model with a few different numbers of clusters (arg
 </p>
 
 
-```python
+``` python
 RANDOM_SEED = 123
 
 gmm_2 = gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
@@ -309,7 +309,7 @@ img1_n4_labels += 1
 
 
 
-```python
+``` python
 gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
 img2_n2_labels = gmm_2.fit_predict(img2_nz.reshape(-1, 1))
 img2_n2_labels += 1
@@ -325,7 +325,7 @@ img2_n4_labels += 1
 
 
 
-```python
+``` python
 gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
 img3_n2_labels = gmm_2.fit_predict(img3_nz.reshape(-1, 1))
 img3_n2_labels += 1
@@ -341,7 +341,7 @@ img3_n4_labels += 1
 
 
 
-```python
+``` python
 gmm_2 = GaussianMixture(2, random_state=RANDOM_SEED)
 img4_n2_labels = gmm_2.fit_predict(img4_nz.reshape(-1, 1))
 img4_n2_labels += 1
@@ -359,7 +359,7 @@ Once we have all our image labels, we map the labels back to the two-dimensional
 
 
 
-```python
+``` python
 img1_n2_labels_mapped = zeros(img1.shape)
 img1_n2_labels_mapped[mask] = img1_n2_labels
 
@@ -372,7 +372,7 @@ img1_n4_labels_mapped[mask] = img1_n4_labels
 
 
 
-```python
+``` python
 img2_n2_labels_mapped = zeros(img2.shape)
 img2_n2_labels_mapped[mask] = img2_n2_labels
 
@@ -385,7 +385,7 @@ img2_n4_labels_mapped[mask] = img2_n4_labels
 
 
 
-```python
+``` python
 img3_n2_labels_mapped = zeros(img3.shape)
 img3_n2_labels_mapped[mask] = img3_n2_labels
 
@@ -398,7 +398,7 @@ img3_n4_labels_mapped[mask] = img3_n4_labels
 
 
 
-```python
+``` python
 img4_n2_labels_mapped = zeros(img4.shape)
 img4_n2_labels_mapped[mask] = img4_n2_labels
 
@@ -411,7 +411,7 @@ img4_n4_labels_mapped[mask] = img4_n4_labels
 
 
 
-```python
+``` python
 fig, ax = subplots(3, 4, figsize=(20, 15))
 
 ax[0, 0].imshow(img1_n2_labels_mapped[:, :, img_slice], cmap='viridis')
@@ -455,17 +455,17 @@ So far, we only used the intensities of each image individually, i.e. using only
 </p>
 
 
-```python
+``` python
 all_img = stack([img1_nz, img2_nz, img3_nz, img4_nz], axis=1)
 all_img.shape
 ```
 
-```{.output}
+``` output
 (240391, 4)
 ```
 
 
-```python
+``` python
 gmm_3 = GaussianMixture(3, random_state=RANDOM_SEED)
 
 all_img_n3_labels = gmm_3.fit_predict(all_img)
@@ -474,14 +474,14 @@ all_img_n3_labels += 1
 
 
 
-```python
+``` python
 all_img_n3_labels_mapped = zeros(img1.shape)
 all_img_n3_labels_mapped[mask] = all_img_n3_labels
 ```
 
 
 
-```python
+``` python
 fig, ax = subplots(1, 5, figsize=(20, 5))
 ax[0].imshow(img1_n3_labels_mapped[:, :, img_slice], cmap='viridis')
 ax[1].imshow(img2_n3_labels_mapped[:, :, img_slice], cmap='viridis')
@@ -512,7 +512,7 @@ Let's plot some of the other image slices to check that the segmentation perform
 
 
 
-```python
+``` python
 fig, ax = subplots(5, 5, figsize=(20, 20))
 
 ax[0, 0].imshow(img1[:, :, 16], cmap='gray')
@@ -586,7 +586,7 @@ conda install seaborn
 To use it, import the required functions in your Python kernel, e.g.:
 
 
-```python
+``` python
 from seaborn import pairplot
 ```
 
@@ -594,7 +594,7 @@ We don't use this library here, but encourage you to look up further information
 
 
 
-```python
+``` python
 fig, ax = subplots(4, 4, figsize=(20, 20))
 
 ax[0, 0].hist(img1_nz, bins=50);
@@ -661,7 +661,7 @@ A 2-dimensional histogram plots the counts of values in bins for two variables. 
 :::::::::::::::::
 
 
-```python
+``` python
 import matplotlib.colors as mcolors
 
 fig, ax = subplots(4, 4, figsize=(20, 20))
@@ -725,7 +725,7 @@ Using `KMeans` from 'sklearn.cluster', do the following tasks:
 
 
 
-```python
+``` python
 img_3d = nib.load('fig/t1.nii')
 img1 = img_3d.get_fdata()
 
@@ -740,7 +740,7 @@ img4 = img_3d.get_fdata()
 ```
 
 
-```python
+``` python
 mask = (img1>0) & (img2>0) & (img3>0) & (img4>0)
 
 img1_nz = img1[mask]
@@ -750,7 +750,7 @@ img4_nz = img4[mask]
 ```
 
 
-```python
+``` python
 import numpy as np
 all_img = np.stack([img1_nz, img2_nz, img3_nz, img4_nz], axis=1)
 ```
@@ -759,7 +759,7 @@ all_img = np.stack([img1_nz, img2_nz, img3_nz, img4_nz], axis=1)
 
 ### **Without scaling**
 
-```python
+``` python
 from sklearn.cluster import KMeans
 
 RANDOM_SEED = 123
@@ -769,12 +769,12 @@ kmeans = KMeans(n_clusters=3, random_state=RANDOM_SEED)
 img1_kmeans_labels = kmeans.fit_predict(img1_nz.reshape(-1, 1))
 ```
 
-```{.output}
+``` output
 /home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
-```python
+``` python
 img1_kmeans_labels += 1
 img1_kmeans_labels_mapped = np.zeros(img1.shape)
 img1_kmeans_labels_mapped[mask] = img1_kmeans_labels
@@ -782,12 +782,12 @@ img1_kmeans_labels_mapped[mask] = img1_kmeans_labels
 img2_kmeans_labels = kmeans.fit_predict(img2_nz.reshape(-1, 1))
 ```
 
-```{.output}
+``` output
 /home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
-```python
+``` python
 img2_kmeans_labels += 1
 img2_kmeans_labels_mapped = np.zeros(img2.shape)
 img2_kmeans_labels_mapped[mask] = img2_kmeans_labels
@@ -795,12 +795,12 @@ img2_kmeans_labels_mapped[mask] = img2_kmeans_labels
 img3_kmeans_labels = kmeans.fit_predict(img3_nz.reshape(-1, 1))
 ```
 
-```{.output}
+``` output
 /home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
-```python
+``` python
 img3_kmeans_labels += 1
 img3_kmeans_labels_mapped = np.zeros(img3.shape)
 img3_kmeans_labels_mapped[mask] = img3_kmeans_labels
@@ -808,12 +808,12 @@ img3_kmeans_labels_mapped[mask] = img3_kmeans_labels
 img4_kmeans_labels = kmeans.fit_predict(img4_nz.reshape(-1, 1))
 ```
 
-```{.output}
+``` output
 /home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
-```python
+``` python
 img4_kmeans_labels += 1
 img4_kmeans_labels_mapped = np.zeros(img4.shape)
 img4_kmeans_labels_mapped[mask] = img4_kmeans_labels
@@ -821,12 +821,12 @@ img4_kmeans_labels_mapped[mask] = img4_kmeans_labels
 all_img_kmeans_labels = kmeans.fit_predict(all_img)
 ```
 
-```{.output}
+``` output
 /home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
-```python
+``` python
 all_img_kmeans_labels += 1
 all_img_kmeans_labels_mapped = np.zeros(img1.shape)
 all_img_kmeans_labels_mapped[mask] = all_img_kmeans_labels
@@ -834,7 +834,7 @@ all_img_kmeans_labels_mapped[mask] = all_img_kmeans_labels
 
 
 
-```python
+``` python
 img_slice = 20
 
 fig, ax = subplots(1, 5, figsize=(20, 5))
@@ -861,7 +861,7 @@ show()
 
 
 
-```python
+``` python
 fig, ax = subplots(4, 4, figsize=(20, 20))
 
 ax[0, 0].hist(img1_nz, bins=50);
@@ -921,7 +921,7 @@ show()
 
 ### **Without scaling**
 
-```python
+``` python
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 
@@ -934,16 +934,16 @@ all_img_scaled = np.concatenate([img1_scaled, img2_scaled, img3_scaled, img4_sca
 ```
 
 
-```python
+``` python
 img1_kmeans_labels = kmeans.fit_predict(img1_scaled)
 ```
 
-```{.output}
+``` output
 /home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
-```python
+``` python
 img1_kmeans_labels += 1
 img1_kmeans_labels_mapped = np.zeros(img1.shape)
 img1_kmeans_labels_mapped[mask] = img1_kmeans_labels
@@ -951,12 +951,12 @@ img1_kmeans_labels_mapped[mask] = img1_kmeans_labels
 img2_kmeans_labels = kmeans.fit_predict(img2_scaled)
 ```
 
-```{.output}
+``` output
 /home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
-```python
+``` python
 img2_kmeans_labels += 1
 img2_kmeans_labels_mapped = np.zeros(img2.shape)
 img2_kmeans_labels_mapped[mask] = img2_kmeans_labels
@@ -964,12 +964,12 @@ img2_kmeans_labels_mapped[mask] = img2_kmeans_labels
 img3_kmeans_labels = kmeans.fit_predict(img3_scaled)
 ```
 
-```{.output}
+``` output
 /home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
-```python
+``` python
 img3_kmeans_labels += 1
 img3_kmeans_labels_mapped = np.zeros(img3.shape)
 img3_kmeans_labels_mapped[mask] = img3_kmeans_labels
@@ -977,12 +977,12 @@ img3_kmeans_labels_mapped[mask] = img3_kmeans_labels
 img4_kmeans_labels = kmeans.fit_predict(img4_scaled)
 ```
 
-```{.output}
+``` output
 /home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
-```python
+``` python
 img4_kmeans_labels += 1
 img4_kmeans_labels_mapped = np.zeros(img4.shape)
 img4_kmeans_labels_mapped[mask] = img4_kmeans_labels
@@ -990,12 +990,12 @@ img4_kmeans_labels_mapped[mask] = img4_kmeans_labels
 all_img_kmeans_labels = kmeans.fit_predict(all_img_scaled)
 ```
 
-```{.output}
+``` output
 /home/runner/work/ML_unsupervised/ML_unsupervised/renv/profiles/lesson-requirements/renv/python/virtualenvs/renv-python-3.10/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   warnings.warn(
 ```
 
-```python
+``` python
 all_img_kmeans_labels += 1
 all_img_kmeans_labels_mapped = np.zeros(img1.shape)
 all_img_kmeans_labels_mapped[mask] = all_img_kmeans_labels
@@ -1003,7 +1003,7 @@ all_img_kmeans_labels_mapped[mask] = all_img_kmeans_labels
 
 
 
-```python
+``` python
 fig, ax = subplots(1, 5, figsize=(20, 5))
 
 ax[0].imshow(img1_kmeans_labels_mapped[:, :, img_slice], cmap='viridis');
@@ -1027,7 +1027,7 @@ show()
 <img src="fig/02-clustering-image-rendered-unnamed-chunk-36-23.png" width="1920" style="display: block; margin: auto;" />
 
 
-```python
+``` python
 fig, ax = subplots(4, 4, figsize=(20, 20))
 
 ax[0, 0].hist(img1_scaled, bins=50);

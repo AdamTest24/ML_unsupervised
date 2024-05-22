@@ -44,7 +44,7 @@ exercises: 2
 ### **Import functions**
 
 
-```python
+``` python
 from numpy import arange, asarray, linspace, zeros, c_, mgrid, meshgrid, array, dot, percentile
 from numpy import histogram, cumsum, around
 from numpy import vstack, sqrt, logspace, amin, amax, equal, invert, count_nonzero
@@ -61,7 +61,7 @@ Import the patients data, scatter the data for Weight and Height and get a summa
 
 
 
-```python
+``` python
 df = read_csv("data/patients_data.csv")
 
 # Weigth to kg and height to cm
@@ -82,7 +82,7 @@ ax.set_ylabel('Height (cm)', fontsize=16)
 df[['Weight', 'Height']].describe()
 ```
 
-```{.output}
+``` output
            Weight      Height
 count  100.000000  100.000000
 mean    69.300000  170.357800
@@ -94,7 +94,7 @@ min     49.950000  152.400000
 max     90.900000  182.880000
 ```
 
-```python
+``` python
 show()
 ```
 
@@ -107,7 +107,7 @@ Looking at the data, one might expect that there are two distinct groups, visual
 We can make this even clearer by looking at the two individual distributions.
 
 
-```python
+``` python
 fig, ax = subplots(ncols=2)
 
 ax[0].hist(df['Weight'], bins=20);
@@ -160,7 +160,7 @@ Let us create synthetic data for testing of the clustering algorithm. We do this
 The example is adapted from a [Scikit-learn example](https://scikit-learn.org/stable/modules/mixture.html#mixture). It uses the concept of [covariance matrix](https://datascienceplus.com/understanding-the-covariance-matrix/) which is the extension of variance (or standard deviation) to multivariate datasets.
 
 
-```python
+``` python
 n_samples = 500
 m_features = 2
 
@@ -193,7 +193,7 @@ ax.scatter(X_train[:, 0], X_train[:, 1]);
 show()
 ```
 
-```{.output}
+``` output
 (1000, 2)
 ```
 
@@ -210,7 +210,7 @@ Analogous to the classifier in supervised learning, we instantiate the model fro
 </p>
 
 
-```python
+``` python
 from sklearn.mixture import GaussianMixture
 
 # Fit a Gaussian Mixture Model with two components
@@ -231,7 +231,7 @@ After the fitting of the model, we first create a meshgrid of the (two-dimension
 </p>
 
 
-```python
+``` python
 resolution = 100
 
 vec_a = linspace(-60., 80., resolution)
@@ -248,7 +248,7 @@ Z_s = Z_score.reshape(grid_a.shape)
 print(Z_s.shape)
 ```
 
-```{.output}
+``` output
 (100, 100)
 ```
 
@@ -257,7 +257,7 @@ Now we can display the predicted scores as a contour plot. Typically, the negati
 </p>
 
 
-```python
+``` python
 fig, ax = subplots(figsize=(8, 6))
 
 cax = ax.contour(grid_a, grid_b, -Z_s,
@@ -281,7 +281,7 @@ show()
 You can change the number of components to see the impact it has on the result. E.g. picking 3 components:
 
 
-```python
+``` python
 clf_3 = GaussianMixture(n_components=3)
 
 clf_3.fit(X_train)
@@ -291,7 +291,7 @@ clf_3.fit(X_train)
 <style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GaussianMixture(n_components=3)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">GaussianMixture</label><div class="sk-toggleable__content"><pre>GaussianMixture(n_components=3)</pre></div></div></div></div></div>
 ```
 
-```python
+``` python
 Z_score_3 = clf_3.score_samples(XY_statespace)
 
 Z_s_3 = Z_score_3.reshape(grid_a.shape)
@@ -327,7 +327,7 @@ Now that the estimator is fitted, we can obtain the optimal parameters for the f
 </p>
 
 
-```python
+``` python
 components = 2
 
 clf = GaussianMixture(n_components=components);
@@ -349,7 +349,7 @@ print(clf.covariances_)
 <style>#sk-container-id-3 {color: black;background-color: white;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GaussianMixture(n_components=2)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">GaussianMixture</label><div class="sk-toggleable__content"><pre>GaussianMixture(n_components=2)</pre></div></div></div></div></div>
 ```
 
-```{.output}
+``` output
 Model Weights: 
 [0.5 0.5]
 
@@ -376,7 +376,7 @@ The result of the fitting are the parameters for two Gaussian distributions with
 If we know the mean and the covariance matrix of a Gaussian, the function `multivariate_normal` can be used to create data from that Gaussian.
 
 
-```python
+``` python
 model1_mean, model2_mean = clf.means_[0], clf.means_[1]
 model1_cov, model2_cov =  clf.covariances_[0], clf.covariances_[1]
 
@@ -403,7 +403,7 @@ We can get the predictions of the group for new data. Here, for simplicity, we c
 </p>
 
 
-```python
+``` python
 n_samples = 10
 m_features = 2
 
@@ -436,7 +436,7 @@ y_test = clf.predict(X_test)
 print(y_test)
 ```
 
-```{.output}
+``` output
 [0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1]
 ```
 <p style='text-align: justify;'>
@@ -444,7 +444,7 @@ For simplicity, fit and predict can be combined with the `.fit_predict` method t
 </p>
 
 
-```python
+``` python
 components = 2
 
 clf_2 = GaussianMixture(n_components=components, covariance_type='full')
@@ -453,7 +453,7 @@ labels = clf_2.fit_predict(X_test)
 print(labels)
 ```
 
-```{.output}
+``` output
 [1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0]
 ```
 
@@ -462,7 +462,7 @@ The probabilities of the predictions are obtained from the method `.predict_prob
 </p>
 
 
-```python
+``` python
 y_proba = clf.predict_proba(X_test)
 
 fig, ax = subplots()
@@ -479,7 +479,7 @@ The `.sample_` method produces individual samples from the trained model. It tak
 </p>
 
 
-```python
+``` python
 samples = clf.sample(5)
 
 print(samples[0])
@@ -487,7 +487,7 @@ print('')
 print(samples[1])
 ```
 
-```{.output}
+``` output
 [[20.06076245 20.69983729]
  [21.67317947 21.86459529]
  [ 4.90658144 -0.99981225]
@@ -500,7 +500,7 @@ print(samples[1])
 We can now redo the example with two distributions that lie closer together, i.e. making the clustering task harder.
 
 
-```python
+``` python
 n_samples = 500
 m_features = 2
 
@@ -535,14 +535,14 @@ ax.scatter(X_train[:, 0], X_train[:, 1]);
 show()
 ```
 
-```{.output}
+``` output
 (1000, 2)
 ```
 
 <img src="fig/01-clustering-intro-rendered-unnamed-chunk-15-15.png" width="672" style="display: block; margin: auto;" />
 
 
-```python
+``` python
 components = 2
 
 clf2 = GaussianMixture(n_components=components)
@@ -554,7 +554,7 @@ clf2.fit(X_train)
 <style>#sk-container-id-4 {color: black;background-color: white;}#sk-container-id-4 pre{padding: 0;}#sk-container-id-4 div.sk-toggleable {background-color: white;}#sk-container-id-4 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-4 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-4 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-4 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-4 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-4 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-4 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-4 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-4 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-4 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-4 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-4 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-4 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-4 div.sk-item {position: relative;z-index: 1;}#sk-container-id-4 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-4 div.sk-item::before, #sk-container-id-4 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-4 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-4 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-4 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-4 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-4 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-4 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-4 div.sk-label-container {text-align: center;}#sk-container-id-4 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-4 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-4" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GaussianMixture(n_components=2)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" checked><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">GaussianMixture</label><div class="sk-toggleable__content"><pre>GaussianMixture(n_components=2)</pre></div></div></div></div></div>
 ```
 
-```python
+``` python
 resolution = 100
 
 vec_a = linspace(-40., 60., resolution)
@@ -589,7 +589,7 @@ show()
 <img src="fig/01-clustering-intro-rendered-unnamed-chunk-16-17.png" width="768" style="display: block; margin: auto;" />
 
 
-```python
+``` python
 print('Model Weights: ')
 print(clf2.weights_)
 print('')
@@ -608,7 +608,7 @@ print('Predicted Labels')
 print(y_predict)
 ```
 
-```{.output}
+``` output
 Model Weights: 
 [0.51626883 0.48373117]
 
@@ -661,7 +661,7 @@ Knowing the origin of the data we can now compare the predicted labels with the 
 </p>
 
 
-```python
+``` python
 from sklearn.metrics.cluster import adjusted_rand_score
 
 y_true = zeros(2*n_samples)
@@ -672,7 +672,7 @@ scoring = adjusted_rand_score(y_true, y_predict)
 print(scoring)
 ```
 
-```{.output}
+``` output
 0.6174145036659798
 ```
 <p style='text-align: justify;'>
@@ -690,7 +690,7 @@ In general, the outcome of clustering is not easy to assess with confidence and 
 Let us now apply the GMM approach to the example at the beginning of the lesson.
 
 
-```python
+``` python
 from pandas import read_csv
 
 df = read_csv("data/patients_data.csv")
@@ -704,7 +704,7 @@ X_train = X_train.to_numpy()
 print(X_train.shape)
 ```
 
-```{.output}
+``` output
 (100, 2)
 ```
 
@@ -712,7 +712,7 @@ Now we can fit the GMM classifier using the suspected number of two components.
 
 
 
-```python
+``` python
 clf = GaussianMixture(n_components=2)
 
 clf.fit(X_train)
@@ -722,7 +722,7 @@ clf.fit(X_train)
 <style>#sk-container-id-5 {color: black;background-color: white;}#sk-container-id-5 pre{padding: 0;}#sk-container-id-5 div.sk-toggleable {background-color: white;}#sk-container-id-5 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-5 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-5 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-5 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-5 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-5 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-5 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-5 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-5 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-5 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-5 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-5 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-5 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-5 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-5 div.sk-item {position: relative;z-index: 1;}#sk-container-id-5 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-5 div.sk-item::before, #sk-container-id-5 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-5 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-5 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-5 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-5 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-5 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-5 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-5 div.sk-label-container {text-align: center;}#sk-container-id-5 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-5 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-5" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GaussianMixture(n_components=2)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" checked><label for="sk-estimator-id-5" class="sk-toggleable__label sk-toggleable__label-arrow">GaussianMixture</label><div class="sk-toggleable__content"><pre>GaussianMixture(n_components=2)</pre></div></div></div></div></div>
 ```
 
-```python
+``` python
 resolution = 100
 
 vec_a = linspace(0.8*min(X_train[:,0]), 1.2*max(X_train[:,0]), resolution)
@@ -762,7 +762,7 @@ These predictions can now be compared with labels in the data, for example the G
 </p>
 
 
-```python
+``` python
 y_predict = clf.predict(X_train)
 
 gender_boolean = df['Gender'] == 'Female'
@@ -774,7 +774,7 @@ scoring = adjusted_rand_score(y_gender, y_predict)
 print(scoring)
 ```
 
-```{.output}
+``` output
 1.0
 ```
 
@@ -785,7 +785,7 @@ We can also compare the predictions with the smoker labels:
 
 
 
-```python
+``` python
 y_smoker = df['Smoker']
 
 scoring = adjusted_rand_score(y_smoker, y_predict)
@@ -793,7 +793,7 @@ scoring = adjusted_rand_score(y_smoker, y_predict)
 print(scoring)
 ```
 
-```{.output}
+``` output
 0.039367492745118096
 ```
 
@@ -804,7 +804,7 @@ From the trained model we create the individual predicted distributions for each
 
 
 
-```python
+``` python
 group1_mean = clf.means_[0]
 group1_cov  = clf.covariances_[0]
 
@@ -865,7 +865,7 @@ The data show systematic gaps in the histogram meaning that some values do not o
 ## Please check these solutions only after submitting the assignments.
 
 
-```python
+``` python
 from numpy import arange, asarray, linspace, zeros, c_, mgrid, meshgrid, array, dot, percentile
 from numpy import histogram, cumsum, around
 from numpy import vstack, sqrt, logspace, amin, amax, equal, count_nonzero
@@ -883,7 +883,7 @@ from sklearn.metrics.cluster import adjusted_rand_score
 ### Q1
 
 
-```python
+``` python
 from pandas import read_csv
 
 df = read_csv('data/patients_data.csv')
@@ -895,13 +895,13 @@ X = df_np[:, [3, 4]]
 print(X.shape)
 ```
 
-```{.output}
+``` output
 (100, 2)
 ```
 
 ### Q2
 
-```python
+``` python
 clf = GaussianMixture(n_components=2, covariance_type='full')
 
 clf.fit(X)
@@ -911,7 +911,7 @@ clf.fit(X)
 <style>#sk-container-id-6 {color: black;background-color: white;}#sk-container-id-6 pre{padding: 0;}#sk-container-id-6 div.sk-toggleable {background-color: white;}#sk-container-id-6 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-6 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-6 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-6 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-6 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-6 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-6 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-6 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-6 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-6 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-6 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-6 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-6 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-6 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-6 div.sk-item {position: relative;z-index: 1;}#sk-container-id-6 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-6 div.sk-item::before, #sk-container-id-6 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-6 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-6 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-6 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-6 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-6 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-6 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-6 div.sk-label-container {text-align: center;}#sk-container-id-6 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-6 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-6" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GaussianMixture(n_components=2)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" checked><label for="sk-estimator-id-6" class="sk-toggleable__label sk-toggleable__label-arrow">GaussianMixture</label><div class="sk-toggleable__content"><pre>GaussianMixture(n_components=2)</pre></div></div></div></div></div>
 ```
 
-```python
+``` python
 resolution = 100
 
 vec_a = linspace(0.7*min(X[:,0]), 1.2*max(X[:,0]), resolution)
@@ -948,7 +948,7 @@ show()
 
 ### Q3
 
-```python
+``` python
 print('Model Weights: ')
 print(clf.weights_)
 print('')
@@ -960,7 +960,7 @@ print('Covariance Matrices: ')
 print(clf.covariances_)
 ```
 
-```{.output}
+``` output
 Model Weights: 
 [0.3463565 0.6536435]
 
@@ -979,7 +979,7 @@ Covariance Matrices:
 
 ### Q4
 
-```python
+``` python
 y_predict = clf.predict(X)
 
 gender_boolean = df['Gender'] == 'Female'
@@ -991,12 +991,12 @@ scoring = adjusted_rand_score(y_gender, y_predict)
 print(scoring)
 ```
 
-```{.output}
+``` output
 0.030809331315545804
 ```
 
 
-```python
+``` python
 y_smoker = df['Smoker']
 
 scoring = adjusted_rand_score(y_smoker, y_predict)
@@ -1004,12 +1004,12 @@ scoring = adjusted_rand_score(y_smoker, y_predict)
 print(scoring)
 ```
 
-```{.output}
+``` output
 0.7349708237209933
 ```
 ### Q5
 
-```python
+``` python
 group1_mean = clf.means_[0]
 group1_cov  = clf.covariances_[0]
 
@@ -1039,7 +1039,7 @@ show()
 
 ### Q7
 
-```python
+``` python
 fig, ax = subplots(ncols=2, figsize=(12, 6))
 
 bins = 20

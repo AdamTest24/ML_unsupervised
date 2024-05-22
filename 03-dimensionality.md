@@ -49,7 +49,7 @@ exercises: 2
 ### **Code Preparation**
 
 
-```python
+``` python
 from numpy import reshape, append, mean, pi, linspace, var, array, cumsum, arange
 from numpy.random import seed, multivariate_normal, binomial
 from numpy.linalg import norm
@@ -99,7 +99,7 @@ Here, the data are read from individual files in the 'Dataset' folder and combin
 
 
 
-```python
+``` python
 # Load all data
 nGenes = 1000 # keep only these genes for now
 
@@ -127,7 +127,7 @@ Apart from the large number of variables (compared to number of samples), we als
 </p>
 
 
-```python
+``` python
 fig, ax = subplots(figsize=(8,8))
 im = ax.matshow(geneData.corr())
 cbar = fig.colorbar(im, shrink=0.82)
@@ -161,7 +161,7 @@ To first explore what dimensionality reduction with PCA looks like, we will work
 We start with generating some observations from a two-dimensional (multivariate) Gaussian distribution, with mean and covariance specified.
 
 
-```python
+``` python
 RND_SEED = 7890
 seed(RND_SEED)
 
@@ -178,14 +178,14 @@ data = multivariate_normal(means, cov_mat, nSamples)
 print(data.shape)
 ```
 
-```{.output}
+``` output
 (300, 2)
 ```
 
 We can check the distribution of the two features in histograms, and we can see how the two data dimensions relate to each other in the scatter plot.
 
 
-```python
+``` python
 # Center data
 zdata = data - mean(data, axis=0)
 
@@ -238,7 +238,7 @@ f(d1,d2) = cos(angle) * d1 + sin(angle) * d2
 
 
 
-```python
+``` python
 ## Centre data at origin by subtracting mean
 zdata = data - mean(data, axis=0)
 
@@ -263,14 +263,6 @@ ax[0].set_xlabel('Dim 1', fontsize=14); ax[0].set_xlim([-4,4]);
 ax[0].set_ylabel('Dim 2', fontsize=14); ax[0].set_ylim([-4,4]);
 
 # Plot histogram of new projected data
-```
-
-```{.output}
-Text(0, 0.5, 'Dim 2')
-(-4.0, 4.0)
-```
-
-```python
 ax[1].hist(dim1_data, bins = linspace(-3,3,9));
 ax[1].set_title('Along vec', fontsize=16, fontweight='bold');
 ax[1].set_xlabel('Values', fontsize=14);
@@ -293,7 +285,7 @@ Now let's formally calculate the variance by projecting along a set of different
 </p>
 
 
-```python
+``` python
 allAngles = linspace( start=0, stop=pi, num=20)
 allVar = []
 for angle in allAngles:
@@ -308,6 +300,8 @@ xlabel('Direction (angle in radians)', fontsize=14);
 ylabel('Variance of projected data', fontsize=14);
 ```
 
+<img src="fig/03-dimensionality-rendered-unnamed-chunk-7-7.png" width="672" style="display: block; margin: auto;" />
+
 <p style='text-align: justify;'>
 It can be seen there is a particular direction that retains maximal variance. This would be the optimal feature to give a 1D description of the 2D data while retaining maximum variability. PCA is the method that directly find this optimal direction. This makes it especially powerful for high dimensional datasets.
 </p>
@@ -321,7 +315,7 @@ To get the best 1D representation of data, we instantiate the class with one com
 
 
 
-```python
+``` python
 from sklearn.decomposition import PCA
 
 # Initialize the PCA model
@@ -336,7 +330,7 @@ dim1_data = pcaResults.transform(data)
 print( "Size of new dataset: ", dim1_data.shape )
 ```
 
-```{.output}
+``` output
 Size of new dataset:  (300, 1)
 ```
 
@@ -352,21 +346,21 @@ From the fitted model 'pcaResults' we can now get:
 
 
 
-```python
+``` python
 # How much variance was captured compared to original data?
 print("Fractional variance captured by first PC: {:1.4f}.".format(pcaResults.explained_variance_ratio_[0]))
 ```
 
-```{.output}
+``` output
 Fractional variance captured by first PC: 0.8722.
 ```
 
-```python
+``` python
 vec1 = pcaResults.components_[0,:]
 print("Direction of PC1 is at angle = {:1.2f} radians".format(atan2(vec1[1],vec1[0])))
 ```
 
-```{.output}
+``` output
 Direction of PC1 is at angle = 0.99 radians
 ```
 
@@ -383,7 +377,7 @@ Our dataset has two features. We can thus obtain two principal components. The t
 </p>
 
 
-```python
+``` python
 # Initialize the PCA model
 pcaResults = PCA(n_components=2, whiten=False) # specify no. of components, and whether to standardize
 
@@ -396,20 +390,20 @@ dim1_data = pcaResults.transform(data)
 print( "Size of new dataset: ", dim1_data.shape )
 ```
 
-```{.output}
+``` output
 Size of new dataset:  (300, 2)
 ```
 
-```python
+``` python
 print(pcaResults.components_)
 ```
 
-```{.output}
+``` output
 [[ 0.54864625  0.8360546 ]
  [ 0.8360546  -0.54864625]]
 ```
 
-```python
+``` python
 vec1 = pcaResults.components_[0,:]
 vec2 = pcaResults.components_[1,:]
 
@@ -428,7 +422,7 @@ ax.set_ylabel('Dim 2', fontsize=14); ax.set_ylim([-4,4]);
 show()
 ```
 
-<img src="fig/03-dimensionality-rendered-unnamed-chunk-10-7.png" width="576" style="display: block; margin: auto;" />
+<img src="fig/03-dimensionality-rendered-unnamed-chunk-10-9.png" width="576" style="display: block; margin: auto;" />
 
 <p style='text-align: justify;'>
 The red arrows show the new coordinate system, defined by the principal components. It also shows that the more correlated the data are, the less information we lose by reducing the data representation using PCA.
@@ -445,7 +439,7 @@ Now, we will use PCA to find a few features that capture most of the variability
 </p>
 
 
-```python
+``` python
 nComp = 50 # Number of PCs to be returned
 #trainIndx = binomial(1,0.9,size=filectr)
 
@@ -458,7 +452,7 @@ How many features should we retain? To investigate this question, we plot the to
 </p>
 
 
-```python
+``` python
 cumExpVar = cumsum(GenePCA.explained_variance_ratio_)
 fig = figure(figsize=(5, 5))
 im  = plot( range(nComp), cumExpVar )
@@ -469,7 +463,7 @@ ylabel('Cumulative explained variance', fontsize=14);
 show()
 ```
 
-<img src="fig/03-dimensionality-rendered-unnamed-chunk-12-9.png" width="480" style="display: block; margin: auto;" />
+<img src="fig/03-dimensionality-rendered-unnamed-chunk-12-11.png" width="480" style="display: block; margin: auto;" />
 
 <p style='text-align: justify;'>
 A common heuristic for choosing the number of components is by defining a set threshold for the total explained variance.
@@ -479,7 +473,7 @@ Thresholds commonly vary between 0.8-0.9, depending on the structure of the PCs,
 As an example, we can check how many PCs we need to retain 99 % of the variance.
 
 
-```python
+``` python
 threshold = 0.99
 
 keepPC = [pc for pc in range(nComp) if cumExpVar[pc]>=threshold][0]
@@ -487,7 +481,7 @@ keepPC = [pc for pc in range(nComp) if cumExpVar[pc]>=threshold][0]
 print('Number of features needed to explain {:1.2f} fraction of total variance is {:2d}. '.format(threshold, keepPC) )
 ```
 
-```{.output}
+``` output
 Number of features needed to explain 0.99 fraction of total variance is 19. 
 ```
 
@@ -505,7 +499,7 @@ Now that we have selected the number of features to be used, we can see what the
 
 
 
-```python
+``` python
 newGeneData = GenePCA.transform(geneData)[:,range(keepPC)]
 
 fig, ax = subplots(ncols=3, nrows=2, figsize=(18, 8))
@@ -544,7 +538,7 @@ ax[1, 2].set_ylabel('PC3', fontsize=14); ax[1, 2].set_ylim([-2,2]);
 show()
 ```
 
-<img src="fig/03-dimensionality-rendered-unnamed-chunk-14-11.png" width="1728" style="display: block; margin: auto;" />
+<img src="fig/03-dimensionality-rendered-unnamed-chunk-14-13.png" width="1728" style="display: block; margin: auto;" />
 
 ### **Beyond dimensionality reduction**
 
