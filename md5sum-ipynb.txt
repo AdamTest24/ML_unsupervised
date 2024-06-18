@@ -1,4 +1,4 @@
 "file" "checksum" "built" "date"
-"episodes/01-clustering-intro.Rmd" "35f627de8085661a831f4698efc5124f" "site/built/01-clustering-intro.ipynb" "2024-06-11"
-"episodes/02-clustering-image.Rmd" "2dcae19efd927b0d703c0cbab7d09a80" "site/built/02-clustering-image.ipynb" "2024-06-11"
-"episodes/03-dimensionality.Rmd" "c7ed217b83ca487de3e3173de5a8efd7" "site/built/03-dimensionality.ipynb" "2024-06-11"
+"episodes/01-clustering-intro.Rmd" "35f627de8085661a831f4698efc5124f" "site/built/01-clustering-intro.ipynb" "2024-06-18"
+"episodes/02-clustering-image.Rmd" "2dcae19efd927b0d703c0cbab7d09a80" "site/built/02-clustering-image.ipynb" "2024-06-18"
+"episodes/03-dimensionality.Rmd" "c7ed217b83ca487de3e3173de5a8efd7" "site/built/03-dimensionality.ipynb" "2024-06-18"
