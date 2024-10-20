@@ -336,8 +336,8 @@ print("Direction of PC1 is at angle = {:1.2f} radians".format(atan2(vec1[1],vec1
 
 ::::::::::::::::::::::::::::::: challenge
 
-## Do it Yourself
-Exercise (DIY): Change the covariance of the synthetic data, and repeat the above steps.
+## Practice Exercise
+Change the covariance of the synthetic data, and repeat the above steps.
 Try to infer the relationship between the shape of the scatter, the strength of correlation between the two dimensions, and the variance captured by the first PC.
 :::::::::::::::::::::::::::::::
 
